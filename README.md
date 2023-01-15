@@ -19,7 +19,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [ ] Halaman setting.
 - [ ] Halaman account.
 - [ ] Halaman login.
-- [ ] Halaman setup.
+- [x] Halaman setup.
 - [ ] Logic admin logout.
 
 **API**

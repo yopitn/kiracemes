@@ -1,0 +1,108 @@
+@import "./partials/base";
+
+.main {
+  &-wrap {
+    position: relative;
+    height: 100vh;
+  }
+
+  &-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    padding: 48px 20px;
+    margin: 0 auto;
+  }
+
+  &-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &-inner {
+    width: 100%;
+    max-width: 480px;
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  &-title {
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 36px;
+  }
+
+  &-form {
+    input {
+      display: block;
+      width: 100%;
+      padding: 16px 14px;
+      background-color: transparent;
+      font-size: 16px;
+      line-height: 1.25;
+      outline: none;
+      appearance: none;
+      border: 1px solid var(--krc-border-color);
+      border-radius: 6px;
+      transition: 0.1s ease-in-out;
+
+      &::placeholder {
+        opacity: 0;
+      }
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        padding-top: 24px;
+        padding-bottom: 8px;
+
+        & ~ label {
+          opacity: 0.75;
+          top: -13px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 16px;
+      opacity: 0.95;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: 0.1s ease;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 16px 14px;
+      background-color: var(--krc-primary-color);
+      color: var(--krc-white-color);
+      font-size: 16px;
+      line-height: 1.25;
+      outline: none;
+      appearance: none;
+      border: 1px solid var(--krc-border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+    }
+
+    &-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
+  }
+}
