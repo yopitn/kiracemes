@@ -14,4 +14,6 @@ router.post("/signin", middleware.admin.isNotLogin, controller.admin.signin.crea
 
 router.get("/signout", middleware.admin.isLogin, controller.admin.signout.destroy);
 
+router.get("/posts", middleware.admin.isLogin, controller.admin.posts.index);
+
 module.exports = router;
