@@ -18,9 +18,9 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [ ] Halaman page (static) (create, findAll, findById, update, delete).
 - [ ] Halaman setting.
 - [ ] Halaman account.
-- [ ] Halaman login.
+- [x] Halaman signin.
 - [x] Halaman setup.
-- [ ] Logic admin logout.
+- [x] Logic admin signout.
 
 **API**
 - SOON!

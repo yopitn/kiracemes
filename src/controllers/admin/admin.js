@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+exports.index = (req, res) => {
   try {
     res.redirect("/admin/posts");
   } catch (error) {

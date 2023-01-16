@@ -64,8 +64,13 @@ exports.create = async (body) => {
   }
 };
 
-exports.destroy = async (user_id) => {
+exports.destroy = async (token) => {
   try {
+    await model.sessions.destroy({
+      where: {
+        token: token
+      }
+    })
   } catch (error) {
     throw new Error(error);
   }
