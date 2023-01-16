@@ -5,8 +5,6 @@ const database = require("./database");
 const path = require("path");
 const routes = require("./routes");
 
-const model = require("./models/users");
-
 const app = express();
 
 app.set("view engine", "ejs");
@@ -28,7 +26,7 @@ const server = async () => {
     });
 
     await database.authenticate();
-    await model.sync();
+    await database.sync();
   } catch (error) {
     throw new Error(error);
   }
