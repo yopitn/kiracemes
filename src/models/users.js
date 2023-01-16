@@ -1,5 +1,5 @@
 const { customAlphabet } = require("nanoid");
-const { DataTypes, Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../database");
 const sequelizeSlugify = require("sequelize-slugify");
 
@@ -35,7 +35,7 @@ const users = sequelize.define(
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.fn("NOW"),
+      defaultValue: DataTypes.NOW,
     },
     updated_at: { type: DataTypes.DATE, allowNull: true },
   },

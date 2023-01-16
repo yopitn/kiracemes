@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --setupFiles dotenv/config "
+    "test": "jest"
   },
   "jest": {
     "verbose": true,
@@ -28,7 +28,8 @@
     "mysql2": "^3.0.1",
     "nanoid": "^3.3.4",
     "sequelize": "^6.28.0",
-    "sequelize-slugify": "^1.6.2"
+    "sequelize-slugify": "^1.6.2",
+    "sqlite3": "^5.1.4"
   },
   "devDependencies": {
     "jest": "^29.3.1"

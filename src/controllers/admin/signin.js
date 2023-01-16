@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
       secure: true,
     });
 
-    res.redirect("admin/posts")
+    res.redirect("/admin/posts")
   } catch (error) {
     throw new Error(error);
   }

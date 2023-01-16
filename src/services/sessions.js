@@ -17,8 +17,8 @@ exports.create = async (body) => {
         const token = jwt.sign(
           {
             id: user.id,
-            username: user.username,
             name: user.name,
+            role: user.role,
           },
           process.env.KEY_TOKEN_SECRET,
           {
@@ -68,9 +68,9 @@ exports.destroy = async (token) => {
   try {
     await model.sessions.destroy({
       where: {
-        token: token
-      }
-    })
+        token: token,
+      },
+    });
   } catch (error) {
     throw new Error(error);
   }
