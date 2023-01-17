@@ -5,19 +5,19 @@
   transition: 0.1s ease;
   z-index: 1;
 
-  &-container {
+  &__container {
     position: sticky;
     top: var(--krc-header-height);
   }
 
-  &-content {
+  &__content {
     position: relative;
     display: flex;
     height: calc(100vh - var(--krc-header-height));
     background-color: var(--krc-sidebar-background);
   }
 
-  &-inner {
+  &__inner {
     position: relative;
     padding: 20px;
     padding-bottom: 160px;
@@ -78,7 +78,7 @@
     }
   }
 
-  &-button {
+  &__button {
     padding-bottom: 20px;
 
     .btn {

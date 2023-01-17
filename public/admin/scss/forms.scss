@@ -1,12 +1,12 @@
 @import "./partials/base";
 
 .main {
-  &-wrap {
+  &__wrap {
     position: relative;
     height: 100vh;
   }
 
-  &-container {
+  &__container {
     width: 100%;
     max-width: 1200px;
     height: 100%;
@@ -14,7 +14,7 @@
     margin: 0 auto;
   }
 
-  &-content {
+  &__content {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -22,14 +22,14 @@
     height: 100%;
   }
 
-  &-inner {
+  &__inner {
     width: 100%;
     max-width: 480px;
     padding: 0 8px;
     text-align: center;
   }
 
-  &-title {
+  &__title {
     font-size: 36px;
     font-weight: 800;
     text-transform: uppercase;
@@ -37,7 +37,7 @@
     margin-bottom: 36px;
   }
 
-  &-message {
+  &__message {
     display: inline-flex;
     flex-wrap: nowrap;
     width: 100%;
@@ -75,7 +75,7 @@
     }
   }
 
-  &-form {
+  &__form {
     input {
       display: block;
       width: 100%;

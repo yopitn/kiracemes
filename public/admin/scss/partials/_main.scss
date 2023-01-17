@@ -1,11 +1,13 @@
-.content-wrap {
-  position: relative;
-  display: flex;
-  width: 100%;
+.content {
+  &__wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
 }
 
 .main {
-  &-wrap {
+  &__wrap {
     flex-grow: 1;
     padding-top: 20px;
 
@@ -16,12 +18,12 @@
 }
 
 .table {
-  &-wrap {
+  &__wrap {
     position: relative;
     width: 100%;
   }
 
-  &-header {
+  &__header {
     display: flex;
     align-items: center;
     width: 100%;
@@ -44,12 +46,12 @@
     }
   }
 
-  &-content {
+  &__content {
     position: relative;
     width: 100%;
   }
 
-  &-item {
+  &__item {
     display: flex;
     align-items: center;
     width: 100%;
@@ -73,12 +75,12 @@
 }
 
 .post {
-  &-detail {
+  &__detail {
     display: flex;
     align-items: center;
   }
 
-  &-image {
+  &__image {
     flex: 0 0 60px;
     max-width: 60px;
     background-size: cover;
@@ -89,12 +91,12 @@
     overflow: hidden;
   }
 
-  &-content {
+  &__content {
     padding: 4px 0;
     padding-left: 10px;
   }
 
-  &-title {
+  &__title {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -105,7 +107,7 @@
     overflow: hidden;
   }
 
-  &-info {
+  &__info {
     display: inline-flex;
     align-items: center;
     font-size: 13px;
@@ -127,7 +129,7 @@
     }
   }
 
-  &-category {
+  &__category {
     font-weight: 500;
 
     &::before {
@@ -142,12 +144,12 @@
     }
   }
 
-  &-author {
+  &__author {
     font-size: 15px;
     font-weight: 500;
   }
 
-  &-status span {
+  &__status span {
     display: inline-block;
     text-align: center;
     padding: 10px;
@@ -172,7 +174,7 @@
     }
   }
 
-  &-action {
+  &__action {
     display: flex;
     align-items: center;
     justify-content: center;

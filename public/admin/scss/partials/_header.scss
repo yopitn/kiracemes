@@ -1,5 +1,5 @@
 .header {
-  &-wrap {
+  &__wrap {
     position: sticky;
     top: 0;
     width: 100%;
@@ -14,7 +14,7 @@
     }
   }
 
-  &-icon {
+  &__icon {
     ul {
       list-style: none;
       padding: 0;
@@ -41,6 +41,8 @@
       height: 40px;
       background-color: rgba(0, 0, 0, 0.04);
       border-radius: 500px;
+      cursor: pointer;
+      user-select: none;
 
       &:hover {
         opacity: 1;
@@ -53,14 +55,14 @@
     }
   }
 
-  &-left {
+  &__left {
     display: flex;
     align-items: center;
     width: var(--krc-sidebar-width);
     padding: 0 0 0 20px;
   }
 
-  &-title {
+  &__title {
     display: inline-flex;
     align-items: center;
 
@@ -82,7 +84,7 @@
     }
   }
 
-  &-right {
+  &__right {
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -94,7 +96,7 @@
     }
   }
 
-  &-search {
+  &__search {
     position: relative;
     width: 100%;
 

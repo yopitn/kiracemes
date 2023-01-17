@@ -15,16 +15,16 @@
 </head>
 
 <body>
-  <div class="main-wrap">
-    <div class="main-container">
-      <div class="main-content">
-        <div class="main-inner">
-          <h1 class="main-title">
+  <div class="main__wrap">
+    <div class="main__container">
+      <div class="main__content">
+        <div class="main__inner">
+          <h1 class="main__title">
             <span class="title">Signin</span>
           </h1>
 
           <% if (message.length > 0) { %>
-          <div class="main-message" role="alert">
+          <div class="main__message" role="alert">
             <span class="message"><%- message %></span>
             <button class="button" aria-label="Close">
               <svg viewBox="0 0 24 24">
@@ -34,18 +34,18 @@
           </div>
           <% } %>
 
-          <form class="main-form" action="" method="post">
-            <div class="main-form-group">
+          <form class="main__form" action="" method="post">
+            <div class="main__form-group">
               <input type="text" name="username" id="username" autocomplete="off" placeholder="Username" required>
               <label for="username">Username</label>
             </div>
 
-            <div class="main-form-group">
+            <div class="main__form-group">
               <input type="password" name="password" id="password" placeholder="Password" required>
               <label for="password">Password</label>
             </div>
 
-            <div class="main-form-button">
+            <div class="main__form-button">
               <button type="submit">Signin</button>
             </div>
           </form>
