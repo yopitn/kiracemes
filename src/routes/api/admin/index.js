@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/session", controller.api.session.create);
 
-router.get("/posts", controller.api.posts.findAll);
-router.post("/posts", controller.api.posts.create);
+router.get("/posts", middleware.api.authAPIAdmin, controller.api.posts.findAll);
+router.post("/posts", middleware.api.authAPIAdmin, controller.api.posts.create);
 
 module.exports = router;
