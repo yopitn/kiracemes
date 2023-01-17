@@ -1,4 +1,5 @@
 module.exports = {
   users: require("./users"),
-  sessions: require("./sessions")
+  sessions: require("./sessions"),
+  posts: require("./posts"),
 };

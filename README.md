@@ -23,4 +23,15 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Logic admin signout.
 
 **API**
-- SOON!
+
+**- session**
+
+- [ ] Endpoint **GET** `/api/admin/session`
+
+**- posts**
+
+- [ ] Endpoint **GET** `/api/admin/posts`
+- [ ] Endpoint **GET** `/api/admin/posts/:id`
+- [ ] Endpoint **POST** `/api/admin/posts/:id`
+- [ ] Endpoint **PUT** `/api/admin/posts/:id`
+- [ ] Endpoint **DELETE** `/api/admin/posts/:id`
