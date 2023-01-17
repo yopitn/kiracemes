@@ -32,6 +32,6 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 - [ ] Endpoint **GET** `/api/admin/posts`
 - [ ] Endpoint **GET** `/api/admin/posts/:id`
-- [ ] Endpoint **POST** `/api/admin/posts/:id`
+- [ ] Endpoint **POST** `/api/admin/posts`
 - [ ] Endpoint **PUT** `/api/admin/posts/:id`
 - [ ] Endpoint **DELETE** `/api/admin/posts/:id`

@@ -43,3 +43,52 @@ exports.findAll = async () => {
     throw new Error(error);
   }
 };
+
+exports.findById = async (id) => {
+  try {
+    const post = await model.posts.findOne({
+      attributes: [
+        "id",
+        "uuid",
+        "title",
+        "slug",
+        "content",
+        "status",
+        "created_at",
+        "updated_at",
+        "published_at",
+      ],
+      where: {
+        id: id,
+        type: "post",
+      },
+    });
+
+    return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.update = async (post, id) => {
+  try {
+    await model.posts.update(
+      {
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        featured: post.featured,
+        status: post.status,
+        updated_at: new Date(),
+      },
+      {
+        where: {
+          id: id,
+          type: "post",
+        },
+      }
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
