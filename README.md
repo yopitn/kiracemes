@@ -24,14 +24,5 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 **API**
 
-**- session**
-
-- [ ] Endpoint **GET** `/api/admin/session`
-
-**- posts**
-
-- [ ] Endpoint **GET** `/api/admin/posts`
-- [ ] Endpoint **GET** `/api/admin/posts/:id`
-- [ ] Endpoint **POST** `/api/admin/posts`
-- [ ] Endpoint **PUT** `/api/admin/posts/:id`
-- [ ] Endpoint **DELETE** `/api/admin/posts/:id`
+- [x] Endpoint `/api/admin/session`
+- [x] Endpoint `/api/admin/posts`

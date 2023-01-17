@@ -1,17 +1,17 @@
 const model = require("../models");
 
-exports.create = async (post) => {
+exports.create = async (body) => {
   try {
     await model.posts.create({
-      id: post.id,
-      author_id: post.author_id,
-      title: post.title,
-      slug: post.slug,
-      content: post.content,
-      featured: post.featured,
-      status: post.status,
+      id: body.id,
+      author_id: body.author_id,
+      title: body.title,
+      slug: body.slug,
+      content: body.content,
+      featured: body.featured,
+      status: body.status,
       created_at: new Date(),
-      published_at: post.published_at,
+      published_at: body.published_at,
     });
   } catch (error) {
     throw new Error(error);
@@ -44,9 +44,9 @@ exports.findAll = async () => {
   }
 };
 
-exports.findById = async (id) => {
+exports.findById = async (post_id) => {
   try {
-    const post = await model.posts.findOne({
+    const post = await model.posts.findAll({
       attributes: [
         "id",
         "uuid",
@@ -59,7 +59,7 @@ exports.findById = async (id) => {
         "published_at",
       ],
       where: {
-        id: id,
+        id: post_id,
         type: "post",
       },
     });
@@ -70,24 +70,63 @@ exports.findById = async (id) => {
   }
 };
 
-exports.update = async (post, id) => {
+exports.findBySlug = async (post_slug) => {
+  try {
+    const post = await model.posts.findAll({
+      attributes: [
+        "id",
+        "uuid",
+        "title",
+        "slug",
+        "content",
+        "status",
+        "created_at",
+        "updated_at",
+        "published_at",
+      ],
+      where: {
+        slug: post_slug,
+        type: "post",
+      },
+    });
+
+    return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.update = async (body, post_id) => {
   try {
     await model.posts.update(
       {
-        title: post.title,
-        slug: post.slug,
-        content: post.content,
-        featured: post.featured,
-        status: post.status,
+        title: body.title,
+        slug: body.slug,
+        content: body.content,
+        featured: body.featured,
+        status: body.status,
         updated_at: new Date(),
       },
       {
         where: {
-          id: id,
+          id: post_id,
           type: "post",
         },
       }
     );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.destroy = async (post_id) => {
+  try {
+    await model.posts.destroy({
+      where: {
+        id: post_id,
+        type: "post",
+      },
+    });
   } catch (error) {
     throw new Error(error);
   }
