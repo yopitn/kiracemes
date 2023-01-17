@@ -37,6 +37,44 @@
     margin-bottom: 36px;
   }
 
+  &-message {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 24px;
+    text-align: start;
+    font-size: 15px;
+    line-height: 1.6em;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+
+    .message {
+      flex-grow: 1;
+    }
+
+    .button {
+      flex-shrink: 1;
+      display: inline-flex;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      padding-left: 20px;
+      cursor: pointer;
+      user-select: none;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
   &-form {
     input {
       display: block;
