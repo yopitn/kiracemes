@@ -3,5 +3,6 @@ module.exports = {
   setup: require("./setup"),
   signin: require("./signin"),
   signout: require("./signout"),
-  posts: require("./posts")
+  posts: require("./posts"),
+  editor: require("./editor"),
 };

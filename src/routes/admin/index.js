@@ -16,4 +16,6 @@ router.get("/signout", middleware.admin.isLogin, controller.admin.signout.destro
 
 router.get("/posts", middleware.admin.isLogin, controller.admin.posts.index);
 
+router.get("/post/new", middleware.admin.isLogin, controller.admin.editor.index);
+
 module.exports = router;
