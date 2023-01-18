@@ -26,7 +26,7 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async (order_by) => {
+exports.findAll = async (order_by, limit, offset) => {
   try {
     const posts = await model.posts.findAll({
       attributes: [
@@ -77,9 +77,25 @@ exports.findAll = async (order_by) => {
         },
       ],
       order: [[order_by, "DESC"]],
+      limit: limit,
+      offset: offset,
     });
 
     return posts;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.findAllCount = async () => {
+  try {
+    const posts = await model.posts.findAll({
+      where: {
+        type: "post"
+      }
+    });
+
+    return posts.length;
   } catch (error) {
     throw new Error(error);
   }

@@ -77,7 +77,16 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const posts = await service.posts.findAll("created_at");
+    const { query } = req;
+
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+    const offset = page * limit;
+
+    const posts = await service.posts.findAll("created_at", limit, offset);
+    const postsCount = await service.posts.findAllCount();
 
     if (posts.length > 0) {
       res.status(200).json({
@@ -120,6 +129,25 @@ exports.findAll = async (req, res) => {
             }),
           };
         }),
+        pagination: {
+          page: query.page > 0 ? parseInt(query.page) : 1,
+          limit: limit,
+          pages: Math.ceil(postsCount / limit),
+          total: postsCount,
+          next:
+            Math.ceil(postsCount / limit) > 1 &&
+            Math.ceil(postsCount / limit) > parseInt(query.page || 1)
+              ? query.page > 0
+                ? parseInt(query.page) + 1
+                : 2
+              : null,
+          prev:
+            Math.ceil(postsCount / limit) > 1
+              ? query.page > 1
+                ? parseInt(query.page) - 1
+                : null
+              : null,
+        },
       });
     } else {
       res.status(422).json({

@@ -47,7 +47,16 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const pages = await service.pages.findAll("created_at");
+    const { query } = req;
+
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+    const offset = page * limit;
+
+    const pages = await service.pages.findAll("created_at", limit, offset);
+    const pagesCount = await service.pages.findAllCount();
 
     if (pages.length > 0) {
       res.status(200).json({
@@ -73,6 +82,25 @@ exports.findAll = async (req, res) => {
             author: page.author,
           };
         }),
+        pagination: {
+          page: query.page > 0 ? parseInt(query.page) : 1,
+          limit: limit,
+          pages: Math.ceil(pagesCount / limit),
+          total: pagesCount,
+          next:
+            Math.ceil(pagesCount / limit) > 1 &&
+            Math.ceil(pagesCount / limit) > parseInt(query.page || 1)
+              ? query.page > 0
+                ? parseInt(query.page) + 1
+                : 2
+              : null,
+          prev:
+            Math.ceil(pagesCount / limit) > 1
+              ? query.page > 1
+                ? parseInt(query.page) - 1
+                : null
+              : null,
+        },
       });
     } else {
       res.status(422).json({
