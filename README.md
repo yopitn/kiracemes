@@ -27,4 +27,4 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Endpoint `/api/admin/session`
 - [x] Endpoint `/api/admin/posts`
 - [x] Endpoint `/api/admin/pages`
-- [ ] Endpoint `/api/admin/images`
+- [x] Endpoint `/api/admin/images`
