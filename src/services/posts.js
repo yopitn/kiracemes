@@ -51,6 +51,31 @@ exports.findAll = async (order_by) => {
       where: {
         type: "post",
       },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: [
+            "id",
+            "name",
+            "slug",
+            "image",
+            "bio",
+            "location",
+            "role",
+            "meta_title",
+            "meta_description",
+            "created_at",
+            "updated_at",
+          ],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
       order: [[order_by, "DESC"]],
     });
 
@@ -79,7 +104,6 @@ exports.findById = async (post_id) => {
         "twitter_title",
         "twitter_description",
         "created_at",
-        "created_at",
         "updated_at",
         "published_at",
       ],
@@ -87,6 +111,31 @@ exports.findById = async (post_id) => {
         id: post_id,
         type: "post",
       },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: [
+            "id",
+            "name",
+            "slug",
+            "image",
+            "bio",
+            "location",
+            "role",
+            "meta_title",
+            "meta_description",
+            "created_at",
+            "updated_at",
+          ],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
     return post;
@@ -122,6 +171,31 @@ exports.findBySlug = async (post_slug) => {
         slug: post_slug,
         type: "post",
       },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: [
+            "id",
+            "name",
+            "slug",
+            "image",
+            "bio",
+            "location",
+            "role",
+            "meta_title",
+            "meta_description",
+            "created_at",
+            "updated_at",
+          ],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
     return post;

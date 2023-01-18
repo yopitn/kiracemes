@@ -52,6 +52,25 @@ exports.findAll = async (order_by) => {
       where: {
         type: "page",
       },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: [
+            "id",
+            "name",
+            "slug",
+            "image",
+            "bio",
+            "location",
+            "role",
+            "meta_title",
+            "meta_description",
+            "created_at",
+            "updated_at",
+          ],
+        },
+      ],
       order: [[order_by, "DESC"]],
     });
 

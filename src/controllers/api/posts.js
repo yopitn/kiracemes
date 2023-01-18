@@ -81,7 +81,45 @@ exports.findAll = async (req, res) => {
 
     if (posts.length > 0) {
       res.status(200).json({
-        posts: posts,
+        posts: posts.map((post) => {
+          return {
+            id: post.id,
+            uuid: post.uuid,
+            title: post.title,
+            slug: post.slug,
+            content: post.content,
+            status: post.status,
+            meta_title: post.meta_title,
+            meta_description: post.meta_description,
+            og_image: post.og_image,
+            og_title: post.og_title,
+            og_description: post.og_description,
+            twitter_image: post.twitter_image,
+            twitter_title: post.twitter_title,
+            twitter_description: post.twitter_description,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+            published_at: post.published_at,
+            author: post.author,
+            tags: post.tags.map((tag) => {
+              return {
+                id: tag.id,
+                name: tag.name,
+                slug: tag.slug,
+                meta_title: tag.meta_title,
+                meta_description: tag.meta_description,
+                og_image: tag.og_image,
+                og_title: tag.og_title,
+                og_description: tag.og_description,
+                twitter_image: tag.twitter_image,
+                twitter_title: tag.twitter_title,
+                twitter_description: tag.twitter_description,
+                created_at: tag.created_at,
+                updated_at: tag.updated_at,
+              };
+            }),
+          };
+        }),
       });
     } else {
       res.status(422).json({

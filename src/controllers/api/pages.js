@@ -51,7 +51,28 @@ exports.findAll = async (req, res) => {
 
     if (pages.length > 0) {
       res.status(200).json({
-        pages,
+        pages: pages.map((page) => {
+          return {
+            id: page.id,
+            uuid: page.uuid,
+            title: page.title,
+            slug: page.slug,
+            content: page.content,
+            status: page.status,
+            meta_title: page.meta_title,
+            meta_description: page.meta_description,
+            og_image: page.og_image,
+            og_title: page.og_title,
+            og_description: page.og_description,
+            twitter_image: page.twitter_image,
+            twitter_title: page.twitter_title,
+            twitter_description: page.twitter_description,
+            created_at: page.created_at,
+            updated_at: page.updated_at,
+            published_at: page.published_at,
+            author: page.author,
+          };
+        }),
       });
     } else {
       res.status(422).json({
