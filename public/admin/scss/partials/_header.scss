@@ -3,14 +3,14 @@
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: var(--krc-header-background);
+    background-color: $headerBackground;
     z-index: 10;
 
     .container {
       position: relative;
       display: flex;
       align-items: center;
-      height: var(--krc-header-height);
+      height: $headerHeight;
     }
   }
 
@@ -28,7 +28,7 @@
         align-items: center;
         justify-content: center;
         margin: 0 5px;
-        height: var(--krc-header-height);
+        height: $headerHeight;
       }
     }
 
@@ -58,7 +58,7 @@
   &__left {
     display: flex;
     align-items: center;
-    width: var(--krc-sidebar-width);
+    width: $sidebarWidth;
     padding: 0 0 0 20px;
   }
 
@@ -110,7 +110,7 @@
       display: block;
       width: 100%;
       padding: 12px 62px 12px 14px;
-      background-color: var(--krc-body-background);
+      background-color: $bodyBackground;
       font-size: 15px;
       outline: none;
       border: none;

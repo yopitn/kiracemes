@@ -1,20 +1,20 @@
 .sidebar {
   flex-shrink: 0;
   position: relative;
-  width: var(--krc-sidebar-width);
+  width: $sidebarWidth;
   transition: 0.1s ease;
   z-index: 1;
 
   &__container {
     position: sticky;
-    top: var(--krc-header-height);
+    top: $headerHeight;
   }
 
   &__content {
     position: relative;
     display: flex;
-    height: calc(100vh - var(--krc-header-height));
-    background-color: var(--krc-sidebar-background);
+    height: calc(100vh - $headerHeight);
+    background-color: $sidebarBackground;
   }
 
   &__inner {
@@ -39,7 +39,7 @@
       left: 0;
       right: 0;
       padding: 0 20px 20px;
-      background-color: var(--krc-sidebar-background);
+      background-color: $sidebarBackground;
     }
 
     .link {
@@ -50,7 +50,7 @@
       align-items: center;
       padding: 14px 10px;
       width: calc(100% + 20px);
-      color: var(--krc-text-color);
+      color: $textColor;
       font-size: 15px;
       font-weight: 500;
       border-radius: 6px;
@@ -62,11 +62,11 @@
       &.active,
       &:hover {
         opacity: 1;
-        color: var(--krc-primary-color);
+        color: $primaryColor;
         background-color: rgba(0, 0, 0, 0.05);
 
         svg {
-          fill: var(--krc-primary-color);
+          fill: $primaryColor;
         }
       }
 
@@ -85,8 +85,8 @@
       display: inline-flex;
       align-items: center;
       padding: 14px 10px;
-      background-color: var(--krc-sidebar-background);
-      color: var(--krc-text-color);
+      background-color: $sidebarBackground;
+      color: $textColor;
       font-size: 15px;
       font-weight: 500;
       border-radius: 10px;

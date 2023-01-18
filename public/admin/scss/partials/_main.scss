@@ -55,8 +55,8 @@
     display: flex;
     align-items: center;
     width: 100%;
-    background-color: var(--krc-content-background);
-    border-bottom: 1px solid var(--krc-border-color);
+    background-color: $contentBackground;
+    border-bottom: 1px solid $borderColor;
 
     > *:first-child {
       width: 55%;
@@ -65,7 +65,7 @@
     > * {
       width: 15%;
       padding: 10px;
-      color: var(--krc-text-color);
+      color: $textColor;
 
       &:hover {
         opacity: 1;
@@ -122,7 +122,7 @@
         display: block;
         width: 4px;
         height: 4px;
-        background-color: var(--krc-icon-color);
+        background-color: $iconColor;
         margin: 0 6px;
         border-radius: 500px;
       }

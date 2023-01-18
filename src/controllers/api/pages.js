@@ -6,27 +6,26 @@ const nanoid = customAlphabet("1234567890", 24);
 exports.create = async (req, res) => {
   try {
     const { body, user_id } = req;
-    const post_id = nanoid();
+    const page_id = nanoid();
 
     if (!body.slug) body.slug = body.title;
     if (!body.published_at && body.status === "published")
       body.published_at = new Date();
 
-    const post = {
-      id: post_id,
+    const page = {
+      id: page_id,
       author_id: user_id,
       title: body.title,
       slug: body.slug,
       content: body.content,
-      featured: body.featured,
       status: body.status,
       published_at: body.published_at,
     };
 
-    await service.posts.create(post);
+    await service.pages.create(page);
 
     res.status(200).json({
-      post: body,
+      page: body,
     });
   } catch (error) {
     res.status(400).json({
@@ -41,17 +40,17 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const posts = await service.posts.findAll();
+    const pages = await service.pages.findAll();
 
-    if (posts.length > 0) {
+    if (pages.length > 0) {
       res.status(200).json({
-        posts: posts,
+        pages,
       });
     } else {
       res.status(422).json({
         errors: [
           {
-            message: "No posts found",
+            message: "No pages found",
           },
         ],
       });
@@ -71,17 +70,17 @@ exports.findById = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findById(params.id);
+    const page = await service.pages.findById(params.id);
 
-    if (post) {
+    if (page.length > 0) {
       res.status(200).json({
-        post: post,
+        page: page,
       });
     } else {
       res.status(422).json({
         errors: [
           {
-            message: "Post not found",
+            message: "Page not found",
           },
         ],
       });
@@ -101,17 +100,17 @@ exports.findBySlug = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findBySlug(params.slug);
+    const page = await service.pages.findBySlug(params.slug);
 
-    if (post) {
+    if (page.length > 0) {
       res.status(200).json({
-        post: post,
+        page: page,
       });
     } else {
       res.status(422).json({
         errors: [
           {
-            message: "Post not found",
+            message: "Page not found",
           },
         ],
       });
@@ -131,15 +130,15 @@ exports.update = async (req, res) => {
   try {
     const { body, params } = req;
 
-    const post = await service.posts.findById(params.id);
+    const page = await service.pages.findById(params.id);
 
-    if (post.length > 0) {
-      await service.posts.update(body, params.id);
+    if (page.length > 0) {
+      await service.pages.update(body, params.id);
 
       res.status(200).json({
-        post: [
+        page: [
           {
-            message: "Post updated succesful",
+            message: "Page updated succesful",
           },
         ],
       });
@@ -147,7 +146,7 @@ exports.update = async (req, res) => {
       res.status(422).json({
         errors: [
           {
-            message: "Failed to update post, because post not found",
+            message: "Failed to update page, because page not found",
           },
         ],
       });
@@ -167,15 +166,15 @@ exports.destroy = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findById(params.id);
+    const page = await service.pages.findById(params.id);
 
-    if (post.length > 0) {
-      await service.posts.destroy(params.id);
+    if (page.length > 0) {
+      await service.pages.destroy(params.id);
 
       res.status(204).json({
-        post: [
+        page: [
           {
-            message: "Post deleted succesful",
+            message: "Page deleted succesful",
           },
         ],
       });
@@ -183,7 +182,7 @@ exports.destroy = async (req, res) => {
       res.status(422).json({
         errors: [
           {
-            message: "Failed to delete post, because post not found",
+            message: "Failed to delete page, because page not found",
           },
         ],
       });

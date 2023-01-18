@@ -1,2 +1,244 @@
+@import "./partials/variables";
+@import "./partials/font";
 @import "./partials/base";
 @import "./partials/header";
+
+$editorHeader: 70px;
+$editorRight: 360px;
+
+.main {
+  &__wrap {
+    position: relative;
+    width: 100%;
+  }
+}
+
+.editor {
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: $editorHeader;
+    background-color: $contentBackground;
+    border-bottom: 1px solid $borderColor;
+  }
+
+  &__title {
+    position: relative;
+    width: 100%;
+    max-width: calc(100% - $editorRight);
+    padding-left: 60px;
+
+    input {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 18px 0;
+      background-color: transparent;
+      font-size: 28px;
+      font-weight: 700;
+      outline: none;
+      border: none;
+
+      &::placeholder {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__action {
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 14px;
+      background-color: transparent;
+      color: $textColor;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: 0.1s ease;
+      cursor: pointer;
+      user-select: none;
+
+      &:not(:last-child) {
+        margin-right: 14px;
+      }
+
+      &-light {
+        background-color: #fefefe;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      &-primary {
+        color: $whiteColor;
+        background-color: $primaryColor;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__field {
+    flex: 0 0 calc(100% - $editorRight);
+    max-width: calc(100% - $editorRight);
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: $contentBackground;
+    padding: 10px 60px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $borderColor;
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      background-color: transparent;
+      padding: 4px;
+      margin: 0 2.5px;
+      color: $textColor;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.1s ease;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.5px;
+        transition: 0.1s ease;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+
+        svg {
+          &:not(.line) {
+            fill: $primaryColor;
+          }
+
+          &.line {
+            stroke: $primaryColor;
+          }
+        }
+      }
+    }
+
+    .separator {
+      width: 1px;
+      height: 18px;
+      background-color: $iconColor;
+      margin: 0 6px;
+      opacity: 0.5;
+    }
+  }
+
+  &__contenteditable {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 780px;
+    min-height: 64vh;
+    margin: 0 auto;
+    background-color: $contentBackground;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    iframe {
+      width: 100%;
+      min-height: inherit;
+    }
+  }
+
+  &__forms {
+    flex-shrink: 0;
+    position: relative;
+    width: $editorRight;
+    z-index: 1;
+
+    &-container {
+      position: sticky;
+      top: $headerHeight;
+    }
+
+    &-content {
+      position: relative;
+      display: flex;
+      height: calc(100vh - ($headerHeight + $editorHeader + 1px));
+      background-color: $contentBackground;
+      border-left: 1px solid $borderColor;
+    }
+
+    &-inner {
+      width: 100%;
+      padding: 20px 40px 20px 20px;
+      overflow-y: visible;
+      overflow-x: hidden;
+    }
+
+    &-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+
+      label {
+        display: inline-block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: transparent;
+        font-size: 14px;
+        outline: none;
+        border: 1px solid $borderColor;
+        border-radius: 6px;
+      }
+    }
+
+    &-published {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > *:first-child {
+        flex: 0 0 60%;
+        max-width: 60%;
+      }
+
+      > *:last-child {
+        flex: 0 0 38%;
+        max-width: 38%;
+      }
+    }
+  }
+}

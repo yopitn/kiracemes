@@ -1,3 +1,5 @@
+@import "./partials/variables";
+@import "./partials/font";
 @import "./partials/base";
 
 .main {
@@ -48,9 +50,9 @@
     text-align: start;
     font-size: 15px;
     line-height: 1.6em;
-    color: #721c24;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    color: $dangerColor;
+    background-color: $dangerBackground;
+    border: 1px solid $dangerBorder;
     border-radius: 6px;
 
     .message {
@@ -85,7 +87,7 @@
       line-height: 1.25;
       outline: none;
       appearance: none;
-      border: 1px solid var(--krc-border-color);
+      border: 1px solid $borderColor;
       border-radius: 6px;
       transition: 0.1s ease-in-out;
 
@@ -126,13 +128,13 @@
       display: block;
       width: 100%;
       padding: 16px 14px;
-      background-color: var(--krc-primary-color);
-      color: var(--krc-white-color);
+      background-color: $primaryColor;
+      color: $whiteColor;
       font-size: 16px;
       line-height: 1.25;
       outline: none;
       appearance: none;
-      border: 1px solid var(--krc-border-color);
+      border: 1px solid $borderColor;
       border-radius: 6px;
       cursor: pointer;
       transition: 0.1s ease-in-out;

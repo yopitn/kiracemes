@@ -15,7 +15,175 @@
       </div>
 
       <div class="editor__content">
-        
+        <div class="editor__field">
+          <div class="editor__toolbar" role="toolbar">
+            <div class="btn" aria-label="View" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <polyline points="7 8 3 12 7 16"></polyline>
+                <polyline points="17 8 21 12 17 16"></polyline>
+                <line x1="14" y1="4" x2="10" y2="20"></line>
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="undo" aria-label="Undo" role="button">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H8z" />
+              </svg>
+            </div>
+
+            <div class="btn" data-command="redo" aria-label="Redo" role="button">
+              <svg viewBox="0 0 24 24">
+                <path d="M16 7h-5a6 6 0 1 0 0 12h9v2h-9a8 8 0 1 1 0-16h5V1l6 5-6 5V7z" />
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="bold" aria-label="Bold" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <path d="M7 5h6a3.5 3.5 0 0 1 0 7h-6z"></path>
+                <path d="M13 12h1a3.5 3.5 0 0 1 0 7h-7v-7"></path>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="italic" aria-label="Italic" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="11" y1="5" x2="17" y2="5"></line>
+                <line x1="7" y1="19" x2="13" y2="19"></line>
+                <line x1="14" y1="5" x2="10" y2="19"></line>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="underline" aria-label="Underline" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <path d="M7 5v5a5 5 0 0 0 10 0v-5"></path>
+                <path d="M5 19h14"></path>
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="justifyLeft" aria-label="Align left" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="12" x2="14" y2="12"></line>
+                <line x1="4" y1="18" x2="18" y2="18"></line>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="justifyCenter" aria-label="Align center" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+                <line x1="6" y1="18" x2="18" y2="18"></line>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="justifyRight" aria-label="Align right" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="10" y1="12" x2="20" y2="12"></line>
+                <line x1="6" y1="18" x2="20" y2="18"></line>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="justifyFull" aria-label="Justify" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="insertUnorderedList" aria-label="Bullet list" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="9" y1="6" x2="20" y2="6"></line>
+                <line x1="9" y1="12" x2="20" y2="12"></line>
+                <line x1="9" y1="18" x2="20" y2="18"></line>
+                <line x1="5" y1="6" x2="5" y2="6.01"></line>
+                <line x1="5" y1="12" x2="5" y2="12.01"></line>
+                <line x1="5" y1="18" x2="5" y2="18.01"></line>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="insertOrderedList" aria-label="Numbered list" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <path d="M11 6h9"></path>
+                <path d="M11 12h9"></path>
+                <path d="M12 18h8"></path>
+                <path d="M4 16a2 2 0 1 1 4 0c0 .591 -.5 1 -1 1.5l-3 2.5h4"></path>
+                <path d="M6 10v-6l-2 2"></path>
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="insertLinkUrl" aria-label="Insert link" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path>
+                <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path>
+              </svg>
+            </div>
+
+            <div class="btn" data-command="unlink" aria-label="Remove link" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path>
+                <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path>
+                <line x1="16" y1="21" x2="16" y2="19"></line>
+                <line x1="19" y1="16" x2="21" y2="16"></line>
+                <line x1="3" y1="8" x2="5" y2="8"></line>
+                <line x1="8" y1="3" x2="8" y2="5"></line>
+              </svg>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
+            <div class="btn" data-command="editImage" aria-label="Insert image" role="button">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="15" y1="8" x2="15.01" y2="8"></line>
+                <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+                <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+                <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="editor__contenteditable">
+            <iframe id="editable" frameborder="0"></iframe>
+          </div>
+        </div>
+
+        <div class="editor__forms">
+          <div class="editor__forms-container">
+            <div class="editor__forms-content">
+              <div class="editor__forms-inner">
+                <div class="editor__forms-group">
+                  <label for="slug">Post URL</label>
+                  <input type="text" id="slug" placeholder="Add permalink" />
+                </div>
+
+                <div class="editor__forms-group">
+                  <label for="published">Published on</label>
+                  <div class="editor__forms-published">
+                    <input type="date" id="date" />
+                    <input type="text" id="time" />
+                  </div>
+                </div>
+
+                <div class="editor__forms-group">
+                  <div class="editor__forms-group">
+                    <label for="slug">Post URL</label>
+                    <input type="text" id="slug" placeholder="Add permalink" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
