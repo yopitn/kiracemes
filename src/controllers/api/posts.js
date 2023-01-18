@@ -20,6 +20,14 @@ exports.create = async (req, res) => {
       content: body.content,
       featured: body.featured,
       status: body.status,
+      meta_title: body.meta_title,
+      meta_description: body.meta_description,
+      og_image: body.og_image,
+      og_title: body.og_title,
+      og_description: body.og_description,
+      twitter_image: body.twitter_image,
+      twitter_title: body.twitter_title,
+      twitter_description: body.twitter_description,
       published_at: body.published_at,
     };
 

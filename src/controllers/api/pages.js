@@ -6,19 +6,26 @@ const nanoid = customAlphabet("1234567890", 24);
 exports.create = async (req, res) => {
   try {
     const { body, user_id } = req;
-    const page_id = nanoid();
 
     if (!body.slug) body.slug = body.title;
     if (!body.published_at && body.status === "published")
       body.published_at = new Date();
 
     const page = {
-      id: page_id,
+      id: nanoid(),
       author_id: user_id,
       title: body.title,
       slug: body.slug,
       content: body.content,
       status: body.status,
+      meta_title: body.meta_title,
+      meta_description: body.meta_description,
+      og_image: body.og_image,
+      og_title: body.og_title,
+      og_description: body.og_description,
+      twitter_image: body.twitter_image,
+      twitter_title: body.twitter_title,
+      twitter_description: body.twitter_description,
       published_at: body.published_at,
     };
 
