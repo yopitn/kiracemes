@@ -5,4 +5,5 @@ module.exports = {
   pages: require("./pages"),
   tags: require("./tags"),
   postsTags: require("./posts-tags"),
+  settings: require("./settings"),
 };
