@@ -47,7 +47,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const pages = await service.pages.findAll();
+    const pages = await service.pages.findAll("created_at");
 
     if (pages.length > 0) {
       res.status(200).json({

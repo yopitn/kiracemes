@@ -26,7 +26,7 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async () => {
+exports.findAll = async (order_by) => {
   try {
     const posts = await model.posts.findAll({
       attributes: [
@@ -36,6 +36,14 @@ exports.findAll = async () => {
         "slug",
         "content",
         "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
         "created_at",
         "updated_at",
         "published_at",
@@ -43,7 +51,7 @@ exports.findAll = async () => {
       where: {
         type: "post",
       },
-      order: [["published_at", "DESC"]],
+      order: [[order_by, "DESC"]],
     });
 
     return posts;
@@ -62,6 +70,15 @@ exports.findById = async (post_id) => {
         "slug",
         "content",
         "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
+        "created_at",
         "created_at",
         "updated_at",
         "published_at",
@@ -88,6 +105,15 @@ exports.findBySlug = async (post_slug) => {
         "slug",
         "content",
         "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
+        "created_at",
         "created_at",
         "updated_at",
         "published_at",

@@ -33,6 +33,34 @@ exports.create = async (req, res) => {
 
     await service.posts.create(post);
 
+    if (body.tags.length > 0) {
+      body.tags.forEach(async (name) => {
+        const tag = await service.tags.findByName(name);
+
+        if (!tag) {
+          const tag_id = nanoid();
+
+          const body = {
+            id: tag_id,
+            tag_id: tag_id,
+            post_id: post_id,
+            name: name,
+            slug: name,
+          };
+
+          await service.tags.create(body);
+          await service.postsTags.create(body);
+        } else {
+          const body = {
+            tag_id: tag.id,
+            post_id: post_id,
+          };
+
+          await service.postsTags.create(body);
+        }
+      });
+    }
+
     res.status(200).json({
       post: body,
     });
@@ -49,7 +77,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const posts = await service.posts.findAll();
+    const posts = await service.posts.findAll("created_at");
 
     if (posts.length > 0) {
       res.status(200).json({
@@ -143,6 +171,36 @@ exports.update = async (req, res) => {
 
     if (post.length > 0) {
       await service.posts.update(body, params.id);
+
+      await service.postsTags.destroy(params.id);
+
+      if (body.tags.length > 0) {
+        body.tags.forEach(async (name) => {
+          const tag = await service.tags.findByName(name);
+
+          if (!tag) {
+            const tag_id = nanoid();
+
+            const body = {
+              id: tag_id,
+              tag_id: tag_id,
+              post_id: params.id,
+              name: name,
+              slug: name,
+            };
+
+            await service.tags.create(body);
+            await service.postsTags.create(body);
+          } else {
+            const body = {
+              tag_id: tag.id,
+              post_id: params.id,
+            };
+
+            await service.postsTags.create(body);
+          }
+        });
+      }
 
       res.status(200).json({
         post: [
