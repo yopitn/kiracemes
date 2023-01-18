@@ -167,18 +167,97 @@
                 </div>
 
                 <div class="editor__forms-group">
+                  <label for="tags">Tags</label>
+
+                  <div class="editor__forms-tags">
+                    <input type="text" id="tags" placeholder="Separate with comma" />
+                  </div>
+
+                  <ul class="editor__forms-tdata" data-id="tags-data"></ul>
+                </div>
+
+                <div class="editor__forms-group">
                   <label for="published">Published on</label>
                   <div class="editor__forms-published">
                     <input type="date" id="date" />
-                    <input type="text" id="time" />
+                    <input type="text" id="time" placeholder="00:00" />
                   </div>
                 </div>
 
                 <div class="editor__forms-group">
-                  <div class="editor__forms-group">
-                    <label for="slug">Post URL</label>
-                    <input type="text" id="slug" placeholder="Add permalink" />
-                  </div>
+                  <details class="editor__forms-details">
+                    <summary>
+                      <span class="name">Meta data</span>
+                      <svg class="line" viewBox="0 0 24 24">
+                        <g transform="translate(5.000000, 8.500000)">
+                          <polyline points="14 0 7 7 0 0"></polyline>
+                        </g>
+                      </svg>
+                    </summary>
+
+                    <div class="content">
+                      <div class="editor__forms-group">
+                        <label for="meta-title">Meta title</label>
+                        <input type="text" id="meta-title" placeholder="Meta title" />
+                      </div>
+
+                      <div class="editor__forms-group">
+                        <label for="meta-description">Meta description</label>
+                        <input type="text" id="meta-description" placeholder="Meta description" />
+                      </div>
+                    </div>
+                  </details>
+
+                  <details class="editor__forms-details">
+                    <summary>
+                      <span class="name">Meta facebook</span>
+                      <svg class="line" viewBox="0 0 24 24">
+                        <g transform="translate(5.000000, 8.500000)">
+                          <polyline points="14 0 7 7 0 0"></polyline>
+                        </g>
+                      </svg>
+                    </summary>
+
+                    <div class="content">
+                      <div class="editor__forms-group">
+                        <label for="facebook-title">Og title</label>
+                        <input type="text" id="facebook-title" placeholder="Facebook title" />
+                      </div>
+
+                      <div class="editor__forms-group">
+                        <label for="facebook-description">Og description</label>
+                        <input type="text" id="facebook-description" placeholder="Facebook description" />
+                      </div>
+                    </div>
+                  </details>
+
+                  <details class="editor__forms-details">
+                    <summary>
+                      <span class="name">Meta twitter</span>
+                      <svg class="line" viewBox="0 0 24 24">
+                        <g transform="translate(5.000000, 8.500000)">
+                          <polyline points="14 0 7 7 0 0"></polyline>
+                        </g>
+                      </svg>
+                    </summary>
+
+                    <div class="content">
+                      <div class="editor__forms-group">
+                        <label for="twitter-title">Twitter title</label>
+                        <input type="text" id="twitter-title" placeholder="Twitter title" />
+                      </div>
+
+                      <div class="editor__forms-group">
+                        <label for="twitter-description">Twitter description</label>
+                        <input type="text" id="twitter-description" placeholder="Twitter description" />
+                      </div>
+                    </div>
+                  </details>
+                </div>
+
+                <div class="editor__forms-featured">
+                  <input type="checkbox" class="hidden" id="featured" />
+                  <label for="featured">Featured this post</label>
                 </div>
               </div>
             </div>

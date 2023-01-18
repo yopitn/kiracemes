@@ -216,12 +216,12 @@ $editorRight: 360px;
       input {
         display: block;
         width: 100%;
-        padding: 10px;
+        padding: 12px 10px;
         background-color: transparent;
         font-size: 14px;
         outline: none;
         border: 1px solid $borderColor;
-        border-radius: 6px;
+        border-radius: 4px;
       }
     }
 
@@ -238,6 +238,101 @@ $editorRight: 360px;
       > *:last-child {
         flex: 0 0 38%;
         max-width: 38%;
+      }
+    }
+
+    &-details {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border-bottom: 1px solid $borderColor;
+      padding: 16px 0;
+
+      summary {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 2px 0 6px;
+        outline: 0;
+        cursor: pointer;
+        user-select: none;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          stroke-width: 1.5px;
+          transition: 0.1s ease;
+          transform: rotate(-90deg);
+        }
+      }
+
+      &[open] summary svg {
+        transform: rotate(0);
+      }
+
+      .content {
+        padding-top: 16px;
+        padding-left: 5px;
+
+        label {
+          font-size: 13px;
+          opacity: 0.95;
+        }
+      }
+    }
+
+    &-featured {
+      input:checked ~ {
+        label {
+          &::before {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 5px;
+            display: block;
+            width: 10px;
+            height: 5px;
+            border-width: 0 0 1.5px 1.5px;
+            border-style: solid;
+            border-color: $whiteColor;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      label {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        user-select: none;
+        padding-left: 20px;
+        cursor: pointer;
+        user-select: none;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          display: block;
+          width: 15px;
+          height: 15px;
+          background-color: transparent;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          border-radius: 2px;
+          transition: 0.1s ease;
+        }
       }
     }
   }

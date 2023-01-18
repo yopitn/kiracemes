@@ -1,8 +1,16 @@
 const service = require("../../services");
+const settings = require("../../utils/settings");
 
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
   try {
+    const setting = await settings();
+
     res.render("admin/signin", {
+      blog: {
+        title: setting.title,
+        homepageUrl: setting.homeurl,
+        pageTitle: `${setting.title}: Signin`,
+      },
       message: req.flash("message"),
     });
   } catch (error) {

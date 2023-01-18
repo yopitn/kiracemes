@@ -2,16 +2,21 @@
 <html lang="en">
 
 <head>
-  <title>Admin</title>
+  <title><%- blog.pageTitle %></title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="<%- blog.homepageUrl %>/favicon.ico" type="image/x-icon">
 
-  <!-- <link rel="stylesheet" href="/admin/css/dashboard.min.css"> -->
-  <link rel="stylesheet" href="/admin/css/editor.min.css">
+  <% if (view.isHomepage) { %>
+  <link rel="stylesheet" href="<%- blog.homepageUrl %>/admin/css/dashboard.min.css">
+  <% } %>
+
+  <% if (view.isEditor) { %>
+  <link rel="stylesheet" href="<%- blog.homepageUrl %>/admin/css/editor.min.css">
+  <% } %>
 
 </head>
 
@@ -19,6 +24,23 @@
   <header class="header__wrap">
     <div class="container">
       <div class="header__left">
+        <% if (view.isEditor) { %>
+        <div class="header__icon">
+          <ul>
+            <li>
+              <a href="<%- blog.homepageUrl %>/admin" class="icon">
+                <svg class="line" viewBox="0 0 24 24">
+                  <g transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)">
+                    <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line>
+                    <polyline points="12.7987 9.7002 6.7747 15.7502 0.7497 9.7002"></polyline>
+                  </g>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <% } %>
+
         <h1 class="header__title">
           <div class="image" style="background-image: url('/admin/images/logo.jpg');"></div>
 
@@ -27,9 +49,10 @@
       </div>
 
       <div class="header__right">
+        <% if (view.isPosts || view.isPages) { %>
         <div class="header__search">
-          <form action="/admin/posts" method="get">
-            <input autocomplete="off" id="search" minlength="3" name="q" placeholder="Search post..." required type="search">
+          <form action="/admin/<%- view.isPosts ? "posts" : "pages" %>" method="get">
+            <input autocomplete="off" id="search" minlength="3" name="q" placeholder="Search <%- view.isPosts ? "posts" : "pages" %>..." required type="search">
             <button type="reset"></button>
             <button type="submit">
               <svg class="line" viewBox="0 0 24 24">
@@ -41,6 +64,7 @@
             </button>
           </form>
         </div>
+        <% } %>
 
         <div class="header__icon">
           <ul>

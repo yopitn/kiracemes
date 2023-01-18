@@ -57,6 +57,7 @@
     width: 100%;
     background-color: $contentBackground;
     border-bottom: 1px solid $borderColor;
+    box-shadow: 2px 2px 6px $borderColor;
 
     > *:first-child {
       width: 55%;

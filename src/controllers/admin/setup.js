@@ -2,7 +2,13 @@ const service = require("../../services");
 
 exports.index = async (req, res) => {
   try {
-    res.render("./admin/setup");
+    res.render("./admin/setup", {
+      blog: {
+        title: "Kiracemes",
+        homepageUrl: `${req.protocol}://${req.headers.host}`,
+        pageTitle: `Kiracemes: Setup`,
+      },
+    });
   } catch (error) {
     throw new Error(error);
   }

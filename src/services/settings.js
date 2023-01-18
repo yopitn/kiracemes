@@ -11,6 +11,20 @@ exports.create = async (body) => {
   }
 };
 
+exports.findByName = async (name) => {
+  try {
+    const setting = await model.settings.findOne({
+      where: {
+        name: name,
+      },
+    });
+
+    return setting.value;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.update = async (body) => {
   try {
     await model.settings.update(
