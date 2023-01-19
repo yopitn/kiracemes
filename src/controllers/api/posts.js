@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
 
     await service.posts.create(post);
 
-    if (body.tags.length > 0) {
+    if (body.tags && body.tags.length > 0) {
       body.tags.forEach(async (name) => {
         const tag = await service.tags.findByName(name);
 

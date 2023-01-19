@@ -73,6 +73,15 @@
       }
     }
   }
+
+  &__noitem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }
 
 .post {
@@ -89,7 +98,21 @@
     background-repeat: no-repeat;
     aspect-ratio: 1 / 1;
     border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.05);
     overflow: hidden;
+
+    &-letter {
+      flex: 0 0 60px;
+      max-width: 60px;
+      height: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.05);
+      font-size: 28px;
+      font-weight: 800;
+      border-radius: 2px;
+    }
   }
 
   &__content {
@@ -153,8 +176,8 @@
   &__status span {
     display: inline-block;
     text-align: center;
-    padding: 10px;
-    font-size: 14px;
+    padding: 8px 10px;
+    font-size: 13px;
     font-weight: 500;
     text-transform: capitalize;
     border-radius: 4px;

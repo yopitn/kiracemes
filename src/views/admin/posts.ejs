@@ -14,39 +14,50 @@
         </div>
 
         <div class="table__content">
-          <div class="table__item">
-            <a href="#" class="post__link">
+          <% if (posts.length > 0) { %>
+          <% posts.forEach(post => { %>
+          <div class="table__item" id="postId-<%- post.id %>">
+            <a href="<%- blog.homepageUrl %>/admin/post/<%- post.id %>" class="post__link">
               <div class="post__detail">
-                <div class="post__image" style="background-image: url('https://dummyimage.com/600x400/000/fff');"></div>
+                <% if (post.featuredImage()) { %>
+                <div class="post__image" style="background-image: url('<%- post.featuredImage() %>');"></div>
+                <% } else { %>
+                <div class="post__image-letter"><%- post.title.charAt(0).toUpperCase() %></div>
+                <% } %>
 
                 <div class="post__content">
                   <div class="post__title">
-                    <span class="title">Contoh judul postingan</span>
+                    <span class="title"><%- post.title %></span>
                   </div>
 
                   <div class="post__info">
                     <div class="post__category">
-                      <span class="category">News</span>
-                      <span class="category">Tutorial</span>
+                      <% if (post.tags.length > 0) { %>
+                      <% post.tags.forEach(tag => { %>
+                      <span class="category"><%- tag.name %></span>
+                      <% }) %>
+                      <% } else { %>
+                      <span class="category">Uncategory</span>
+                      <% } %>
                     </div>
 
                     <div class="post__date">
-                      <span class="date">17 Januari 2023</span>
+                      <span class="date"><%- helpers.parseDate(post.date.created) %></span>
                     </div>
                   </div>
                 </div>
               </div>
             </a>
 
-            <a href="#" class="post__link">
+            <a href="<%- blog.homepageUrl %>/admin/post/<%- post.id %>" class="post__link">
               <div class="post__author">
-                <span class="text">Admin</span>
+                <span class="text"><%- post.author %></span>
               </div>
             </a>
 
-            <a href="#" class="post__link">
+            <a href="<%- blog.homepageUrl %>/admin/post/<%- post.id %>" class="post__link">
               <div class="post__status">
-                <span class="status scheduled">Scheduled</span>
+                <span class="status <%- post.status %>"><%- post.status %></span>
               </div>
             </a>
 
@@ -60,6 +71,12 @@
               </div>
             </div>
           </div>
+          <% }) %>
+          <% } else { %>
+          <div class="table__noitem">
+            <span class="text">No posts found</span>
+          </div>
+          <% } %>
         </div>
       </div>
     </div>
