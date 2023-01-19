@@ -45,17 +45,15 @@ exports.upload = (req, res) => {
         },
       }),
       fileFilter: (req, file, cb) => {
-        const fileType = file.mimetype.split("/")[1];
-
         if (
-          fileType === "jpg" ||
-          fileType === "jpeg" ||
-          fileType === "png" ||
-          fileType === "webp"
+          file.mimetype == "image/png" ||
+          file.mimetype == "image/jpg" ||
+          file.mimetype == "image/jpeg" ||
+          file.mimetype == "image/webp"
         ) {
           cb(null, true);
         } else {
-          cb(
+          return cb(
             new Error(
               "Sorry, you are not allowed to upload this file type for images"
             )
@@ -66,7 +64,7 @@ exports.upload = (req, res) => {
 
     upload(req, res, (error) => {
       if (error)
-        return res.status(400).json({
+        return res.status(200).json({
           errors: [
             {
               message: error.message,
@@ -75,7 +73,7 @@ exports.upload = (req, res) => {
         });
 
       if (error instanceof multer.MulterError)
-        return res.status(400).json({
+        return res.status(200).json({
           errors: [
             {
               message: error.message,

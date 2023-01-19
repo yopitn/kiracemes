@@ -27,6 +27,50 @@
 
             <div class="separator" role="separator"></div>
 
+            <div class="styled" aria-label="Style" role="listbox">
+              <div class="header" data-method="shdrop-styled">
+                <span aria-hidden="true">Styled</span>
+
+                <svg class="line" viewBox="0 0 24 24">
+                  <g transform="translate(5.000000, 8.500000)">
+                    <polyline points="14 0 7 7 0 0"></polyline>
+                  </g>
+                </svg>
+              </div>
+
+              <ul class="dropdown">
+                <li>
+                  <div class="btn" aria-label="Paragraph" data-value="P">Paragraph</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 1" data-value="H1">Heading H1</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 2" data-value="H2">Heading H2</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 3" data-value="H3">Heading H3</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 4" data-value="H4">Heading H4</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 5" data-value="H5">Heading H5</div>
+                </li>
+
+                <li>
+                  <div class="btn" aria-label="Heading 6" data-value="H6">Heading H6</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="separator" role="separator"></div>
+
             <div class="btn" data-command="undo" aria-label="Undo" role="button">
               <svg viewBox="0 0 24 24">
                 <path d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H8z" />
@@ -154,6 +198,7 @@
 
           <div class="editor__contenteditable">
             <iframe id="editable" frameborder="0"></iframe>
+            <textarea class="hidden" name="content" id="content" cols="30" rows="10"> </textarea>
           </div>
         </div>
 
@@ -267,3 +312,5 @@
     </div>
   </div>
 </main>
+
+<%- include("./partials/footer") %>
