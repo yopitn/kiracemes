@@ -128,7 +128,7 @@ exports.findById = async (req, res) => {
 
     const page = await service.pages.findById(params.id);
 
-    if (page.length > 0) {
+    if (page) {
       res.status(200).json({
         page: page,
       });
@@ -158,7 +158,7 @@ exports.findBySlug = async (req, res) => {
 
     const page = await service.pages.findBySlug(params.slug);
 
-    if (page.length > 0) {
+    if (page) {
       res.status(200).json({
         page: page,
       });

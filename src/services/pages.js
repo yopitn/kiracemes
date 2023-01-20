@@ -98,7 +98,7 @@ exports.findAllCount = async () => {
 
 exports.findById = async (page_id) => {
   try {
-    const page = await model.posts.findAll({
+    const page = await model.posts.findOne({
       attributes: [
         "id",
         "uuid",
@@ -133,7 +133,7 @@ exports.findById = async (page_id) => {
 
 exports.findBySlug = async (page_slug) => {
   try {
-    const page = await model.posts.findAll({
+    const page = await model.posts.findOne({
       attributes: [
         "id",
         "uuid",

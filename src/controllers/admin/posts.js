@@ -26,6 +26,10 @@ exports.index = async (req, res) => {
         isPages: false,
         isSetting: false,
         isEditor: false,
+        isPostCreate: false,
+        isPostUpdate: false,
+        isPageUpdate: false,
+        isPageCreate: false,
         isError: false,
       },
       posts: posts.map((post) => {
@@ -39,14 +43,14 @@ exports.index = async (req, res) => {
             const content = post.content;
 
             if (content) {
-              const regex1 =
-                /<\s*?img\s+[^>]*?\s*src\s*=\s*(["'])((\\?.)*?)\1[^>]*?>/gm;
+              const regex1 = /<\s*?img\s+[^>]*?\s*src\s*=\s*(["'])((\\?.)*?)\1[^>]*?>/gm;
               const regex2 = /\<img.+src\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/;
 
               const imgArr = content.match(regex1);
-              const imgElem = imgArr[0];
 
-              if (imgArr.length != 0) {
+              if (imgArr) {
+                const imgElem = imgArr[0];
+
                 const img = imgElem.match(regex2);
 
                 return img[1];
@@ -71,20 +75,7 @@ exports.index = async (req, res) => {
       }),
       helpers: {
         parseDate: (datetime) => {
-          const month = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-          ];
+          const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
           const date = new Date(datetime).toLocaleDateString();
           const arr = date.split("/");
@@ -114,7 +105,64 @@ exports.create = async (req, res) => {
         isPages: false,
         isSetting: false,
         isEditor: true,
+        isPostCreate: true,
+        isPostUpdate: false,
+        isPageUpdate: false,
+        isPageCreate: false,
         isError: false,
+      },
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const { params } = req;
+
+    const setting = await settings();
+
+    const post = await service.posts.findById(params.id);
+
+    res.render("admin/editor", {
+      blog: {
+        title: setting.title,
+        homepageUrl: setting.homeurl,
+        pageTitle: `${setting.title}: Update Post`,
+      },
+      view: {
+        isHomepage: false,
+        isPosts: false,
+        isPages: false,
+        isSetting: false,
+        isEditor: true,
+        isPostCreate: false,
+        isPostUpdate: true,
+        isPageUpdate: false,
+        isPageCreate: false,
+        isError: false,
+      },
+      post: {
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        featured: post.featured,
+        status: post.status,
+        meta_title: post.meta_title,
+        meta_description: post.meta_description,
+        og_image: post.og_image,
+        og_title: post.og_title,
+        og_description: post.og_description,
+        twitter_image: post.twitter_image,
+        twitter_title: post.twitter_title,
+        twitter_description: post.twitter_description,
+        published_at: post.published_at,
+        tags: post.tags.map((tag) => {
+          return {
+            name: tag.name,
+          };
+        }),
       },
     });
   } catch (error) {

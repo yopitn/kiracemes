@@ -8,9 +8,17 @@ exports.create = async (req, res) => {
     const { body, user_id } = req;
     const post_id = nanoid();
 
+    if (!body.title)
+      return res.status(400).json({
+        errors: [
+          {
+            message: "Title field cannot be empty",
+          },
+        ],
+      });
+
     if (!body.slug) body.slug = body.title;
-    if (!body.published_at && body.status === "published")
-      body.published_at = new Date();
+    if (!body.published_at && body.status === "published") body.published_at = new Date();
 
     const post = {
       id: post_id,
@@ -135,18 +143,12 @@ exports.findAll = async (req, res) => {
           pages: Math.ceil(postsCount / limit),
           total: postsCount,
           next:
-            Math.ceil(postsCount / limit) > 1 &&
-            Math.ceil(postsCount / limit) > parseInt(query.page || 1)
+            Math.ceil(postsCount / limit) > 1 && Math.ceil(postsCount / limit) > parseInt(query.page || 1)
               ? query.page > 0
                 ? parseInt(query.page) + 1
                 : 2
               : null,
-          prev:
-            Math.ceil(postsCount / limit) > 1
-              ? query.page > 1
-                ? parseInt(query.page) - 1
-                : null
-              : null,
+          prev: Math.ceil(postsCount / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
         },
       });
     } else {
