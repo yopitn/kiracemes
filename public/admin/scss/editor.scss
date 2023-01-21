@@ -30,12 +30,11 @@ $toolbarHeight: 28px;
   &__message {
     position: fixed;
     top: 20px;
+    left: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
+    transform: translateX(-50%);
     z-index: 1000;
 
     .alert {
@@ -111,6 +110,7 @@ $toolbarHeight: 28px;
 
       &-light {
         background-color: #fefefe;
+        border: 1px solid rgba(0, 0, 0, 0.05);
 
         &:hover {
           background-color: rgba(0, 0, 0, 0.05);

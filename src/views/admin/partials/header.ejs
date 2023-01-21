@@ -1,3 +1,15 @@
+<%
+let path_type = null;
+
+if (view.isPostCreate || view.isPostUpdate) {
+  path_type = "posts";
+}
+
+if (view.isPageCreate || view.isPageUpdate) {
+  path_type = "pages";
+}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +40,7 @@
         <div class="header__icon">
           <ul>
             <li>
-              <a href="<%- blog.homepageUrl %>/admin" class="icon" data-button="back">
+              <a href="<%- blog.homepageUrl %>/admin/<%- path_type %>" class="icon" data-button="back">
                 <svg class="line" viewBox="0 0 24 24">
                   <g transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)">
                     <line x1="6.7743" y1="15.75" x2="6.7743" y2="0.75"></line>

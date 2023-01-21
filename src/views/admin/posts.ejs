@@ -26,7 +26,7 @@
                 <% } %>
 
                 <div class="post__content">
-                  <div class="post__title">
+                  <div class="post__title <%- post.title === "untitled" ? "opacity-7" : "" %>">
                     <span class="title"><%- post.title %></span>
                   </div>
 

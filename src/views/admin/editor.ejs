@@ -2,14 +2,14 @@
 
 <% 
 let type_lower;
-let type_capital
+let type_capital;
+let is_save = true;
 
 let submit__button = "publish";
 let title = "";
 let content = "";
 let slug = "";
 let tags = [];
-let published_at = "";
 let date = "";
 let time = "";
 let meta_title = "";
@@ -32,28 +32,22 @@ if (view.isPageCreate || view.isPageUpdate) {
   type_lower = "page";
 }
 
-if (typeof(post) !== "undefined" || typeof(page) !== "undefined") {
+if (typeof(post) !== "undefined") {
   if (post.status === "published") {
     submit__button = "update";
+    is_save = false;
   };
 
   if (post.status === "draft") {
     submit__button = "publish";
+    is_save = true;
   };
 
-  if (post.status === "schedule") {
-    submit__button = "pulish";
-  };
-}
-
-if (typeof(post) !== "undefined") {
   title = post.title;
   content = post.content;
   slug = post.slug;
   tags = post.tags;
-  published_at = post.published_at;
-  date = new Date(published_at).toISOString().substring(0, 10);
-  time = new Date(published_at).toISOString().substring(11, 16);
+
   meta_title = post.meta_title;
   meta_description = post.meta_description;
   og_image = post.og_image;
@@ -66,11 +60,20 @@ if (typeof(post) !== "undefined") {
 }
 
 if (typeof(page) !== "undefined") {
+  if (page.status === "published") {
+    submit__button = "update";
+    is_save = false;
+  };
+
+  if (page.status === "draft") {
+    submit__button = "publish";
+    is_save = true;
+  };
+
   title = page.title;
   content = page.content;
   slug = page.slug;
   tags = page.tags;
-  published_at = page.published_at;
   meta_title = page.meta_title;
   meta_description = page.meta_description;
   og_image = page.og_image;
@@ -91,7 +94,10 @@ if (typeof(page) !== "undefined") {
         </div>
 
         <div class="editor__action">
-          <a href="#" class="btn btn-light">Preview</a>
+          <!-- <a href="#" class="btn btn-light">Preview</a> -->
+          <% if (is_save) { %>
+          <div class="btn btn-light" data-button="save">Save</div>
+          <% } %>
           <div class="btn btn-primary" data-button="<%- submit__button %>"><%- submit__button %></div>
         </div>
       </div>
@@ -290,7 +296,7 @@ if (typeof(page) !== "undefined") {
               <div class="editor__forms-inner">
                 <div class="editor__forms-group">
                   <label for="slug">Post URL</label>
-                  <input type="text" id="slug" placeholder="Add permalink" value="<%- slug %>"/>
+                  <input type="text" id="slug" placeholder="Add permalink" value="<%- slug %>" />
                 </div>
 
                 <% if (view.isPostCreate || view.isPostUpdate) { %>
@@ -306,14 +312,6 @@ if (typeof(page) !== "undefined") {
                 <% } %>
 
                 <div class="editor__forms-group">
-                  <label for="published">Published on</label>
-                  <div class="editor__forms-published">
-                    <input type="date" id="date" value="<%- date %>" />
-                    <input type="text" id="time" placeholder="00:00" value="<%- time %>"/>
-                  </div>
-                </div>
-
-                <div class="editor__forms-group">
                   <details class="editor__forms-details">
                     <summary>
                       <span class="name">Meta data</span>
@@ -327,12 +325,12 @@ if (typeof(page) !== "undefined") {
                     <div class="content">
                       <div class="editor__forms-group">
                         <label for="meta-title">Meta title</label>
-                        <input type="text" id="meta-title" placeholder="Meta title" value="<%- meta_title %>"/>
+                        <input type="text" id="meta-title" placeholder="Meta title" value="<%- meta_title %>" />
                       </div>
 
                       <div class="editor__forms-group">
                         <label for="meta-description">Meta description</label>
-                        <input type="text" id="meta-description" placeholder="Meta description" value="<%- meta_description %>"/>
+                        <input type="text" id="meta-description" placeholder="Meta description" value="<%- meta_description %>" />
                       </div>
                     </div>
                   </details>
@@ -350,7 +348,7 @@ if (typeof(page) !== "undefined") {
                     <div class="content">
                       <div class="editor__forms-group">
                         <label for="facebook-title">Og title</label>
-                        <input type="text" id="facebook-title" placeholder="Facebook title" value="<%- og_title %>"/>
+                        <input type="text" id="facebook-title" placeholder="Facebook title" value="<%- og_title %>" />
                       </div>
 
                       <div class="editor__forms-group">
@@ -373,12 +371,12 @@ if (typeof(page) !== "undefined") {
                     <div class="content">
                       <div class="editor__forms-group">
                         <label for="twitter-title">Twitter title</label>
-                        <input type="text" id="twitter-title" placeholder="Twitter title" value="<%- twitter_title %>"/>
+                        <input type="text" id="twitter-title" placeholder="Twitter title" value="<%- twitter_title %>" />
                       </div>
 
                       <div class="editor__forms-group">
                         <label for="twitter-description">Twitter description</label>
-                        <input type="text" id="twitter-description" placeholder="Twitter description" value="<%- twitter_description %>"/>
+                        <input type="text" id="twitter-description" placeholder="Twitter description" value="<%- twitter_description %>" />
                       </div>
                     </div>
                   </details>
@@ -386,7 +384,7 @@ if (typeof(page) !== "undefined") {
 
                 <% if (view.isPostCreate || view.isPostUpdate) { %>
                 <div class="editor__forms-featured">
-                  <input type="checkbox" class="hidden" id="featured" <%- featured ? "checked" : "" %>/>
+                  <input type="checkbox" class="hidden" id="featured" <%- featured ? "checked" : "" %> />
                   <label for="featured">Featured this post</label>
                 </div>
                 <% } %>

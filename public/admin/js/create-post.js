@@ -1,5 +1,5 @@
 const publish_button = document.querySelector("[data-button='publish']");
-const back_button = document.querySelector("[data-button='back']");
+const save_button = document.querySelector("[data-button='save']");
 const editor_wrap = document.querySelector(".editor__wrap");
 const editor_message = document.querySelector(".editor__message");
 
@@ -88,7 +88,7 @@ function createPoshAsDraft() {
   }
 
   const data = {
-    title: title.value ? title.value : "Blog post",
+    title: title.value ? title.value : "untitled",
     slug: slug.slug,
     content: post_content,
     featured: featured.checked,
@@ -110,11 +110,7 @@ function createPoshAsDraft() {
     body: JSON.stringify(data),
   })
     .then((res) => {
-      if (res.ok) {
-        return (window.location.href = "/admin/posts/");
-      } else {
-        return res.json();
-      }
+      return res.json();
     })
     .then((json) => {
       if (json.errors) {
@@ -133,6 +129,8 @@ function createPoshAsDraft() {
             message.remove();
           }, 5000);
         }
+      } else {
+        return (window.location.href = `/admin/post/${json.post.id}`);
       }
     })
     .catch((error) => {
@@ -141,4 +139,4 @@ function createPoshAsDraft() {
 }
 
 publish_button.addEventListener("click", createPostAsPublished);
-back_button.addEventListener("click", createPoshAsDraft);
+save_button.addEventListener("click", createPoshAsDraft);

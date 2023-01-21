@@ -70,7 +70,23 @@ exports.create = async (req, res) => {
     }
 
     res.status(200).json({
-      post: body,
+      post: {
+        id: post_id,
+        title: body.title,
+        slug: body.slug,
+        content: body.content,
+        featured: body.featured,
+        status: body.status,
+        meta_title: body.meta_title,
+        meta_description: body.meta_description,
+        og_image: body.og_image,
+        og_title: body.og_title,
+        og_description: body.og_description,
+        twitter_image: body.twitter_image,
+        twitter_title: body.twitter_title,
+        twitter_description: body.twitter_description,
+        tags: body.tags,
+      },
     });
   } catch (error) {
     res.status(400).json({
@@ -105,6 +121,7 @@ exports.findAll = async (req, res) => {
             title: post.title,
             slug: post.slug,
             content: post.content,
+            featured: post.featured,
             status: post.status,
             meta_title: post.meta_title,
             meta_description: post.meta_description,
@@ -235,9 +252,11 @@ exports.update = async (req, res) => {
   try {
     const { body, params } = req;
 
+    if (!body.published_at && body.status === "published") body.published_at = new Date();
+
     const post = await service.posts.findById(params.id);
 
-    if (post.length > 0) {
+    if (post) {
       await service.posts.update(body, params.id);
 
       await service.postsTags.destroy(params.id);
@@ -303,7 +322,7 @@ exports.destroy = async (req, res) => {
 
     const post = await service.posts.findById(params.id);
 
-    if (post.length > 0) {
+    if (post) {
       await service.posts.destroy(params.id);
 
       res.status(204).json({

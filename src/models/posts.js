@@ -31,7 +31,7 @@ const posts = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: "draft",
-      validate: { isIn: [["published", "draft", "scheduled"]] },
+      validate: { isIn: [["published", "draft"]] },
     },
     meta_title: { type: DataTypes.STRING(2000), allowNull: true },
     meta_description: { type: DataTypes.STRING(2000), allowNull: true },

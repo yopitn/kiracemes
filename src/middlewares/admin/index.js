@@ -63,6 +63,24 @@ exports.isNotLogin = (req, res, next) => {
   }
 };
 
+exports.isSetup = async (req, res, next) => {
+  try {
+    const admin = await model.users.findAll({
+      where: {
+        role: "admin",
+      },
+    });
+
+    if (admin.length > 0) {
+      return next();
+    } else {
+      res.redirect("/admin/setup");
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.isNotSetup = async (req, res, next) => {
   try {
     const admin = await model.users.findAll({

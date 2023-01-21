@@ -6,13 +6,13 @@ const nanoid = customAlphabet("1234567890", 24);
 exports.create = async (req, res) => {
   try {
     const { body, user_id } = req;
+    const page_id = nanoid();
 
     if (!body.slug) body.slug = body.title;
-    if (!body.published_at && body.status === "published")
-      body.published_at = new Date();
+    if (!body.published_at && body.status === "published") body.published_at = new Date();
 
     const page = {
-      id: nanoid(),
+      id: page_id,
       author_id: user_id,
       title: body.title,
       slug: body.slug,
@@ -32,7 +32,22 @@ exports.create = async (req, res) => {
     await service.pages.create(page);
 
     res.status(200).json({
-      page: body,
+      page: {
+        id: page_id,
+        title: body.title,
+        slug: body.slug,
+        content: body.content,
+        featured: body.featured,
+        status: body.status,
+        meta_title: body.meta_title,
+        meta_description: body.meta_description,
+        og_image: body.og_image,
+        og_title: body.og_title,
+        og_description: body.og_description,
+        twitter_image: body.twitter_image,
+        twitter_title: body.twitter_title,
+        twitter_description: body.twitter_description,
+      },
     });
   } catch (error) {
     res.status(400).json({
@@ -88,18 +103,12 @@ exports.findAll = async (req, res) => {
           pages: Math.ceil(pagesCount / limit),
           total: pagesCount,
           next:
-            Math.ceil(pagesCount / limit) > 1 &&
-            Math.ceil(pagesCount / limit) > parseInt(query.page || 1)
+            Math.ceil(pagesCount / limit) > 1 && Math.ceil(pagesCount / limit) > parseInt(query.page || 1)
               ? query.page > 0
                 ? parseInt(query.page) + 1
                 : 2
               : null,
-          prev:
-            Math.ceil(pagesCount / limit) > 1
-              ? query.page > 1
-                ? parseInt(query.page) - 1
-                : null
-              : null,
+          prev: Math.ceil(pagesCount / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
         },
       });
     } else {
@@ -188,7 +197,7 @@ exports.update = async (req, res) => {
 
     const page = await service.pages.findById(params.id);
 
-    if (page.length > 0) {
+    if (page) {
       await service.pages.update(body, params.id);
 
       res.status(200).json({
@@ -224,7 +233,7 @@ exports.destroy = async (req, res) => {
 
     const page = await service.pages.findById(params.id);
 
-    if (page.length > 0) {
+    if (page) {
       await service.pages.destroy(params.id);
 
       res.status(204).json({
