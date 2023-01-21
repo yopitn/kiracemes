@@ -196,7 +196,7 @@ $toolbarHeight: 28px;
     .styled {
       position: relative;
 
-      .header {
+      .button {
         display: inline-flex;
         align-items: center;
         font-size: 14px;
@@ -231,7 +231,7 @@ $toolbarHeight: 28px;
       .dropdown {
         display: block;
         position: absolute;
-        top: calc($toolbarHeight + 8px);
+        top: calc($toolbarHeight + 10px);
         left: -14px;
         right: -14px;
         list-style: none;

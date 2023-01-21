@@ -16,6 +16,6 @@ router.get("/signout", [middleware.admin.isSetup, middleware.admin.isLogin], con
 
 router.get("/posts", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.index);
 router.get("/post/new", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.create);
-router.get("/post/:id", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.update);
+router.get("/post/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.update);
 
 module.exports = router;

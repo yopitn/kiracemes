@@ -16,6 +16,10 @@
   </script>
   <% } %>
 
+  <% if (view.isPosts) { %>
+  <script src="<%- blog.homepageUrl %>/admin/js/posts.js"></script>
+  <% } %>
+
   <% if (view.isEditor) { %>
   <script src="<%- blog.homepageUrl %>/admin/js/editor.js"></script>
   <% } %>
@@ -25,8 +29,8 @@
   <% } %>
 
   <% if (view.isPostUpdate) { %>
-    <script src="<%- blog.homepageUrl %>/admin/js/update-post.js"></script>
-    <% } %>
+  <script src="<%- blog.homepageUrl %>/admin/js/update-post.js"></script>
+  <% } %>
 
   </body>
 
