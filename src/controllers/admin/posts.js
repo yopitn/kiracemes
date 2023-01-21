@@ -44,7 +44,7 @@ exports.index = async (req, res) => {
 
             if (content) {
               const regex1 = /<\s*?img\s+[^>]*?\s*src\s*=\s*(["'])((\\?.)*?)\1[^>]*?>/gm;
-              const regex2 = /\<img.+src\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/;
+              const regex2 = /src\=(?:\"|\')(.+?)(?:\"|\')/;
 
               const imgArr = content.match(regex1);
 

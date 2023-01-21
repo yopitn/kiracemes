@@ -5,8 +5,6 @@ const iframe_body = iframe_doc.body;
 const insert_link = document.querySelector("[data-command='insertLinkUrl']");
 const insert_image = document.querySelector("[data-command='editImage']");
 
-let post_content;
-
 // Set content editable
 (function () {
   const current_content = document.getElementById("content");
@@ -14,11 +12,7 @@ let post_content;
   iframe_body.setAttribute("contenteditable", "true");
   iframe_body.setAttribute("spellcheck", "false");
   iframe_body.setAttribute("role", "textbox");
-  iframe_body.innerHTML = current_content ? (current_content.textContent === " " ? "<p><br></p>" : current_content.textContent) : "<p><br></p>";
-
-  iframe_body.addEventListener("input", (e) => {
-    post_content = e.target.innerHTML;
-  });
+  iframe_body.innerHTML = current_content ? (current_content.textContent === "" ? "<p><br></p>" : current_content.textContent) : "<p><br></p>";
 
   const iframe_style = iframe_doc.createElement("style");
   iframe_style.innerHTML = `

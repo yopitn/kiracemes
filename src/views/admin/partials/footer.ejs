@@ -6,9 +6,12 @@
   <script>
     (function() {
       const sidebar_link = document.querySelectorAll(".sidebar__inner .link");
+      const current_url = location.pathname.split('/')[2];
+
+      if (current_url === "") return;
 
       sidebar_link.forEach(link => {
-        if (link.baseURI === link.href) {
+        if (link.href.indexOf(current_url) !== -1) {
           link.classList.add("active")
         }
       })

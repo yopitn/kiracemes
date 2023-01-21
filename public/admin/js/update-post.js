@@ -18,6 +18,7 @@ const twitter_description = document.getElementById("twitter-description");
 const tags_data = document.querySelector("editor__forms-tdata .tag[data-value]");
 
 function updatePostAsPublished() {
+  const content = iframe_body.innerHTML;
   const post_id = window.location.pathname.split("/").reverse()[0];
 
   let tags = [];
@@ -31,7 +32,7 @@ function updatePostAsPublished() {
   const data = {
     title: title.value,
     slug: slug.slug,
-    content: post_content,
+    content: content,
     featured: featured.checked,
     status: "published",
     meta_title: meta_title.value,
@@ -82,6 +83,7 @@ function updatePostAsPublished() {
 }
 
 function updatePost() {
+  const content = iframe_body.innerHTML;
   const post_id = window.location.pathname.split("/").reverse()[0];
 
   let tags = [];
@@ -95,7 +97,7 @@ function updatePost() {
   const data = {
     title: title.value,
     slug: slug.slug,
-    content: post_content,
+    content: content,
     featured: featured.checked,
     meta_title: meta_title.value,
     meta_description: meta_description.value,

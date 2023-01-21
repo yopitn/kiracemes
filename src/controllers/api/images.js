@@ -2,9 +2,11 @@ const crypto = require("crypto");
 const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
+const settings = require("../../utils/settings");
 
-exports.upload = (req, res) => {
+exports.upload = async (req, res) => {
   try {
+    const setting = await settings();
     const month = ("0" + (new Date().getMonth() + 1)).slice(-2).toString();
     const year = new Date().getFullYear().toString();
 
@@ -81,7 +83,7 @@ exports.upload = (req, res) => {
           ],
         });
 
-      const url = `/content/images/${year}/${month}/${req.file.filename}`;
+      const url = `${setting.homeurl}/content/images/${year}/${month}/${req.file.filename}`;
 
       res.status(201).json({
         images: [

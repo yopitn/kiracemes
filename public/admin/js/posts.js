@@ -44,7 +44,7 @@
         </div>
 
         <div class="modal__content">
-          <span class="modal__message">You want to delete "<b>${post_title}</b>", it will be deleted permanently. If you are sure click "<b>Delete</b>" to confirm.</span>
+          <span class="modal__message">You want to delete "<b>${post_title}</b>", it will be deleted permanently. If you sure click "<b>Delete</b>" to confirm.</span>
         </div>
 
         <div class="modal__footer">

@@ -17,6 +17,8 @@ const twitter_description = document.getElementById("twitter-description");
 const tags_data = document.querySelector("editor__forms-tdata .tag[data-value]");
 
 function createPostAsPublished() {
+  const content = iframe_body.innerHTML;
+
   let tags = [];
 
   if (tags_data && tags_data.length > 0) {
@@ -28,7 +30,7 @@ function createPostAsPublished() {
   const data = {
     title: title.value,
     slug: slug.slug,
-    content: post_content,
+    content: content,
     featured: featured.checked,
     status: "published",
     meta_title: meta_title.value,
@@ -79,6 +81,7 @@ function createPostAsPublished() {
 }
 
 function createPoshAsDraft() {
+  const content = iframe_body.innerHTML;
   let tags = [];
 
   if (tags_data && tags_data.length > 0) {
@@ -90,7 +93,7 @@ function createPoshAsDraft() {
   const data = {
     title: title.value ? title.value : "untitled",
     slug: slug.slug,
-    content: post_content,
+    content: content,
     featured: featured.checked,
     status: "draft",
     meta_title: meta_title.value,
@@ -130,7 +133,7 @@ function createPoshAsDraft() {
           }, 5000);
         }
       } else {
-        return (window.location.href = `/admin/post/${json.post.id}`);
+        return (window.location.href = `/admin/post/edit/${json.post.id}`);
       }
     })
     .catch((error) => {
