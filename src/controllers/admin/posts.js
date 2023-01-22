@@ -24,14 +24,50 @@ exports.index = async (req, res) => {
       return condition;
     };
 
+    const getStatus = () => {
+      let condition;
+
+      if (query.status) {
+        condition = {
+          [Op.and]: [{ status: { [Op.like]: `%${query.status}%` } }],
+        };
+      }
+
+      return condition;
+    };
+
+    const getTag = () => {
+      let condition;
+
+      if (query.tag) {
+        condition = {
+          where: {
+            [Op.and]: [{ name: { [Op.like]: `%${query.tag}%` } }],
+          },
+        };
+      }
+
+      return condition;
+    };
+
     const setting = await settings();
+
     const posts = await service.posts.findAll({
       order_by: "created_at",
       limit: limit,
       offset: offset,
-      search: getSearch()
+      search_query: getSearch(),
+      status_query: getStatus(),
+      tag_query: getTag(),
     });
-    const postsCount = await service.posts.findAllCount(getSearch());
+
+    const postsCount = await service.posts.findAllCount({
+      search_query: getSearch(),
+      status_query: getStatus(),
+      tag_query: getTag(),
+    });
+
+    const tags = await service.tags.findAll();
 
     res.render("admin/posts", {
       blog: {
@@ -90,6 +126,13 @@ exports.index = async (req, res) => {
               name: tag.name,
             };
           }),
+        };
+      }),
+      tags: tags.map((tag) => {
+        return {
+          id: tag.id,
+          name: tag.name,
+          slug: tag.slug,
         };
       }),
       helpers: {

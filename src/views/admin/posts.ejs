@@ -6,6 +6,60 @@
   <main class="main__wrap">
     <div class="container">
       <div class="table__wrap">
+        <div class="table__filter">
+          <div class="table__filter-status">
+            <div class="button" data-button="filter">
+              <span class="text" data-button="current-status">All posts</span>
+
+              <svg class="line" viewBox="0 0 24 24">
+                <g transform="translate(5.000000, 8.500000)">
+                  <polyline points="14 0 7 7 0 0"></polyline>
+                </g>
+              </svg>
+            </div>
+
+            <ul class="dropdown">
+              <li>
+                <div class="option" data-value="all posts" aria-selected="true" role="option" data-button="status-option">All posts</div>
+              </li>
+
+              <li>
+                <div class="option" data-value="published" aria-selected="false" role="option" data-button="status-option">Published</div>
+              </li>
+
+              <li>
+                <div class="option" data-value="draft" aria-selected="false" role="option" data-button="status-option">Draft</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="table__filter-tags">
+            <div class="button" data-button="filter">
+              <span class="text" data-button="current-tags">All tags</span>
+
+              <svg class="line" viewBox="0 0 24 24">
+                <g transform="translate(5.000000, 8.500000)">
+                  <polyline points="14 0 7 7 0 0"></polyline>
+                </g>
+              </svg>
+            </div>
+
+            <ul class="dropdown">
+              <li>
+                <div class="option" data-value="all tags" aria-selected="true" role="option" data-button="tag-option">All tags</div>
+              </li>
+
+              <% if (tags.length > 0) { %>
+              <% tags.forEach(tag => { %>
+              <li>
+                <div class="option" data-value="<%- tag.name %>" aria-selected="false" role="option" data-button="tag-option"><%- tag.name %></div>
+              </li>
+              <% }) %>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+
         <div class="table__header">
           <div>Details</div>
           <div>Author</div>
@@ -133,6 +187,7 @@
         </div>
 
         <div class="table__footer">
+          <% if (pagination.pages > 0) { %>
           <div class="table__pagination">
             <script>
               const num_of_limit = <%- pagination.limit %>;
@@ -141,6 +196,7 @@
             </script>
             <script src="<%- blog.homepageUrl %>/admin/js/pagination.js"></script>
           </div>
+          <% } %>
         </div>
       </div>
     </div>

@@ -73,22 +73,37 @@
 
   for (let i = 1; i <= num_of_pages; i++) {
     if (current_page == i) {
-      if (i == 1) {
+      if (i == 1 && i != num_of_pages) {
         prev_button.classList.add("inactive");
 
         next_button.addEventListener("click", () => {
           window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) + 1);
         });
-      } else if (i == num_of_pages) {
-        prev_button.addEventListener("click", () => {
-          window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) - 1);
-        });
+      } else if (i == num_of_pages && i != 1) {
+        if (parseInt(i) - 1 == 1) {
+          prev_button.addEventListener("click", () => {
+            window.location.href = updateQueryStringParameter(window.location.href, "page", undefined);
+          });
+        } else {
+          prev_button.addEventListener("click", () => {
+            window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) - 1);
+          });
+        }
 
         next_button.classList.add("inactive");
+      } else if (i == 1 && i == num_of_pages) {
+        prev_button.classList.add("inactive");
+        next_button.classList.add("inactive");
       } else {
-        prev_button.addEventListener("click", () => {
-          window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) - 1);
-        });
+        if (parseInt(i) - 1 == 1) {
+          prev_button.addEventListener("click", () => {
+            window.location.href = updateQueryStringParameter(window.location.href, "page", undefined);
+          });
+        } else {
+          prev_button.addEventListener("click", () => {
+            window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) - 1);
+          });
+        }
 
         next_button.addEventListener("click", () => {
           window.location.href = updateQueryStringParameter(window.location.href, "page", parseInt(i) + 1);

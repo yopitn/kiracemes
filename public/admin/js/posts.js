@@ -104,3 +104,92 @@
     });
   });
 })();
+
+// Show filter dropdown
+(function () {
+  const filter_button = document.querySelectorAll("[data-button='filter']");
+
+  filter_button.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.parentNode.classList.toggle("s");
+    });
+
+    document.addEventListener("mouseup", (e) => {
+      if (button.parentNode.classList.contains("s") && !button.contains(e.target)) {
+        button.parentNode.classList.remove("s");
+      }
+    });
+  });
+})();
+
+// Filter tags handler function
+(function () {
+  const option_button = document.querySelectorAll("[data-button='tag-option']");
+  const filter_button = document.querySelector("[data-button='current-tags']");
+
+  const search_query = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  const tag_query = search_query.tag;
+
+  if (tag_query) {
+    filter_button.innerText = tag_query;
+  }
+
+  option_button.forEach((button) => {
+    let option_value = button.dataset.value;
+
+    if (option_value === tag_query) {
+      button.setAttribute("aria-selected", true);
+    } else if (!tag_query && option_value == "all tags") {
+      button.setAttribute("aria-selected", true);
+    } else {
+      button.setAttribute("aria-selected", false);
+    }
+
+    button.addEventListener("click", () => {
+      if (option_value === "all tags") {
+        window.location.href = updateQueryStringParameter(window.location.href, "tag", undefined);
+      } else {
+        window.location.href = updateQueryStringParameter(window.location.href, "tag", option_value);
+      }
+    });
+  });
+})();
+
+// Filter status handler function
+(function () {
+  const option_button = document.querySelectorAll("[data-button='status-option']");
+  const filter_button = document.querySelector("[data-button='current-status']");
+
+  const search_query = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  const status_query = search_query.status;
+
+  if (status_query) {
+    filter_button.innerText = status_query;
+  }
+
+  option_button.forEach((button) => {
+    let option_value = button.dataset.value;
+
+    if (option_value === status_query) {
+      button.setAttribute("aria-selected", true);
+    } else if (!status_query && option_value == "all posts") {
+      button.setAttribute("aria-selected", true);
+    } else {
+      button.setAttribute("aria-selected", false);
+    }
+
+    button.addEventListener("click", () => {
+      if (option_value === "all posts") {
+        window.location.href = updateQueryStringParameter(window.location.href, "status", undefined);
+      } else {
+        window.location.href = updateQueryStringParameter(window.location.href, "status", option_value);
+      }
+    });
+  });
+})();

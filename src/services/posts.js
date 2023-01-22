@@ -1,4 +1,3 @@
-
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -27,7 +26,7 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async ({order_by, limit, offset, search = null}) => {
+exports.findAll = async ({ order_by, limit, offset, search_query = null, tag_query = null, status_query = null }) => {
   try {
     const posts = await model.posts.findAll({
       attributes: [
@@ -52,7 +51,8 @@ exports.findAll = async ({order_by, limit, offset, search = null}) => {
       ],
       where: {
         type: "post",
-        ...search
+        ...search_query,
+        ...status_query,
       },
       include: [
         {
@@ -62,6 +62,7 @@ exports.findAll = async ({order_by, limit, offset, search = null}) => {
         },
         {
           model: model.tags,
+          ...tag_query,
           through: {
             attributes: [],
           },
@@ -78,13 +79,23 @@ exports.findAll = async ({order_by, limit, offset, search = null}) => {
   }
 };
 
-exports.findAllCount = async (search = null) => {
+exports.findAllCount = async ({ search_query = null, status_query = null, tag_query = null }) => {
   try {
     const posts = await model.posts.findAll({
       where: {
         type: "post",
-        ...search
+        ...search_query,
+        ...status_query,
       },
+      include: [
+        {
+          model: model.tags,
+          ...tag_query,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
     return posts.length;
@@ -220,19 +231,7 @@ exports.search = async (query) => {
         {
           model: model.users,
           as: "author",
-          attributes: [
-            "id", 
-            "name", 
-            "slug", 
-            "image", 
-            "bio", 
-            "location", 
-            "role", 
-            "meta_title", 
-            "meta_description", 
-            "created_at", 
-            "updated_at"
-          ],
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
         },
         {
           model: model.tags,

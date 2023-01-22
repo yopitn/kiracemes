@@ -23,6 +23,91 @@
     width: 100%;
   }
 
+  &__filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    > * {
+      position: relative;
+
+      &.s {
+        .button svg {
+          transform: rotate(-180deg);
+        }
+
+        .dropdown {
+          opacity: 1;
+          max-height: 100vh;
+          visibility: visible;
+        }
+      }
+
+      &:not(:last-child) {
+        margin-right: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        height: 36px;
+        padding: 6px;
+        background-color: $contentBackground;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: capitalize;
+        border-radius: 4px;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        > * {
+          margin: 0 2.5px;
+        }
+
+        svg {
+          width: 14px;
+          height: 14px;
+          stroke-width: 1.5px;
+        }
+      }
+
+      .dropdown {
+        position: absolute;
+        top: 36px;
+        left: 0;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        min-width: 180px;
+        max-height: 0;
+        background-color: $contentBackground;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 0 4px 4px 4px;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        border: 1px solid $borderColor;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+        z-index: 5;
+
+        .option {
+          padding: 10px 6px;
+          cursor: pointer;
+          user-select: none;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+          }
+        }
+      }
+    }
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -49,7 +134,6 @@
   &__content {
     position: relative;
     width: 100%;
-    padding-bottom: 20px;
   }
 
   &__item {
@@ -87,9 +171,9 @@
   &__footer {
     display: flex;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 20px;
-    padding: 20px 0;
+    padding: 0 0 20px;
   }
 
   &__pagination ul {
@@ -126,6 +210,7 @@
       }
 
       &.inactive {
+        opacity: 0.8;
         cursor: no-drop;
       }
 
