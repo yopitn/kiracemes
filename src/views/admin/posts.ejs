@@ -131,6 +131,17 @@
           </div>
           <% } %>
         </div>
+
+        <div class="table__footer">
+          <div class="table__pagination">
+            <script>
+              const num_of_limit = <%- pagination.limit %>;
+              const num_of_pages = <%- pagination.pages %>;
+              const current_page = <%- pagination.page %>;
+            </script>
+            <script src="<%- blog.homepageUrl %>/admin/js/pagination.js"></script>
+          </div>
+        </div>
       </div>
     </div>
   </main>

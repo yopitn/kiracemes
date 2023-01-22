@@ -13,6 +13,7 @@ exports.index = async (req, res) => {
 
     const setting = await settings();
     const posts = await service.posts.findAll("created_at", limit, offset);
+    const postsCount = await service.posts.findAllCount();
 
     res.render("admin/posts", {
       blog: {
@@ -82,6 +83,19 @@ exports.index = async (req, res) => {
 
           return `${month[arr[0] - 1]} ${arr[1]}, ${arr[2]}`;
         },
+      },
+      pagination: {
+        page: query.page > 0 ? parseInt(query.page) : 1,
+        limit: limit,
+        pages: Math.ceil(postsCount / limit),
+        total: postsCount,
+        next:
+          Math.ceil(postsCount / limit) > 1 && Math.ceil(postsCount / limit) > parseInt(query.page || 1)
+            ? query.page > 0
+              ? parseInt(query.page) + 1
+              : 2
+            : null,
+        prev: Math.ceil(postsCount / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
       },
     });
   } catch (error) {

@@ -56,19 +56,7 @@ exports.findAll = async (order_by, limit, offset) => {
         {
           model: model.users,
           as: "author",
-          attributes: [
-            "id",
-            "name",
-            "slug",
-            "image",
-            "bio",
-            "location",
-            "role",
-            "meta_title",
-            "meta_description",
-            "created_at",
-            "updated_at",
-          ],
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
         },
         {
           model: model.tags,
@@ -92,8 +80,8 @@ exports.findAllCount = async () => {
   try {
     const posts = await model.posts.findAll({
       where: {
-        type: "post"
-      }
+        type: "post",
+      },
     });
 
     return posts.length;
@@ -133,19 +121,7 @@ exports.findById = async (post_id) => {
         {
           model: model.users,
           as: "author",
-          attributes: [
-            "id",
-            "name",
-            "slug",
-            "image",
-            "bio",
-            "location",
-            "role",
-            "meta_title",
-            "meta_description",
-            "created_at",
-            "updated_at",
-          ],
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
         },
         {
           model: model.tags,
@@ -194,19 +170,7 @@ exports.findBySlug = async (post_slug) => {
         {
           model: model.users,
           as: "author",
-          attributes: [
-            "id",
-            "name",
-            "slug",
-            "image",
-            "bio",
-            "location",
-            "role",
-            "meta_title",
-            "meta_description",
-            "created_at",
-            "updated_at",
-          ],
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
         },
         {
           model: model.tags,
@@ -218,6 +182,66 @@ exports.findBySlug = async (post_slug) => {
     });
 
     return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.search = async (query) => {
+  try {
+    const posts = await model.posts.findAll({
+      attributes: [
+        "id",
+        "uuid",
+        "title",
+        "slug",
+        "content",
+        "featured",
+        "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
+        "created_at",
+        "updated_at",
+        "published_at",
+      ],
+      where: {
+        type: "post",
+      },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: [
+            "id", 
+            "name", 
+            "slug", 
+            "image", 
+            "bio", 
+            "location", 
+            "role", 
+            "meta_title", 
+            "meta_description", 
+            "created_at", 
+            "updated_at"
+          ],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      order: [[order_by, "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
   } catch (error) {
     throw new Error(error);
   }
