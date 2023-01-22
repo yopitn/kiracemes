@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const service = require("../../services");
 const settings = require("../../utils/settings");
 
@@ -11,9 +12,26 @@ exports.index = async (req, res) => {
     limit = limit < 0 ? 10 : limit;
     const offset = page * limit;
 
+    const getSearch = () => {
+      let condition;
+
+      if (query.q) {
+        condition = {
+          [Op.or]: [{ title: { [Op.like]: `%${query.q}%` } }],
+        };
+      }
+
+      return condition;
+    };
+
     const setting = await settings();
-    const posts = await service.posts.findAll("created_at", limit, offset);
-    const postsCount = await service.posts.findAllCount();
+    const posts = await service.posts.findAll({
+      order_by: "created_at",
+      limit: limit,
+      offset: offset,
+      search: getSearch()
+    });
+    const postsCount = await service.posts.findAllCount(getSearch());
 
     res.render("admin/posts", {
       blog: {

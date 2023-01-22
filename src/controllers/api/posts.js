@@ -109,7 +109,11 @@ exports.findAll = async (req, res) => {
     limit = limit < 0 ? 10 : limit;
     const offset = page * limit;
 
-    const posts = await service.posts.findAll("created_at", limit, offset);
+    const posts = await service.posts.findAll({
+      order_by: "created_at",
+      limit: limit,
+      offset: offset,
+    });
     const postsCount = await service.posts.findAllCount();
 
     if (posts.length > 0) {

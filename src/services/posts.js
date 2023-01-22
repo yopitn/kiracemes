@@ -1,3 +1,4 @@
+
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -26,7 +27,7 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async (order_by, limit, offset) => {
+exports.findAll = async ({order_by, limit, offset, search = null}) => {
   try {
     const posts = await model.posts.findAll({
       attributes: [
@@ -51,6 +52,7 @@ exports.findAll = async (order_by, limit, offset) => {
       ],
       where: {
         type: "post",
+        ...search
       },
       include: [
         {
@@ -76,11 +78,12 @@ exports.findAll = async (order_by, limit, offset) => {
   }
 };
 
-exports.findAllCount = async () => {
+exports.findAllCount = async (search = null) => {
   try {
     const posts = await model.posts.findAll({
       where: {
         type: "post",
+        ...search
       },
     });
 

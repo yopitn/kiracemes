@@ -26,7 +26,7 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async (order_by, limit, offset) => {
+exports.findAll = async ({order_by, limit, offset}) => {
   try {
     const pages = await model.posts.findAll({
       attributes: [
