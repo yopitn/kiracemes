@@ -15,9 +15,9 @@ const og_description = document.getElementById("facebook-description");
 // const twitter_image = document.getElementById("twitter-image");
 const twitter_title = document.getElementById("twitter-title");
 const twitter_description = document.getElementById("twitter-description");
-const tags_data = document.querySelector("editor__forms-tdata .tag[data-value]");
 
 function updatePostAsPublished() {
+  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
   const content = iframe_body.innerHTML;
   const post_id = window.location.pathname.split("/").reverse()[0];
 
@@ -83,6 +83,7 @@ function updatePostAsPublished() {
 }
 
 function updatePost() {
+  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
   const content = iframe_body.innerHTML;
   const post_id = window.location.pathname.split("/").reverse()[0];
 
@@ -93,6 +94,8 @@ function updatePost() {
       tags.push(tag.dataset.value);
     });
   }
+
+  console.log(tags)
 
   const data = {
     title: title.value,

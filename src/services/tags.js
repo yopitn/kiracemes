@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -62,6 +63,29 @@ exports.findByName = async (tag_name) => {
     });
 
     return tag;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.search = async (query) => {
+  try {
+    const tags = await model.tags.findAll({
+      attributes: ["id", "name", "slug"],
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+        ],
+      },
+    });
+
+    console.log(tags)
+
+    return tags;
   } catch (error) {
     throw new Error(error);
   }

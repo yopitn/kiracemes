@@ -27,6 +27,10 @@
   <script src="<%- blog.homepageUrl %>/admin/js/editor.js"></script>
   <% } %>
 
+  <% if (view.isPostCreate || view.isPostUpdate) { %>
+    <script src="<%- blog.homepageUrl %>/admin/js/tags.js"></script>
+    <% } %>
+
   <% if (view.isPostCreate) { %>
   <script src="<%- blog.homepageUrl %>/admin/js/create-post.js"></script>
   <% } %>

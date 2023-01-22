@@ -20,6 +20,8 @@ router.post("/pages", middleware.api.authAPIAdmin, controller.api.pages.create);
 router.put("/pages/:id", middleware.api.authAPIAdmin, controller.api.pages.update);
 router.delete("/pages/:id", middleware.api.authAPIAdmin, controller.api.pages.destroy);
 
+router.get("/tags/search", middleware.api.authAPIAdmin, controller.api.tags.search);
+
 router.post("/images/upload", middleware.api.authAPIAdmin, controller.api.images.upload);
 
 module.exports = router;

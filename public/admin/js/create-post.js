@@ -14,9 +14,9 @@ const og_description = document.getElementById("facebook-description");
 // const twitter_image = document.getElementById("twitter-image");
 const twitter_title = document.getElementById("twitter-title");
 const twitter_description = document.getElementById("twitter-description");
-const tags_data = document.querySelector("editor__forms-tdata .tag[data-value]");
 
 function createPostAsPublished() {
+  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
   const content = iframe_body.innerHTML;
 
   let tags = [];
@@ -81,6 +81,7 @@ function createPostAsPublished() {
 }
 
 function createPoshAsDraft() {
+  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
   const content = iframe_body.innerHTML;
   let tags = [];
 

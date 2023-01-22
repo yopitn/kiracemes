@@ -560,19 +560,92 @@ $toolbarHeight: 28px;
       }
     }
 
-    &-published {
+    &-tags {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      width: 100%;
+      max-width: 100%;
+      padding: 2px 8px;
+      background-color: transparent;
+      border: 1px solid $borderColor;
+      border-radius: 4px;
 
-      > *:first-child {
-        flex: 0 0 60%;
-        max-width: 60%;
+      > * {
+        display: inline-flex !important;
+        align-items: center;
+        max-width: 100%;
+        margin: 4px 0;
+
+        &:not(:last-child) {
+          margin-right: 4px;
+        }
       }
 
-      > *:last-child {
-        flex: 0 0 38%;
-        max-width: 38%;
+      .tag {
+        padding: 6px;
+        background-color: rgba(0, 0, 0, 0.05);
+        color: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid var(--krc-border-color);
+        border-radius: 3px;
+
+        span.close {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2px;
+          margin-left: 5px;
+          background-color: rgba(0, 0, 0, 0.1);
+          border-radius: 500px;
+          cursor: pointer;
+          user-select: none;
+
+          svg {
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+
+      > input {
+        flex: 1;
+        width: auto;
+        padding: 6px 0;
+        background-color: transparent;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        border-radius: 0;
+      }
+    }
+
+    &-tdata {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+
+      > li {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px solid $borderColor;
+        border-top: 0;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.1s ease;
+
+        &:hover {
+          background-color: $primaryColor;
+          color: $whiteColor;
+        }
+
+        &:last-child {
+          border-radius: 0 0 4px 4px;
+        }
       }
     }
 

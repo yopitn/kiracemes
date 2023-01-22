@@ -3,4 +3,5 @@ module.exports = {
   posts: require("./posts"),
   pages: require("./pages"),
   images: require("./images"),
+  tags: require("./tags"),
 };
