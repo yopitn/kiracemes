@@ -122,6 +122,11 @@ $toolbarHeight: 28px;
         background-color: $primaryColor;
       }
 
+      &-danger {
+        color: #fff;
+        background-color: #dc3545;
+      }
+
       &:hover {
         opacity: 1;
       }
@@ -554,6 +559,8 @@ $toolbarHeight: 28px;
         padding: 12px 10px;
         background-color: transparent;
         font-size: 14px;
+        font-weight: 500;
+        color: $titleColor;
         outline: none;
         border: 1px solid $borderColor;
         border-radius: 4px;

@@ -5,7 +5,6 @@ const editor_message = document.querySelector(".editor__message");
 
 const title = document.getElementById("title");
 const slug = document.getElementById("slug");
-const featured = document.getElementById("featured");
 const meta_title = document.getElementById("meta-title");
 const meta_description = document.getElementById("meta-description");
 // const og_image = document.getElementById("facebook-image");
@@ -15,23 +14,13 @@ const og_description = document.getElementById("facebook-description");
 const twitter_title = document.getElementById("twitter-title");
 const twitter_description = document.getElementById("twitter-description");
 
-function createPostAsPublished() {
-  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
+function createPageAsPublished() {
   const content = iframe_body.innerHTML;
-
-  let tags = [];
-
-  if (tags_data && tags_data.length > 0) {
-    tags_data.forEach((tag) => {
-      tags.push(tag.dataset.value);
-    });
-  }
 
   const data = {
     title: title.value,
     slug: slug.value,
     content: content,
-    featured: featured.checked,
     status: "published",
     meta_title: meta_title.value,
     meta_description: meta_description.value,
@@ -41,17 +30,16 @@ function createPostAsPublished() {
     // twitter_image: twitter_image.value,
     twitter_title: twitter_title.value,
     twitter_description: twitter_description.value,
-    tags: tags,
   };
 
-  fetch(`${BASE_API}/posts`, {
+  fetch(`${BASE_API}/pages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
     .then((res) => {
       if (res.ok) {
-        return (window.location.href = "/admin/posts/");
+        return (window.location.href = "/admin/pages/");
       } else {
         return res.json();
       }
@@ -80,22 +68,13 @@ function createPostAsPublished() {
     });
 }
 
-function createPostAsDraft() {
-  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
+function createPageAsDraft() {
   const content = iframe_body.innerHTML;
-  let tags = [];
-
-  if (tags_data && tags_data.length > 0) {
-    tags_data.forEach((tag) => {
-      tags.push(tag.dataset.value);
-    });
-  }
 
   const data = {
     title: title.value ? title.value : "untitled",
     slug: slug.value,
     content: content,
-    featured: featured.checked,
     status: "draft",
     meta_title: meta_title.value,
     meta_description: meta_description.value,
@@ -105,10 +84,9 @@ function createPostAsDraft() {
     // twitter_image: twitter_image.value,
     twitter_title: twitter_title.value,
     twitter_description: twitter_description.value,
-    tags: tags,
   };
 
-  fetch(`${BASE_API}/posts`, {
+  fetch(`${BASE_API}/pages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -134,7 +112,7 @@ function createPostAsDraft() {
           }, 5000);
         }
       } else {
-        return (window.location.href = `/admin/post/edit/${json.post.id}`);
+        return (window.location.href = `/admin/page/edit/${json.page.id}`);
       }
     })
     .catch((error) => {
@@ -142,5 +120,5 @@ function createPostAsDraft() {
     });
 }
 
-publish_button.addEventListener("click", createPostAsPublished);
-save_button.addEventListener("click", createPostAsDraft);
+publish_button.addEventListener("click", createPageAsPublished);
+save_button.addEventListener("click", createPageAsDraft);

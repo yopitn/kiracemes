@@ -18,4 +18,8 @@ router.get("/posts", [middleware.admin.isSetup, middleware.admin.isLogin], contr
 router.get("/post/new", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.create);
 router.get("/post/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.posts.update);
 
+router.get("/pages", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.pages.index);
+router.get("/page/new", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.pages.create);
+router.get("/page/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.pages.update);
+
 module.exports = router;

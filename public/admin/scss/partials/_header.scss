@@ -129,7 +129,8 @@
         display: none;
       }
 
-      &:focus ~ button[type="reset"] {
+      &:focus ~ button[type="reset"],
+      &:not(:placeholder-shown) ~ button[type="reset"] {
         opacity: 1;
       }
     }
@@ -164,8 +165,11 @@
       right: 44px;
       font-size: 12px;
       font-weight: 500;
-      opacity: 0;
       transition: opacity 0.1s ease;
+
+      &:empty {
+        opacity: 0;
+      }
 
       &::before {
         content: "\2715";

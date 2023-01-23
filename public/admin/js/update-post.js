@@ -1,6 +1,7 @@
 const publish_button = document.querySelector("[data-button='publish']");
 const update_button = document.querySelector("[data-button='update']");
 const save_button = document.querySelector("[data-button='save']");
+const draft_button = document.querySelector("[data-button='draft']");
 const editor_wrap = document.querySelector(".editor__wrap");
 const editor_message = document.querySelector(".editor__message");
 
@@ -31,7 +32,7 @@ function updatePostAsPublished() {
 
   const data = {
     title: title.value,
-    slug: slug.slug,
+    slug: slug.value,
     content: content,
     featured: featured.checked,
     status: "published",
@@ -82,6 +83,72 @@ function updatePostAsPublished() {
     });
 }
 
+function updatePostAsDraft() {
+  const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
+  const content = iframe_body.innerHTML;
+  const post_id = window.location.pathname.split("/").reverse()[0];
+
+  let tags = [];
+
+  if (tags_data && tags_data.length > 0) {
+    tags_data.forEach((tag) => {
+      tags.push(tag.dataset.value);
+    });
+  }
+
+  const data = {
+    title: title.value,
+    slug: slug.value,
+    content: content,
+    featured: featured.checked,
+    status: "draft",
+    meta_title: meta_title.value,
+    meta_description: meta_description.value,
+    // og_image: og_image.value,
+    og_title: og_title.value,
+    og_description: og_description.value,
+    // twitter_image: twitter_image.value,
+    twitter_title: twitter_title.value,
+    twitter_description: twitter_description.value,
+    tags: tags,
+  };
+
+  fetch(`${BASE_API}/posts/${post_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      if (res.ok) {
+        return window.location.reload();
+      } else {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      if (json.errors) {
+        if (!editor_message) {
+          let message = document.createElement("div");
+          message.className = "editor__message";
+          message.innerHTML = `
+          <div class="alert danger">
+            <span class="text">${json.errors[0].message}</span>
+          </div>
+          `;
+
+          editor_wrap.appendChild(message);
+
+          setTimeout(() => {
+            message.remove();
+          }, 5000);
+        }
+      }
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+}
+
 function updatePost() {
   const tags_data = document.querySelectorAll(".editor__forms-tags .tag[data-value]");
   const content = iframe_body.innerHTML;
@@ -95,11 +162,9 @@ function updatePost() {
     });
   }
 
-  console.log(tags)
-
   const data = {
     title: title.value,
-    slug: slug.slug,
+    slug: slug.value,
     content: content,
     featured: featured.checked,
     meta_title: meta_title.value,
@@ -171,4 +236,8 @@ if (update_button) {
 
 if (save_button) {
   save_button.addEventListener("click", updatePost);
+}
+
+if (draft_button) {
+  draft_button.addEventListener("click", updatePostAsDraft);
 }

@@ -4,4 +4,5 @@ module.exports = {
   signin: require("./signin"),
   signout: require("./signout"),
   posts: require("./posts"),
+  pages: require("./pages"),
 };

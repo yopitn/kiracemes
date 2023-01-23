@@ -3,13 +3,13 @@
 <div class="content__wrap">
   <%- include("./partials/sidebar") %>
 
-  <main class="main__wrap">
+  <div class="main__wrap">
     <div class="container">
       <div class="table__wrap">
         <div class="table__filter">
           <div class="table__filter-status">
             <div class="button" data-button="filter">
-              <span class="text" data-button="current-status">All posts</span>
+              <span class="text" data-button="current-status">All pages</span>
 
               <svg class="line" viewBox="0 0 24 24">
                 <g transform="translate(5.000000, 8.500000)">
@@ -20,7 +20,7 @@
 
             <ul class="dropdown">
               <li>
-                <div class="option" data-value="all posts" aria-selected="true" role="option" data-button="status-option">All posts</div>
+                <div class="option" data-value="all pages" aria-selected="true" role="option" data-button="status-option">All pages</div>
               </li>
 
               <li>
@@ -30,32 +30,6 @@
               <li>
                 <div class="option" data-value="draft" aria-selected="false" role="option" data-button="status-option">Draft</div>
               </li>
-            </ul>
-          </div>
-
-          <div class="table__filter-tags">
-            <div class="button" data-button="filter">
-              <span class="text" data-button="current-tags">All tags</span>
-
-              <svg class="line" viewBox="0 0 24 24">
-                <g transform="translate(5.000000, 8.500000)">
-                  <polyline points="14 0 7 7 0 0"></polyline>
-                </g>
-              </svg>
-            </div>
-
-            <ul class="dropdown">
-              <li>
-                <div class="option" data-value="all tags" aria-selected="true" role="option" data-button="tag-option">All tags</div>
-              </li>
-
-              <% if (tags.length > 0) { %>
-              <% tags.forEach(tag => { %>
-              <li>
-                <div class="option" data-value="<%- tag.name %>" aria-selected="false" role="option" data-button="tag-option"><%- tag.name %></div>
-              </li>
-              <% }) %>
-              <% } %>
             </ul>
           </div>
         </div>
@@ -68,50 +42,40 @@
         </div>
 
         <div class="table__content">
-          <% if (posts.length > 0) { %>
-          <% posts.forEach(post => { %>
-          <div class="table__item" id="postId-<%- post.id %>">
-            <a href="<%- blog.homepageUrl %>/admin/post/edit/<%- post.id %>" class="post__link">
+          <% if (pages.length > 0) { %>
+          <% pages.forEach(page => { %>
+          <div class="table__item" id="pageId-<%- page.id %>">
+            <a href="<%- blog.homepageUrl %>/admin/page/edit/<%- page.id %>" class="post__link">
               <div class="post__detail">
-                <% if (post.featuredImage()) { %>
-                <div class="post__image" style="background-image: url('<%- post.featuredImage() %>');"></div>
+                <% if (page.featuredImage()) { %>
+                <div class="post__image" style="background-image: url('<%- page.featuredImage() %>');"></div>
                 <% } else { %>
-                <div class="post__image-letter"><%- post.title.charAt(0).toUpperCase() %></div>
+                <div class="post__image-letter"><%- page.title.charAt(0).toUpperCase() %></div>
                 <% } %>
 
                 <div class="post__content">
-                  <div class="post__title <%- post.title === "untitled" ? "opacity-7" : "" %>">
-                    <span class="title"><%- post.title %></span>
+                  <div class="post__title <%- page.title === "untitled" ? "opacity-7" : "" %>">
+                    <span class="title"><%- page.title %></span>
                   </div>
 
                   <div class="post__info">
-                    <div class="post__category">
-                      <% if (post.tags.length > 0) { %>
-                      <% post.tags.forEach(tag => { %>
-                      <span class="category"><%- tag.name %></span>
-                      <% }) %>
-                      <% } else { %>
-                      <span class="category">Uncategory</span>
-                      <% } %>
-                    </div>
-
                     <div class="post__date">
-                      <span class="date"><%- helpers.parseDate(post.date.created) %></span>
+                      <span class="date"><%- helpers.parseDate(page.date.created) %></span>
                     </div>
                   </div>
                 </div>
               </div>
             </a>
 
-            <a href="<%- blog.homepageUrl %>/admin/post/edit/<%- post.id %>" class="post__link">
+            <a href="<%- blog.homepageUrl %>/admin/page/edit/<%- page.id %>" class="post__link">
               <div class="post__author">
-                <span class="text"><%- post.author %></span>
+                <span class="text"><%- page.author %></span>
               </div>
             </a>
 
-            <a href="<%- blog.homepageUrl %>/admin/post/edit/<%- post.id %>" class="post__link">
+            <a href="<%- blog.homepageUrl %>/admin/page/edit/<%- page.id %>" class="post__link">
               <div class="post__status">
-                <span class="status <%- post.status %>"><%- post.status %></span>
+                <span class="status <%- page.status %>"><%- page.status %></span>
               </div>
             </a>
 
@@ -126,9 +90,9 @@
                 </div>
 
                 <ul class="dropdown">
-                  <% if (post.status === "published") { %>
+                  <% if (page.status === "published") { %>
                   <li>
-                    <a class="link" href="<%- post.url %>" target="_blank">
+                    <a class="link" href="<%- page.url %>" target="_blank">
                       <svg class="line" viewBox="0 0 24 24">
                         <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                           <g transform="translate(2.000000, 4.000000)">
@@ -144,7 +108,7 @@
                   <% } %>
 
                   <li>
-                    <a class="link" href="<%- blog.homepageUrl %>/admin/post/edit/<%- post.id %>">
+                    <a class="link" href="<%- blog.homepageUrl %>/admin/page/edit/<%- page.id %>">
                       <svg class="line" viewBox="0 0 24 24">
                         <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                           <g transform="translate(2.000000, 2.000000)">
@@ -160,7 +124,7 @@
                   </li>
 
                   <li>
-                    <div class="link delete" data-button="delete-post" data-id="pid-<%- post.id %>">
+                    <div class="link delete" data-button="delete-page" data-id="pid-<%- page.id %>">
                       <svg class="line" viewBox="0 0 24 24">
                         <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                           <g transform="translate(3.000000, 2.000000)">
@@ -181,7 +145,7 @@
           <% }) %>
           <% } else { %>
           <div class="table__noitem">
-            <span class="text">No posts found</span>
+            <span class="text">No pages found</span>
           </div>
           <% } %>
         </div>
@@ -200,7 +164,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </div>
 
 <%- include("./partials/footer") %>

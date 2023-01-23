@@ -19,13 +19,13 @@
 
 // Delete post function
 (function () {
-  const delete_button = document.querySelectorAll("[data-button='delete-post']");
+  const delete_button = document.querySelectorAll("[data-button='delete-page']");
   const table_wrap = document.querySelector(".table__wrap");
 
   delete_button.forEach((button, index) => {
     button.addEventListener("click", () => {
-      const post_id = button.dataset.id.split("-").reverse()[0];
-      const post_title = document.querySelectorAll(".post__title")[index].innerText;
+      const page_id = button.dataset.id.split("-").reverse()[0];
+      const page_title = document.querySelectorAll(".post__title")[index].innerText;
 
       const modal = document.createElement("div");
       modal.className = "modal__wrap";
@@ -44,7 +44,7 @@
         </div>
 
         <div class="modal__content">
-          <span class="modal__message">You want to delete "<b>${post_title}</b>", it will be deleted permanently. If you sure click "<b>Delete</b>" to confirm.</span>
+          <span class="modal__message">You want to delete "<b>${page_title}</b>", it will be deleted permanently. If you sure click "<b>Delete</b>" to confirm.</span>
         </div>
 
         <div class="modal__footer">
@@ -68,7 +68,7 @@
       });
 
       submit_button.addEventListener("click", () => {
-        fetch(`${BASE_API}/posts/${post_id}`, {
+        fetch(`${BASE_API}/pages/${page_id}`, {
           method: "DELETE",
         })
           .then((res) => {
@@ -117,42 +117,6 @@
     document.addEventListener("mouseup", (e) => {
       if (button.parentNode.classList.contains("s") && !button.contains(e.target)) {
         button.parentNode.classList.remove("s");
-      }
-    });
-  });
-})();
-
-// Filter tags handler function
-(function () {
-  const option_button = document.querySelectorAll("[data-button='tag-option']");
-  const filter_button = document.querySelector("[data-button='current-tags']");
-
-  const search_query = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
-
-  const tag_query = search_query.tag;
-
-  if (tag_query) {
-    filter_button.innerText = tag_query;
-  }
-
-  option_button.forEach((button) => {
-    let option_value = button.dataset.value;
-
-    if (option_value === tag_query) {
-      button.setAttribute("aria-selected", true);
-    } else if (!tag_query && option_value == "all tags") {
-      button.setAttribute("aria-selected", true);
-    } else {
-      button.setAttribute("aria-selected", false);
-    }
-
-    button.addEventListener("click", () => {
-      if (option_value === "all tags") {
-        window.location.href = updateQueryStringParameter(window.location.href, "tag", undefined);
-      } else {
-        window.location.href = updateQueryStringParameter(window.location.href, "tag", option_value);
       }
     });
   });

@@ -37,7 +37,6 @@ exports.create = async (req, res) => {
         title: body.title,
         slug: body.slug,
         content: body.content,
-        featured: body.featured,
         status: body.status,
         meta_title: body.meta_title,
         meta_description: body.meta_description,
@@ -64,22 +63,16 @@ exports.findAll = async (req, res) => {
   try {
     const { query } = req;
 
-    let page = query.page ? query.page - 1 : 0;
-    let limit = parseInt(query.limit || 10);
-    page = page < 0 ? 0 : page;
-    limit = limit < 0 ? 10 : limit;
-    const offset = page * limit;
+    const limit = parseInt(query.limit || 10);
 
     const pages = await service.pages.findAll({
-      order_by: "created_at",
-      limit: limit,
-      offset: offset,
+      order: "created_at",
+      query: query,
     });
-    const pagesCount = await service.pages.findAllCount();
 
-    if (pages.length > 0) {
+    if (pages.data.length > 0) {
       res.status(200).json({
-        pages: pages.map((page) => {
+        pages: pages.data.map((page) => {
           return {
             id: page.id,
             uuid: page.uuid,
@@ -104,15 +97,15 @@ exports.findAll = async (req, res) => {
         pagination: {
           page: query.page > 0 ? parseInt(query.page) : 1,
           limit: limit,
-          pages: Math.ceil(pagesCount / limit),
-          total: pagesCount,
+          pages: Math.ceil(pages.count / limit),
+          total: pages.count,
           next:
-            Math.ceil(pagesCount / limit) > 1 && Math.ceil(pagesCount / limit) > parseInt(query.page || 1)
+            Math.ceil(pages.count / limit) > 1 && Math.ceil(pages.count / limit) > parseInt(query.page || 1)
               ? query.page > 0
                 ? parseInt(query.page) + 1
                 : 2
               : null,
-          prev: Math.ceil(pagesCount / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
+          prev: Math.ceil(pages.count / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
         },
       });
     } else {
@@ -202,7 +195,7 @@ exports.update = async (req, res) => {
     const page = await service.pages.findById(params.id);
 
     if (page) {
-      await service.pages.update(body, params.id);
+      await service.pages.update({ body: body, id: params.id });
 
       res.status(200).json({
         page: [

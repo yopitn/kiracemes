@@ -83,8 +83,6 @@ exports.search = async (query) => {
       },
     });
 
-    console.log(tags)
-
     return tags;
   } catch (error) {
     throw new Error(error);

@@ -55,7 +55,7 @@ if (typeof(post) !== "undefined") {
   og_description = post.og_description;
   twitter_image = post.twitter_image;
   twitter_title = post.twitter_title;
-  twitter_description = post.description;
+  twitter_description = post.twitter_description;
   featured = post.featured;
 }
 
@@ -81,7 +81,7 @@ if (typeof(page) !== "undefined") {
   og_description = page.og_description;
   twitter_image = page.twitter_image;
   twitter_title = page.twitter_title;
-  twitter_description = page.description;
+  twitter_description = page.twitter_description;
 }
 %>
 
@@ -95,8 +95,12 @@ if (typeof(page) !== "undefined") {
 
         <div class="editor__action">
           <!-- <a href="#" class="btn btn-light">Preview</a> -->
+
           <% if (is_save) { %>
           <div class="btn btn-light" data-button="save">Save</div>
+          <% } %>
+          <% if (!is_save) { %>
+          <div class="btn btn-light" data-button="draft">Revert to Draft</div>
           <% } %>
           <div class="btn btn-primary" data-button="<%- submit__button %>"><%- submit__button %></div>
         </div>

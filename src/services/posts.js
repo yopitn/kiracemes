@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -26,8 +27,15 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async ({ order_by, limit, offset, search_query = null, tag_query = null, status_query = null }) => {
+exports.findAll = async ({ order, query }) => {
   try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
     const posts = await model.posts.findAll({
       attributes: [
         "id",
@@ -51,8 +59,6 @@ exports.findAll = async ({ order_by, limit, offset, search_query = null, tag_que
       ],
       where: {
         type: "post",
-        ...search_query,
-        ...status_query,
       },
       include: [
         {
@@ -62,35 +68,80 @@ exports.findAll = async ({ order_by, limit, offset, search_query = null, tag_que
         },
         {
           model: model.tags,
-          ...tag_query,
           through: {
             attributes: [],
           },
         },
       ],
-      order: [[order_by, "DESC"]],
+      order: [[order, "DESC"]],
       limit: limit,
       offset: offset,
     });
 
-    return posts;
+    const count = await model.posts.findAll({
+      where: {
+        type: "post",
+      },
+    });
+
+    return {
+      data: posts,
+      count: count.length,
+    };
   } catch (error) {
     throw new Error(error);
   }
 };
 
-exports.findAllCount = async ({ search_query = null, status_query = null, tag_query = null }) => {
+exports.findAllAdmin = async ({ order, query }) => {
   try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
+    let search = query.q ? { [Op.or]: [{ title: { [Op.like]: `%${query.q}%` } }] } : undefined;
+    let status = query.status ? { [Op.and]: [{ status: { [Op.like]: `%${query.status}%` } }] } : undefined;
+    let tag = query.tag ? { where: { [Op.and]: [{ name: { [Op.like]: `%${query.tag}%` } }] } } : undefined;
+
     const posts = await model.posts.findAll({
+      attributes: ["id", "title", "slug", "content", "status", "created_at", "updated_at", "published_at"],
       where: {
         type: "post",
-        ...search_query,
-        ...status_query,
+        ...search,
+        ...status,
+      },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: ["id", "name"],
+        },
+        {
+          model: model.tags,
+          ...tag,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      order: [[order, "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+    const count = await model.posts.findAll({
+      where: {
+        type: "post",
+        ...search,
+        ...status,
       },
       include: [
         {
           model: model.tags,
-          ...tag_query,
+          ...tag,
           through: {
             attributes: [],
           },
@@ -98,13 +149,16 @@ exports.findAllCount = async ({ search_query = null, status_query = null, tag_qu
       ],
     });
 
-    return posts.length;
+    return {
+      data: posts,
+      count: count.length,
+    };
   } catch (error) {
     throw new Error(error);
   }
 };
 
-exports.findById = async (post_id) => {
+exports.findById = async (id) => {
   try {
     const post = await model.posts.findOne({
       attributes: [
@@ -128,7 +182,7 @@ exports.findById = async (post_id) => {
         "published_at",
       ],
       where: {
-        id: post_id,
+        id: id,
         type: "post",
       },
       include: [
@@ -152,7 +206,7 @@ exports.findById = async (post_id) => {
   }
 };
 
-exports.findBySlug = async (post_slug) => {
+exports.findBySlug = async (slug) => {
   try {
     const post = await model.posts.findOne({
       attributes: [
@@ -177,7 +231,7 @@ exports.findBySlug = async (post_slug) => {
         "published_at",
       ],
       where: {
-        slug: post_slug,
+        slug: slug,
         type: "post",
       },
       include: [
@@ -201,8 +255,15 @@ exports.findBySlug = async (post_slug) => {
   }
 };
 
-exports.search = async (query) => {
+exports.findAllByTag = async ({ order, query }) => {
   try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
     const posts = await model.posts.findAll({
       attributes: [
         "id",
@@ -235,21 +296,126 @@ exports.search = async (query) => {
         },
         {
           model: model.tags,
+          where: {
+            name: query.tag,
+          },
           through: {
             attributes: [],
           },
         },
       ],
-      order: [[order_by, "DESC"]],
+      order: [[order, "DESC"]],
       limit: limit,
       offset: offset,
     });
+
+    const count = await model.posts.findAll({
+      where: {
+        type: "post",
+      },
+      include: [
+        {
+          model: model.tags,
+          where: {
+            name: query.tag,
+          },
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+
+    return {
+      data: posts,
+      count: count.length,
+    };
   } catch (error) {
     throw new Error(error);
   }
 };
 
-exports.update = async (body, post_id) => {
+exports.search = async ({ order, query }) => {
+  try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
+    const posts = await model.posts.findAll({
+      attributes: [
+        "id",
+        "uuid",
+        "title",
+        "slug",
+        "content",
+        "featured",
+        "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
+        "created_at",
+        "updated_at",
+        "published_at",
+      ],
+      where: {
+        type: "post",
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+        ],
+      },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      order: [[order, "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+    const count = await model.posts.findAll({
+      where: {
+        type: "post",
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+        ],
+      },
+    });
+
+    return {
+      data: posts,
+      count: count.length,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.update = async ({ body, id }) => {
   try {
     await model.posts.update(
       {
@@ -271,7 +437,7 @@ exports.update = async (body, post_id) => {
       },
       {
         where: {
-          id: post_id,
+          id: id,
           type: "post",
         },
       }
@@ -281,11 +447,11 @@ exports.update = async (body, post_id) => {
   }
 };
 
-exports.destroy = async (post_id) => {
+exports.destroy = async (id) => {
   try {
     await model.posts.destroy({
       where: {
-        id: post_id,
+        id: id,
         type: "post",
       },
     });

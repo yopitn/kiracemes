@@ -103,22 +103,17 @@ exports.findAll = async (req, res) => {
   try {
     const { query } = req;
 
-    let page = query.page ? query.page - 1 : 0;
     let limit = parseInt(query.limit || 10);
-    page = page < 0 ? 0 : page;
     limit = limit < 0 ? 10 : limit;
-    const offset = page * limit;
 
     const posts = await service.posts.findAll({
-      order_by: "created_at",
-      limit: limit,
-      offset: offset,
+      order: "created_at",
+      query: query,
     });
-    const postsCount = await service.posts.findAllCount();
 
-    if (posts.length > 0) {
+    if (posts.data.length > 0) {
       res.status(200).json({
-        posts: posts.map((post) => {
+        posts: posts.data.map((post) => {
           return {
             id: post.id,
             uuid: post.uuid,
@@ -161,15 +156,15 @@ exports.findAll = async (req, res) => {
         pagination: {
           page: query.page > 0 ? parseInt(query.page) : 1,
           limit: limit,
-          pages: Math.ceil(postsCount / limit),
-          total: postsCount,
+          pages: Math.ceil(posts.count / limit),
+          total: posts.count,
           next:
-            Math.ceil(postsCount / limit) > 1 && Math.ceil(postsCount / limit) > parseInt(query.page || 1)
+            Math.ceil(posts.count / limit) > 1 && Math.ceil(posts.count / limit) > parseInt(query.page || 1)
               ? query.page > 0
                 ? parseInt(query.page) + 1
                 : 2
               : null,
-          prev: Math.ceil(postsCount / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
+          prev: Math.ceil(posts.count / limit) > 1 ? (query.page > 1 ? parseInt(query.page) - 1 : null) : null,
         },
       });
     } else {
@@ -261,11 +256,11 @@ exports.update = async (req, res) => {
     const post = await service.posts.findById(params.id);
 
     if (post) {
-      await service.posts.update(body, params.id);
+      await service.posts.update({ body: body, id: params.id });
 
       await service.postsTags.destroy(params.id);
 
-      if (body.tags.length > 0) {
+      if (body.tags && body.tags.length > 0) {
         body.tags.forEach(async (name) => {
           const tag = await service.tags.findByName(name);
 

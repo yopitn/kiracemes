@@ -14,8 +14,8 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [ ] Halaman kategori.
 
 **Admin**
-- [ ] Halaman postingan (create, findAll, findById, update, delete).
-- [ ] Halaman page (static) (create, findAll, findById, update, delete).
+- [x] Halaman postingan (create, findAll, findById, update, delete).
+- [x] Halaman page (static) (create, findAll, findById, update, delete).
 - [ ] Halaman setting.
 - [ ] Halaman account.
 - [x] Halaman signin.

@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -26,8 +27,15 @@ exports.create = async (body) => {
   }
 };
 
-exports.findAll = async ({order_by, limit, offset}) => {
+exports.findAll = async ({ order, query }) => {
   try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
     const pages = await model.posts.findAll({
       attributes: [
         "id",
@@ -56,47 +64,78 @@ exports.findAll = async ({order_by, limit, offset}) => {
         {
           model: model.users,
           as: "author",
-          attributes: [
-            "id",
-            "name",
-            "slug",
-            "image",
-            "bio",
-            "location",
-            "role",
-            "meta_title",
-            "meta_description",
-            "created_at",
-            "updated_at",
-          ],
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
         },
       ],
-      order: [[order_by, "DESC"]],
+      order: [[order, "DESC"]],
       limit: limit,
       offset: offset,
     });
 
-    return pages;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-exports.findAllCount = async () => {
-  try {
-    const posts = await model.posts.findAll({
+    const count = await model.posts.findAll({
       where: {
         type: "page",
       },
     });
 
-    return posts.length;
+    return {
+      data: pages,
+      count: count.length,
+    };
   } catch (error) {
     throw new Error(error);
   }
 };
 
-exports.findById = async (page_id) => {
+exports.findAllAdmin = async ({ order, query }) => {
+  try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
+    let search = query.q ? { [Op.or]: [{ title: { [Op.like]: `%${query.q}%` } }] } : undefined;
+    let status = query.status ? { [Op.and]: [{ status: { [Op.like]: `%${query.status}%` } }] } : undefined;
+
+    const pages = await model.posts.findAll({
+      attributes: ["id", "title", "slug", "content", "status", "created_at", "updated_at", "published_at"],
+      where: {
+        type: "page",
+        ...search,
+        ...status,
+      },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: ["id", "name"],
+        },
+      ],
+      order: [[order, "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+    const count = await model.posts.findAll({
+      where: {
+        type: "page",
+        ...search,
+        ...status,
+      },
+    });
+
+    return {
+      data: pages,
+      count: count.length,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.findById = async (id) => {
   try {
     const page = await model.posts.findOne({
       attributes: [
@@ -120,7 +159,7 @@ exports.findById = async (page_id) => {
         "published_at",
       ],
       where: {
-        id: page_id,
+        id: id,
         type: "page",
       },
     });
@@ -131,7 +170,7 @@ exports.findById = async (page_id) => {
   }
 };
 
-exports.findBySlug = async (page_slug) => {
+exports.findBySlug = async (slug) => {
   try {
     const page = await model.posts.findOne({
       attributes: [
@@ -155,7 +194,7 @@ exports.findBySlug = async (page_slug) => {
         "published_at",
       ],
       where: {
-        slug: page_slug,
+        slug: slug,
         type: "page",
       },
     });
@@ -166,7 +205,7 @@ exports.findBySlug = async (page_slug) => {
   }
 };
 
-exports.update = async (body, page_id) => {
+exports.update = async ({ body, id }) => {
   try {
     await model.posts.update(
       {
@@ -186,7 +225,7 @@ exports.update = async (body, page_id) => {
       },
       {
         where: {
-          id: page_id,
+          id: id,
           type: "page",
         },
       }
@@ -196,11 +235,11 @@ exports.update = async (body, page_id) => {
   }
 };
 
-exports.destroy = async (page_id) => {
+exports.destroy = async (id) => {
   try {
     await model.posts.destroy({
       where: {
-        id: page_id,
+        id: id,
         type: "page",
       },
     });

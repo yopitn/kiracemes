@@ -65,7 +65,7 @@ if (view.isPageCreate || view.isPageUpdate) {
         <div class="header__search">
           <form action="/admin/<%- view.isPosts ? "posts" : "pages" %>" method="get">
             <input autocomplete="off" id="search" minlength="3" name="q" placeholder="Search <%- view.isPosts ? "posts" : "pages" %>..." required type="search">
-            <button type="reset"></button>
+            <button id="search-reset" type="reset"></button>
             <button type="submit">
               <svg class="line" viewBox="0 0 24 24">
                 <g transform="translate(2.000000, 2.000000)">
