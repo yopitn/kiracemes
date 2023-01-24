@@ -52,3 +52,31 @@ exports.update = async (req, res) => {
     throw new Error(error);
   }
 };
+
+exports.image = async (req, res) => {
+  try {
+    const { user_id } = req;
+    const setting = await util.getSetting();
+    const month = ("0" + (new Date().getMonth() + 1)).slice(-2).toString();
+    const year = new Date().getFullYear().toString();
+
+    await util.uploadImage(req, res, async (error) => {
+      if (error)
+        return res.status(400).json({
+          errors: [
+            {
+              message: error.message,
+            },
+          ],
+        });
+
+      const image = `${setting.homeurl}/content/images/${year}/${month}/${req.file.filename}`;
+
+      await service.users.image(image, user_id);
+
+      res.sendStatus(200);
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};

@@ -97,7 +97,7 @@
         }
       }
 
-      .photo {
+      .images {
         width: 100%;
         height: 100%;
         background-position: center;
@@ -733,9 +733,15 @@
       background-color: transparent;
       color: #273239;
       border-radius: 4px;
+      box-shadow: 0px 1px 8px rgb(0, 0, 0, 0.12);
       transition: 0.1s ease;
       cursor: pointer;
       user-select: none;
+
+      &-primary {
+        color: $whiteColor;
+        background-color: $primaryColor;
+      }
 
       &-danger {
         color: $whiteColor;
@@ -745,7 +751,10 @@
       &-light {
         background-color: $contentBackground;
         border: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: 0px 1px 8px rgb(0, 0, 0, 0.12);
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
       }
     }
   }
