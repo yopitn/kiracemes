@@ -1,10 +1,11 @@
 const service = require("../../services");
-const settings = require("../../utils/settings");
+const util = require("../../utils");
 
 exports.index = async (req, res) => {
   try {
-    const { query } = req;
-    const setting = await settings();
+    const { query, user_id } = req;
+    const setting = await util.getSetting();
+    const user = await service.users.findById(user_id);
     const pages = await service.pages.findAllAdmin({ order: "created_at", query: query });
 
     let limit = parseInt(query.limit || 10);
@@ -28,6 +29,7 @@ exports.index = async (req, res) => {
         isPageUpdate: false,
         isError: false,
       },
+      user: user,
       pages: pages.data.map((page) => {
         return {
           id: page.id,
@@ -95,7 +97,9 @@ exports.index = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const setting = await settings();
+    const { user_id } = req;
+    const setting = await util.getSetting();
+    const user = await service.users.findById(user_id);
 
     res.render("admin/editor", {
       blog: {
@@ -115,6 +119,7 @@ exports.create = async (req, res) => {
         isPageUpdate: false,
         isError: false,
       },
+      user: user,
     });
   } catch (error) {
     throw new Error(error);
@@ -123,10 +128,9 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { params } = req;
-
-    const setting = await settings();
-
+    const { params, user_id } = req;
+    const setting = await util.getSetting();
+    const user = await service.users.findById(user_id);
     const page = await service.pages.findById(params.id);
 
     res.render("admin/editor", {
@@ -147,6 +151,7 @@ exports.update = async (req, res) => {
         isPageUpdate: true,
         isError: false,
       },
+      user: user,
       page: {
         title: page.title,
         slug: page.slug,

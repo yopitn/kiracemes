@@ -1,9 +1,9 @@
 const service = require("../../services");
-const settings = require("../../utils/settings");
+const util = require("../../utils");
 
 exports.index = async (req, res) => {
   try {
-    const setting = await settings();
+    const setting = await util.getSetting();
 
     res.render("admin/signin", {
       blog: {

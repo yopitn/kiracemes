@@ -5,4 +5,5 @@ module.exports = {
   signout: require("./signout"),
   posts: require("./posts"),
   pages: require("./pages"),
+  profile: require("./profile"),
 };

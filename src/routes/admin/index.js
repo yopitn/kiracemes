@@ -22,4 +22,7 @@ router.get("/pages", [middleware.admin.isSetup, middleware.admin.isLogin], contr
 router.get("/page/new", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.pages.create);
 router.get("/page/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.pages.update);
 
+router.get("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.index);
+router.put("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.update);
+
 module.exports = router;

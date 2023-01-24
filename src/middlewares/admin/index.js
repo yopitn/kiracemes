@@ -14,9 +14,9 @@ exports.isLogin = (req, res, next) => {
         });
 
         if (!error && session) {
-          req.body.user_id = decode.id;
-          req.body.role = decode.role;
-          req.body.name = decode.name;
+          req.user_id = decode.id;
+          req.role = decode.role;
+          req.name = decode.name;
 
           return next();
         } else {
@@ -51,7 +51,7 @@ exports.isNotLogin = (req, res, next) => {
           req.role = decode.role;
           req.name = decode.name;
 
-          res.redirect("/admin/posts");
+          res.redirect("/admin");
           return false;
         } else {
           return next();

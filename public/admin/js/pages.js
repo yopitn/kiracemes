@@ -142,14 +142,14 @@
 
     if (option_value === status_query) {
       button.setAttribute("aria-selected", true);
-    } else if (!status_query && option_value == "all posts") {
+    } else if (!status_query && option_value == "all pages") {
       button.setAttribute("aria-selected", true);
     } else {
       button.setAttribute("aria-selected", false);
     }
 
     button.addEventListener("click", () => {
-      if (option_value === "all posts") {
+      if (option_value === "all pages") {
         window.location.href = updateQueryStringParameter(window.location.href, "status", undefined);
       } else {
         window.location.href = updateQueryStringParameter(window.location.href, "status", option_value);

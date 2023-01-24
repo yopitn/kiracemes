@@ -25,3 +25,17 @@ function updateQueryStringParameter(uri, key, value) {
     }
   }
 }
+
+(function () {
+  const profile_button = document.querySelector("[data-button='profile']");
+
+  profile_button.addEventListener("click", () => {
+    profile_button.parentNode.classList.toggle("s");
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (profile_button.parentNode.classList.contains("s") && !profile_button.contains(e.target)) {
+      profile_button.parentNode.classList.remove("s");
+    }
+  });
+})();

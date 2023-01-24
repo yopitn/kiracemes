@@ -1,0 +1,99 @@
+<%- include("./partials/header") %>
+
+<div class="content__wrap">
+  <%- include("./partials/sidebar") %>
+
+  <main class="main__wrap">
+    <div class="container">
+      <div class="main__profile">
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Photo profile</span>
+          </div>
+
+          <div class="main__form-image">
+            <input class="hidden" type="file" name="photo" id="photo">
+
+            <div class="box">
+              <% if (user.image) { %>
+              <div class="photo" style="background-image: url('<%- blog.homepageUrl %><%- user.image %>');" data-show="photo"></div>
+              <% } else { %>
+              <div class="photo-empty" data-show="photo">
+                <svg viewBox="0 0 24 24">
+                  <g transform="translate(4.000000, 2.000000)">
+                    <path d="M8,13.1739317 C12.338627,13.1739317 16,13.8789388 16,16.598966 C16,19.3199932 12.314618,20 8,20 C3.66237339,20 5.68434189e-14,19.2949929 5.68434189e-14,16.5749657 C5.68434189e-14,13.8539385 3.68538202,13.1739317 8,13.1739317 Z M8,-6.03961325e-14 C10.9391022,-6.03961325e-14 13.2939852,2.35402354 13.2939852,5.29105291 C13.2939852,8.22808228 10.9391022,10.5831058 8,10.5831058 C5.06189821,10.5831058 2.70601476,8.22808228 2.70601476,5.29105291 C2.70601476,2.35402354 5.06189821,-6.03961325e-14 8,-6.03961325e-14 Z"></path>
+                  </g>
+                </svg>
+              </div>
+              <% } %>
+
+              <label for="photo">EDIT PICTURE</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Basic</span>
+          </div>
+
+          <div class="main__form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Username" value="<%- user.username %>">
+          </div>
+
+          <div class="main__form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Name" value="<%- user.name %>">
+          </div>
+
+          <div class="main__form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="example@email.com" value="<%- user.email %>">
+          </div>
+
+          <div class="main__form-group">
+            <label for="bio">Bio</label>
+            <textarea name="bio" id="bio" placeholder="Bio"><%- user.bio %></textarea>
+          </div>
+
+          <div class="main__form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" placeholder="Location" value="<%- user.location %>">
+          </div>
+
+          <div class="main__form-submit">
+            <button class="btn btn-primary" type="submit" data-button="save-profile">Save</button>
+          </div>
+        </div>
+
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Password</span>
+          </div>
+
+          <div class="main__form-group">
+            <label for="old-password">Old password</label>
+            <input type="password" name="old-password" id="old-password" placeholder="Old password">
+          </div>
+
+          <div class="main__form-group">
+            <label for="new-password">New password</label>
+            <input type="password" name="new-password" id="new-password" placeholder="New password">
+          </div>
+
+          <div class="main__form-group">
+            <label for="verify-password">Verify password</label>
+            <input type="password" name="verify-password" id="verify-password" placeholder="Verify password">
+          </div>
+
+          <div class="main__form-submit">
+            <button class="btn btn-danger" type="submit" data-button="save-password">Change password</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<%- include("./partials/footer") %>

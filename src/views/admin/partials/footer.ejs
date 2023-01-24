@@ -1,5 +1,6 @@
   <script>
     const BASE_API = "<%- blog.homepageUrl %>/api/admin";
+    const BASE_ADMIN = "<%- blog.homepageUrl %>/admin";
   </script>
 
   <% if (view.isHomepage) { %>
@@ -17,17 +18,17 @@
       })
     })();
   </script>
+  <% } %>
 
   <script src="<%- blog.homepageUrl %>/admin/js/dashboard.js"></script>
-  <% } %>
 
   <% if (view.isPosts) { %>
   <script src="<%- blog.homepageUrl %>/admin/js/posts.js"></script>
   <% } %>
 
   <% if (view.isPages) { %>
-    <script src="<%- blog.homepageUrl %>/admin/js/pages.js"></script>
-    <% } %>
+  <script src="<%- blog.homepageUrl %>/admin/js/pages.js"></script>
+  <% } %>
 
   <% if (view.isEditor) { %>
   <script src="<%- blog.homepageUrl %>/admin/js/editor.js"></script>
@@ -51,6 +52,10 @@
 
   <% if (view.isPageUpdate) { %>
   <script src="<%- blog.homepageUrl %>/admin/js/update-page.js"></script>
+  <% } %>
+
+  <% if (view.isProfile) { %>
+  <script src="<%- blog.homepageUrl %>/admin/js/profile.js"></script>
   <% } %>
 
   </body>
