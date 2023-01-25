@@ -25,5 +25,6 @@ router.get("/page/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin
 router.get("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.index);
 router.put("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.update);
 router.put("/profile/image", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.image);
+router.put("/profile/password", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.password);
 
 module.exports = router;

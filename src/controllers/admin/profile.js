@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -76,6 +77,44 @@ exports.image = async (req, res) => {
 
       res.sendStatus(200);
     });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.password = async (req, res) => {
+  try {
+    const { body, user_id } = req;
+    const user = await service.users.findById(user_id);
+    const match = await bcrypt.compare(body.old_password, user.password);
+
+    let password;
+
+    if (match) {
+      password = body.new_password;
+    } else {
+      return res.status(400).json({
+        errors: [
+          {
+            message: "The old password is incorrect. Try again",
+          },
+        ],
+      });
+    }
+
+    if (body.new_password !== body.verify_password) {
+      return res.status(400).json({
+        errors: [
+          {
+            message: "New password do not match",
+          },
+        ],
+      });
+    }
+
+    await service.users.password(password, user_id);
+
+    return res.sendStatus(200);
   } catch (error) {
     throw new Error(error);
   }

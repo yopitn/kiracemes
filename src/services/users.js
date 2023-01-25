@@ -22,7 +22,21 @@ exports.create = async (body) => {
 exports.findById = async (id) => {
   try {
     const user = model.users.findOne({
-      attributes: ["id", "username", "name", "email", "slug", "image", "bio", "location", "meta_title", "meta_description", "created_at", "updated_at"],
+      attributes: [
+        "id",
+        "username",
+        "name",
+        "email",
+        "password",
+        "slug",
+        "image",
+        "bio",
+        "location",
+        "meta_title",
+        "meta_description",
+        "created_at",
+        "updated_at",
+      ],
       where: {
         id: id,
       },
@@ -78,13 +92,13 @@ exports.image = async (image, id) => {
   }
 };
 
-exports.password = async (body, id) => {
+exports.password = async (password, id) => {
   const salt = await bcrypt.genSalt();
-  const password = await bcrypt.hash(body.new_password, salt);
+  const hashPassword = await bcrypt.hash(password, salt);
 
   await model.users.update(
     {
-      password: password,
+      password: hashPassword,
     },
     {
       where: {

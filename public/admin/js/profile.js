@@ -1,5 +1,6 @@
 (function () {
   const save_profile_button = document.querySelector("[data-button='save-profile']");
+  const save_password_button = document.querySelector("[data-button='save-password']");
   const show_images = document.querySelector("[data-show='images']");
   const main_wrap = document.querySelector(".main__wrap .container");
   const main_message = document.querySelector(".editor__message");
@@ -9,6 +10,9 @@
   const email = document.getElementById("email");
   const bio = document.getElementById("bio");
   const location = document.getElementById("location");
+  const old_password = document.getElementById("old-password");
+  const new_password = document.getElementById("new-password");
+  const verify_password = document.getElementById("verify-password");
 
   images.addEventListener("change", () => {
     const [file] = images.files;
@@ -133,6 +137,67 @@
             setTimeout(() => {
               message.remove();
             }, 5000);
+          }
+        }
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  });
+
+  save_password_button.addEventListener("click", () => {
+    const data = {
+      old_password: old_password.value,
+      new_password: new_password.value,
+      verify_password: verify_password.value,
+    };
+
+    fetch(`${BASE_ADMIN}/profile/password`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          if (!main_message) {
+            let message = document.createElement("div");
+            message.className = "main__message";
+            message.innerHTML = `
+            <div class="alert success">
+              <span class="text">Password updated successfully</span>
+            </div>
+          `;
+
+            main_wrap.appendChild(message);
+
+            setTimeout(() => {
+              message.remove();
+            }, 5000);
+
+            return false;
+          }
+        } else {
+          return res.json();
+        }
+      })
+      .then((json) => {
+        if (json.errors) {
+          if (!main_message) {
+            let message = document.createElement("div");
+            message.className = "main__message";
+            message.innerHTML = `
+            <div class="alert danger">
+              <span class="text">${json.errors[0].message}</span>
+            </div>
+          `;
+
+            main_wrap.appendChild(message);
+
+            setTimeout(() => {
+              message.remove();
+            }, 5000);
+
+            return false;
           }
         }
       })
