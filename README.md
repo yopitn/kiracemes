@@ -7,6 +7,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 ## Goal
 
 **Blog**
+
 - [ ] Halaman home.
 - [ ] Halaman postingan.
 - [ ] Halaman page (static).
@@ -14,10 +15,11 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [ ] Halaman kategori.
 
 **Admin**
+
 - [x] Halaman postingan (create, findAll, findById, update, delete).
 - [x] Halaman page (static) (create, findAll, findById, update, delete).
 - [ ] Halaman setting.
-- [ ] Halaman account.
+- [x] Halaman account.
 - [x] Halaman signin.
 - [x] Halaman setup.
 - [x] Logic admin signout.
