@@ -186,7 +186,7 @@
         { name: "title", value: blogtitle.value },
         { name: "description", value: blogdescription.value },
         { name: "meta_title", value: meta_title.value },
-        { name: "description_title", value: meta_description.value },
+        { name: "meta_description", value: meta_description.value },
         { name: "posts_per_page", value: posts_per_page.value },
       ],
     };
