@@ -1,0 +1,108 @@
+<%- include("./partials/header") %>
+
+<div class="content__wrap">
+  <div class="container">
+    <div class="content__inner">
+      <main class="main">
+        <div class="blog__posts">
+          <% if (posts.length > 0) { %>
+          <% posts.forEach(post => { %>
+          <article class="hentry">
+            <div class="post__thumbnail">
+              <div class="image">
+                <div class="preloader"></div>
+                <% if (post.featuredImage()) { %>
+                <a href="<%- post.url %>" class="thumbnail">
+                  <img class="lazy" data-src="<%- post.featuredImage() %>" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="<%- post.title %>">
+                </a>
+                <% } else { %>
+                <div class="thumbnail">
+                  <span>No image</span>
+                </div>
+                <% } %>
+              </div>
+            </div>
+
+            <div class="post__content">
+              <h2 class="post__title">
+                <a href="<%- post.url %>" rel="bookmark"><%- post.title %></a>
+              </h2>
+
+              <div class="post__info">
+                <bdi class="post__author" data-text="Oleh">
+                  <span><%- post.author.name %></span>
+                </bdi>
+
+                <time class="post__time published" datetime="<%- post.date.iso %>" title="Published: <%- post.date.published("MMMM D, YYYY") %>"><%- post.date.published("MMMM D, YYYY") %></time>
+
+                <div class="post__category" data-text="In">
+                  <% if (post.tags.length > 0) { %>
+                  <% post.tags.forEach(tag => { %>
+                  <a href="<%- tag.url %>" class="tag" aria-label="<%- tag.name %>"><%- tag.name %></a>
+                  <% }) %>
+                  <% } else { %>
+                  <span class="uncategorized">Uncategorized</span>
+                  <% } %>
+                </div>
+              </div>
+
+              <p class="post__snippet">
+                <%- helpers.shorten(post.content, 150) %>
+              </p>
+
+              <script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "BlogPosting",
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "<%- post.url %>"
+                  },
+                  "headline": "<%- post.title %>",
+                  "description": "<%- post.meta_description ? post.meta_description : blog.meta_description%> ,
+                  "datePublished": "<%- post.publishedISO %>",
+                  "dateModified": "<%- post.updatedISO %>",
+
+                  "image": {
+                    "@type": "ImageObject",
+                    "url": "<%- post.image %>",
+                  },
+
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "<%- blog.title %>",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "<%# change with your own blog logo and make sure to user logo with 350 x 350%>",
+                      "width": 350,
+                      "height": 350
+                    }
+                  },
+
+                  "author": {
+                    "@type": "Person",
+                    "name": "<%- post.author.name %>",
+                    "url": "<%- post.author.url %>",
+                    "image": "<%- post.author.image %>"
+                  }
+                }
+              </script>
+            </div>
+          </article>
+          <% }) %>
+          <% } else { %>
+          <div class="blog__empty">
+            <span class="text">Tidak ada postingan...</span>
+          </div>
+          <% } %>
+        </div>
+      </main>
+
+      <aside class="aside">
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

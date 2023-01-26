@@ -12,7 +12,8 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 **Blog**
 
-- [ ] Halaman home.
+- [x] Halaman home.
+- [ ] Halaman pagination
 - [ ] Halaman postingan.
 - [ ] Halaman page (static).
 - [ ] Halaman search.

@@ -23,10 +23,10 @@ const insert_image = document.querySelector("[data-command='editImage']");
 
   iframe_doc.execCommand("defaultParagraphSeparator", false, "p");
 
-  iframe_doc.addEventListener("paste", (e) => {
+  iframe_body.addEventListener("paste", (e) => {
     e.preventDefault();
 
-    let text = e.clipboardData.getData("text/plan");
+    const text = e.clipboardData.getData("text/plain");
 
     iframe_doc.execCommand("insertText", false, text);
   });

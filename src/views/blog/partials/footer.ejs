@@ -1,0 +1,49 @@
+<footer class="footer__wrap">
+  <div class="container">
+    <div class="footer__copyright">
+      © <span id="getYear">
+        <script>
+          const date = new Date();
+          const year = date.getFullYear();
+          document.getElementById("getYear").innerHTML = year
+        </script>
+      </span> ‧ <bdi><a href="<%- blog.homepageUrl %>"><%- blog.title %></a></bdi>. All rights reserved.
+    </div>
+
+    <div class="footer__list">
+      <ul>
+        <li>
+          <a href="#" class="link">
+            <span class="name">Beranda</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="link">
+            <span class="name">About us</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="link">
+            <span class="name">Contact us</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  Defer.dom('.lazy', 100, 'loaded', null, {
+    rootMargin: '1px'
+  }), 'undefined' != typeof infinite_scroll && infinite_scroll.on('load', function() {
+    Defer.dom('.lazy', 100, 'loaded', null, {
+      rootMargin: '1px'
+    })
+  });
+</script>
+
+</body>
+
+</html>
