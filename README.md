@@ -4,6 +4,10 @@ Kiracemes merupakan sebuah Content Management System (CMS) yang dibuat menggunak
 
 Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
+## Note
+
+- Jujur, kodingan untuk halaman profile dan setting sudah mulai agai aneh.
+
 ## Goal
 
 **Blog**
@@ -18,7 +22,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 - [x] Halaman postingan (create, findAll, findById, update, delete).
 - [x] Halaman page (static) (create, findAll, findById, update, delete).
-- [ ] Halaman setting.
+- [x] Halaman setting.
 - [x] Halaman account.
 - [x] Halaman signin.
 - [x] Halaman setup.

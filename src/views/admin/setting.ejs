@@ -1,0 +1,85 @@
+<%- include("./partials/header") %>
+
+<div class="content__wrap">
+  <%- include("./partials/sidebar") %>
+
+  <div class="main__wrap">
+    <div class="container">
+      <div class="main__setting">
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Basic</span>
+          </div>
+
+          <div class="main__form-group">
+            <label for="blogname">Blog name</label>
+            <input type="text" name="blogname" id="blogname" placeholder="Blog name" value="<%- setting.title %>">
+          </div>
+
+          <div class="main__form-group">
+            <label for="blogdescription">Blog description</label>
+            <textarea name="blogdescription" id="blogdescription" placeholder="Blog description"><%- setting.description %></textarea>
+          </div>
+
+          <div class="main__form-group">
+            <label for="favicon">Favicon</label>
+            <input class="hidden" type="file" name="favicon" id="favicon">
+
+            <div class="main__setting-favicon">
+              <div class="favicon" style="background-image: url('<%- blog.homepageUrl %>/admin/setting/favicon')" data-show="show-favicon"></div>
+
+              <label for="favicon">Change favicon</label>
+            </div>
+          </div>
+
+          <div class="main__form-group">
+            <label>Edit robots.txt</label>
+
+            <div class="main__setting-robottxt" data-button="robottxt">
+              <svg viewBox="0 0 24 24">
+                <g transform="translate(3.000000, 2.000000)">
+                  <path d="M13.191,0 C16.28,0 18,1.78 18,4.83 L18,4.83 L18,15.16 C18,18.26 16.28,20 13.191,20 L13.191,20 L4.81,20 C1.77,20 0,18.26 0,15.16 L0,15.16 L0,4.83 C0,1.78 1.77,0 4.81,0 L4.81,0 Z M5.08,13.74 C4.78,13.71 4.49,13.85 4.33,14.11 C4.17,14.36 4.17,14.69 4.33,14.95 C4.49,15.2 4.78,15.35 5.08,15.31 L5.08,15.31 L12.92,15.31 C13.319,15.27 13.62,14.929 13.62,14.53 C13.62,14.12 13.319,13.78 12.92,13.74 L12.92,13.74 Z M12.92,9.179 L5.08,9.179 C4.649,9.179 4.3,9.53 4.3,9.96 C4.3,10.39 4.649,10.74 5.08,10.74 L5.08,10.74 L12.92,10.74 C13.35,10.74 13.7,10.39 13.7,9.96 C13.7,9.53 13.35,9.179 12.92,9.179 L12.92,9.179 Z M8.069,4.65 L5.08,4.65 L5.08,4.66 C4.649,4.66 4.3,5.01 4.3,5.44 C4.3,5.87 4.649,6.22 5.08,6.22 L5.08,6.22 L8.069,6.22 C8.5,6.22 8.85,5.87 8.85,5.429 C8.85,5 8.5,4.65 8.069,4.65 L8.069,4.65 Z"></path>
+                </g>
+              </svg>
+
+              <div class="text">Edit your custom robots.txt</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Tag Meta</span>
+          </div>
+
+          <div class="main__form-group">
+            <label for="meta-title">Meta title</label>
+            <input type="text" name="meta-title" id="meta-title" placeholder="Meta title" value="<%- setting.meta_title %>">
+          </div>
+
+          <div class="main__form-group">
+            <label for="meta-description">Meta description</label>
+            <textarea name="meta-description" id="meta-description" placeholder="Meta description" value="<%- setting.meta_description %>"></textarea>
+          </div>
+        </div>
+
+        <div class="main__form">
+          <div class="main__form-title">
+            <span class="text">Posts</span>
+          </div>
+
+          <div class="main__form-group">
+            <label for="posts-per-page">Posts per page</label>
+            <input type="number" name="posts-per-page" id="posts-per-page" min="0" max="999" autocomplete="off" value="<%- setting.posts_per_page %>">
+          </div>
+
+          <div class="main__form-submit">
+            <button class="btn btn-primary" type="submit" data-button="save-profile">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

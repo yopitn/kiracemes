@@ -18,6 +18,7 @@ exports.index = async (req, res) => {
         isHomepage: true,
         isPosts: false,
         isPages: false,
+        isProfile: false,
         isSetting: false,
         isProfile: true,
         isEditor: false,
@@ -54,14 +55,12 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.image = async (req, res) => {
+exports.updateImage = async (req, res) => {
   try {
     const { user_id } = req;
     const setting = await util.getSetting();
-    const month = ("0" + (new Date().getMonth() + 1)).slice(-2).toString();
-    const year = new Date().getFullYear().toString();
 
-    await util.uploadImage(req, res, async (error) => {
+    await util.uploadUserImage(req, res, async (error) => {
       if (error)
         return res.status(400).json({
           errors: [
@@ -71,7 +70,7 @@ exports.image = async (req, res) => {
           ],
         });
 
-      const image = `${setting.homeurl}/content/images/${year}/${month}/${req.file.filename}`;
+      const image = `${setting.homeurl}/content/images/users/${req.file.filename}`;
 
       await service.users.image(image, user_id);
 
@@ -82,7 +81,7 @@ exports.image = async (req, res) => {
   }
 };
 
-exports.password = async (req, res) => {
+exports.updatePassword = async (req, res) => {
   try {
     const { body, user_id } = req;
     const user = await service.users.findById(user_id);

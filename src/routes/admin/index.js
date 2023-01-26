@@ -24,7 +24,14 @@ router.get("/page/edit/:id", [middleware.admin.isSetup, middleware.admin.isLogin
 
 router.get("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.index);
 router.put("/profile", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.update);
-router.put("/profile/image", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.image);
-router.put("/profile/password", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.password);
+router.put("/profile/image", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.updateImage);
+router.put("/profile/password", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.profile.updatePassword);
+
+router.get("/setting", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.index);
+router.put("/setting", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.update);
+router.get("/setting/favicon", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.getFavicon);
+router.put("/setting/favicon", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.updateFavicon);
+router.get("/setting/robots-txt", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.getRobotsTxt);
+router.put("/setting/robots-txt", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.updateRobotsTxt);
 
 module.exports = router;

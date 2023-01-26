@@ -6,4 +6,5 @@ module.exports = {
   posts: require("./posts"),
   pages: require("./pages"),
   profile: require("./profile"),
+  setting: require("./setting"),
 };
