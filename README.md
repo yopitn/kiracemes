@@ -13,7 +13,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 **Blog**
 
 - [x] Halaman home.
-- [ ] Halaman pagination
+- [x] Halaman pagination.
 - [ ] Halaman postingan.
 - [ ] Halaman page (static).
 - [ ] Halaman search.

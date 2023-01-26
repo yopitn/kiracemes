@@ -374,6 +374,12 @@ body {
 }
 
 .post {
+  &__empty {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+  }
+
   &__title {
     a {
       display: -webkit-box;
@@ -474,61 +480,87 @@ body {
 }
 
 .multi {
-  .blog__posts {
-    article {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+  .blog {
+    &__posts {
+      article {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
 
-    .post__thumbnail {
-      flex: 0 0 42%;
-      max-width: 42%;
-      overflow: hidden;
-    }
+      .post__thumbnail {
+        flex: 0 0 42%;
+        max-width: 42%;
+        overflow: hidden;
+      }
 
-    .post__content {
-      flex: 0 0 58%;
-      max-width: 58%;
-      padding: 10px 0 10px 10px;
-    }
+      .post__content {
+        flex: 0 0 58%;
+        max-width: 58%;
+        padding: 10px 0 10px 10px;
+      }
 
-    .post__title {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
+      .post__title {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
 
-    .post__info {
-      > * {
-        display: inline-flex;
-        align-items: center;
+      .post__info {
+        > * {
+          display: inline-flex;
+          align-items: center;
 
-        &:not(:last-child)::after {
-          content: "";
-          display: block;
-          width: 4px;
-          height: 4px;
-          background-color: var(--icon-color);
-          margin: 0 6px;
-          border-radius: 500px;
+          &:not(:last-child)::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 4px;
+            background-color: var(--icon-color);
+            margin: 0 6px;
+            border-radius: 500px;
+          }
         }
       }
-    }
 
-    .post__author {
-      font-weight: 500;
+      .post__author {
+        font-weight: 500;
 
-      &::before {
-        content: attr(data-text);
-        font-size: 13px;
-        font-weight: 400;
-        margin-right: 3px;
-        opacity: 0.9;
+        &::before {
+          content: attr(data-text);
+          font-size: 13px;
+          font-weight: 400;
+          margin-right: 3px;
+          opacity: 0.9;
+        }
+      }
+
+      .post__snippet {
+        margin-top: 15px;
       }
     }
 
-    .post__snippet {
-      margin-top: 15px;
+    &__pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 40px;
+
+      .link {
+        display: inline-block;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--white-color);
+        background-color: var(--primary-color);
+      }
+
+      .next {
+        margin-right: auto;
+      }
+
+      .prev {
+        margin-left: auto;
+      }
     }
   }
 }

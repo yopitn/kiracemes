@@ -91,9 +91,35 @@
           </article>
           <% }) %>
           <% } else { %>
-          <div class="blog__empty">
+          <div class="post__empty">
             <span class="text">Tidak ada postingan...</span>
           </div>
+          <% } %>
+        </div>
+
+        <div class="blog__pagination">
+          <% if (pagination.next) { %>
+          <a href="<%- pagination.next %>" class="link next">
+            <span class="text">Postingan baru</span>
+          </a>
+          <% } %>
+
+          <%
+            if (!view.isHomepage) {
+              console.log(pagination)
+            }
+          %>
+
+          <% if (!view.isHomepage) { %>
+          <a href="<%- blog.homepageUrl %>" class="link home">
+            <span class="text">Beranda</span>
+          </a>
+          <% } %>
+
+          <% if (pagination.prev) { %>
+          <a href="<%- pagination.prev %>" class="link prev">
+            <span class="text">Postingan lama</span>
+          </a>
           <% } %>
         </div>
       </main>
