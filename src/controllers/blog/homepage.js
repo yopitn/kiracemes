@@ -4,13 +4,15 @@ const util = require("../../utils");
 
 module.exports = async (req, res) => {
   try {
+    const { query } = req;
     const setting = await util.getSetting();
-    const query = {
+    const findBy = {
       limit: setting.posts_per_page,
+      search: query.q,
     };
-    const posts = await service.posts.findAll({ order: "published_at", query: query });
+    const posts = await service.posts.findAllBlog({ order: "published_at", query: findBy });
 
-    res.render("blog/homepage", {
+    res.render("blog/multiple", {
       blog: {
         title: setting.title,
         description: setting.description,
@@ -20,12 +22,12 @@ module.exports = async (req, res) => {
         meta_description: setting.meta_description,
       },
       view: {
-        isHomepage: true,
+        isHomepage: query.q ? false : true,
         isMultipleItems: true,
         isSingleItem: false,
         isPost: false,
         isPage: false,
-        isSearch: false,
+        isSearch: query.q ? true : false,
         isCategory: false,
       },
       posts: posts.data.map((post) => {
@@ -100,7 +102,7 @@ module.exports = async (req, res) => {
         pages: Math.ceil(posts.count / setting.posts_per_page),
         total: posts.count,
         next: null,
-        prev: posts.count > setting.posts_per_page ? `${setting.homeurl}/page/2` : null,
+        prev: posts.count > setting.posts_per_page ? (query.q ? `${setting.homeurl}/page/2?q=${query.q}` : `${setting.homeurl}/page/2`) : null,
       },
     });
   } catch (error) {

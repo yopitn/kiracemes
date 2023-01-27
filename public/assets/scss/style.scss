@@ -292,6 +292,10 @@ body {
     height: var(--bottom-header-height);
 
     nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
       ul {
         list-style: none;
         padding: 0;
@@ -312,7 +316,7 @@ body {
         align-items: center;
         height: 100%;
         padding: 0 18px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         text-transform: uppercase;
         color: var(--white-color);
@@ -321,6 +325,74 @@ body {
           background-color: var(--primary-color);
           opacity: 1;
         }
+      }
+    }
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 300px;
+    padding-right: 20px;
+
+    form {
+      position: relative;
+      width: 100%;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px 54px 10px 16px;
+      background-color: var(--white-color);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
+
+      &:focus ~ button[type="reset"],
+      &:not(:placeholder-shown) ~ button[type="reset"] {
+        opacity: 1;
+      }
+    }
+
+    button {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      z-index: 3;
+      opacity: 0.9;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        font-weight: 1.5px;
+      }
+    }
+
+    button[type="submit"] {
+      right: 8px;
+    }
+
+    button[type="reset"] {
+      right: 34px;
+      font-size: 12px;
+      opacity: 0;
+      transition: 0.1s ease;
+
+      &::before {
+        content: "✕";
       }
     }
   }

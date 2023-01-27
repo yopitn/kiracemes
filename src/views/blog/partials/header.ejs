@@ -119,7 +119,7 @@
 
       <div class="header__middle">
         <div class="navbar__title">
-          <% if (view.isMultipleItems) { %>
+          <% if (view.isHomepage) { %>
           <h1>
             <span class="title"><%- blog.title %></span>
           </h1>
@@ -152,6 +152,19 @@
               </a>
             </li>
           </ul>
+
+          <div class="header__search">
+            <form action="<%- blog.homepageUrl %>" method="get">
+              <input aria-label="Search for this blog" type="search" name="q" id="search" autocomplete="off" placeholder="Try tutorial, games, etc">
+              <button type="reset"></button>
+              <button type="submit">
+                <svg class="line" viewBox="0 0 24 24">
+                  <circle cx="11.7666" cy="11.7666" r="8.98856"></circle>
+                  <path d="M18.0183 18.4851L21.5423 22"></path>
+                </svg>
+              </button>
+            </form>
+          </div>
         </nav>
       </div>
     </div>

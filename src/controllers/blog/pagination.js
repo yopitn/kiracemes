@@ -4,7 +4,7 @@ const util = require("../../utils");
 
 module.exports = async (req, res) => {
   try {
-    const { params } = req;
+    const { params, query } = req;
 
     if (parseInt(params.page) === 1) {
       res.redirect("/");
@@ -12,13 +12,19 @@ module.exports = async (req, res) => {
     }
 
     const setting = await util.getSetting();
-    const query = {
+    const findBy = {
       limit: setting.posts_per_page,
       page: params.page,
+      search: query.q,
     };
-    const posts = await service.posts.findAll({ order: "published_at", query: query });
+    const posts = await service.posts.findAllBlog({ order: "published_at", query: findBy });
 
-    res.render("blog/homepage", {
+    if (posts.data.length == 0) {
+      res.redirect("/");
+      return false;
+    }
+
+    res.render("blog/multiple", {
       blog: {
         title: setting.title,
         description: setting.description,
@@ -33,7 +39,7 @@ module.exports = async (req, res) => {
         isSingleItem: false,
         isPost: false,
         isPage: false,
-        isSearch: false,
+        isSearch: query.q ? true : false,
         isCategory: false,
       },
       posts: posts.data.map((post) => {
@@ -111,7 +117,11 @@ module.exports = async (req, res) => {
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > 1
             ? params.page > 1
               ? parseInt(params.page - 1) === 1
-                ? setting.homeurl
+                ? query.q
+                  ? `${setting.homeurl}?q=${query.q}`
+                  : setting.homeurl
+                : query.q
+                ? `${setting.homeurl}/page/${parseInt(params.page) - 1}?q=${query.q}`
                 : `${setting.homeurl}/page/${parseInt(params.page) - 1}`
               : null
             : null,
@@ -119,7 +129,11 @@ module.exports = async (req, res) => {
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > 1 &&
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > parseInt(params.page || 1)
             ? params.page > 0
-              ? `${setting.homeurl}/page/${parseInt(params.page) + 1}`
+              ? query.q
+                ? `${setting.homeurl}/page/${parseInt(params.page) + 1}?q=${query.q}`
+                : `${setting.homeurl}/page/${parseInt(params.page) + 1}`
+              : query.q
+              ? `${setting.homeurl}/page/2?q=${query.q}`
               : `${setting.homeurl}/page/2`
             : null,
       },

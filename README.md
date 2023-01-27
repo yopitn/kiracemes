@@ -16,7 +16,8 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman pagination.
 - [ ] Halaman postingan.
 - [ ] Halaman page (static).
-- [ ] Halaman search.
+- [ ] Halaman author.
+- [x] Halaman search.
 - [ ] Halaman kategori.
 
 **Admin**

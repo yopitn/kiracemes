@@ -93,6 +93,84 @@ exports.findAll = async ({ order, query }) => {
   }
 };
 
+exports.findAllBlog = async ({ order, query }) => {
+  try {
+    let page = query.page ? query.page - 1 : 0;
+    let limit = parseInt(query.limit || 10);
+    page = page < 0 ? 0 : page;
+    limit = limit < 0 ? 10 : limit;
+
+    const offset = page * limit;
+
+    let search = query.search ? { [Op.or]: [{ title: { [Op.like]: `%${query.search}%` } }] } : undefined;
+
+    const posts = await model.posts.findAll({
+      attributes: [
+        "id",
+        "uuid",
+        "title",
+        "slug",
+        "content",
+        "featured",
+        "status",
+        "meta_title",
+        "meta_description",
+        "og_image",
+        "og_title",
+        "og_description",
+        "twitter_image",
+        "twitter_title",
+        "twitter_description",
+        "created_at",
+        "updated_at",
+        "published_at",
+      ],
+      where: {
+        type: "post",
+        ...search,
+      },
+      include: [
+        {
+          model: model.users,
+          as: "author",
+          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
+        },
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      order: [[order, "DESC"]],
+      limit: limit,
+      offset: offset,
+    });
+
+    const count = await model.posts.findAll({
+      where: {
+        type: "post",
+        ...search,
+      },
+      include: [
+        {
+          model: model.tags,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+
+    return {
+      data: posts,
+      count: count.length,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.findAllAdmin = async ({ order, query }) => {
   try {
     let page = query.page ? query.page - 1 : 0;
@@ -324,86 +402,6 @@ exports.findAllByTag = async ({ order, query }) => {
           },
         },
       ],
-    });
-
-    return {
-      data: posts,
-      count: count.length,
-    };
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-exports.search = async ({ order, query }) => {
-  try {
-    let page = query.page ? query.page - 1 : 0;
-    let limit = parseInt(query.limit || 10);
-    page = page < 0 ? 0 : page;
-    limit = limit < 0 ? 10 : limit;
-
-    const offset = page * limit;
-
-    const posts = await model.posts.findAll({
-      attributes: [
-        "id",
-        "uuid",
-        "title",
-        "slug",
-        "content",
-        "featured",
-        "status",
-        "meta_title",
-        "meta_description",
-        "og_image",
-        "og_title",
-        "og_description",
-        "twitter_image",
-        "twitter_title",
-        "twitter_description",
-        "created_at",
-        "updated_at",
-        "published_at",
-      ],
-      where: {
-        type: "post",
-        [Op.or]: [
-          {
-            title: {
-              [Op.like]: `%${query}%`,
-            },
-          },
-        ],
-      },
-      include: [
-        {
-          model: model.users,
-          as: "author",
-          attributes: ["id", "name", "slug", "image", "bio", "location", "role", "meta_title", "meta_description", "created_at", "updated_at"],
-        },
-        {
-          model: model.tags,
-          through: {
-            attributes: [],
-          },
-        },
-      ],
-      order: [[order, "DESC"]],
-      limit: limit,
-      offset: offset,
-    });
-
-    const count = await model.posts.findAll({
-      where: {
-        type: "post",
-        [Op.or]: [
-          {
-            title: {
-              [Op.like]: `%${query}%`,
-            },
-          },
-        ],
-      },
     });
 
     return {
