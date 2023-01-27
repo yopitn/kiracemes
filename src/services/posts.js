@@ -127,6 +127,7 @@ exports.findAllBlog = async ({ order, query }) => {
       ],
       where: {
         type: "post",
+        status: "published",
         ...search,
       },
       include: [
@@ -342,6 +343,8 @@ exports.findAllByTag = async ({ order, query }) => {
 
     const offset = page * limit;
 
+    console.log(query);
+
     const posts = await model.posts.findAll({
       attributes: [
         "id",
@@ -365,6 +368,7 @@ exports.findAllByTag = async ({ order, query }) => {
       ],
       where: {
         type: "post",
+        status: "published",
       },
       include: [
         {
@@ -375,7 +379,7 @@ exports.findAllByTag = async ({ order, query }) => {
         {
           model: model.tags,
           where: {
-            name: query.tag,
+            slug: query.slug,
           },
           through: {
             attributes: [],
@@ -390,12 +394,13 @@ exports.findAllByTag = async ({ order, query }) => {
     const count = await model.posts.findAll({
       where: {
         type: "post",
+        status: "published",
       },
       include: [
         {
           model: model.tags,
           where: {
-            name: query.tag,
+            slug: query.slug,
           },
           through: {
             attributes: [],

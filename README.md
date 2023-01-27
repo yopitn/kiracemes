@@ -18,7 +18,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [ ] Halaman page (static).
 - [ ] Halaman author.
 - [x] Halaman search.
-- [ ] Halaman kategori.
+- [x] Halaman kategori.
 
 **Admin**
 
