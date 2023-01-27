@@ -343,8 +343,6 @@ exports.findAllByTag = async ({ order, query }) => {
 
     const offset = page * limit;
 
-    console.log(query);
-
     const posts = await model.posts.findAll({
       attributes: [
         "id",

@@ -1,0 +1,98 @@
+<%- include("./partials/header") %>
+
+<div class="content__wrap">
+  <div class="container">
+    <div class="content__inner">
+      <main class="main">
+        <div class="blog__posts">
+          <article class="hentry">
+            <div class="post__breadcrumb" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
+              <div itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+                <meta content="1" itemprop="position">
+                <a href="<%- blog.homepageUrl %>" itemprop="item" title="Home">
+                  <span itemprop="name">Beranda</span>
+                </a>
+              </div>
+
+              <% if (post.tags) { %>
+              <% post.tags.forEach((tag, index) => { %>
+              <div itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+                <meta content="<%- index + 2 %>" itemprop="position">
+                <a href="<%- tag.url %>" itemprop="item" title="<%- tag.name %>">
+                  <span itemprop="name"><%- tag.name %></span>
+                </a>
+              </div>
+              <% }) %>
+              <% } else { %>
+              <div itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+                <meta content="2" itemprop="position">
+                <div itemprop="item" title="Uncategorized">
+                  <span itemprop="name">Uncategorized</span>
+                </div>
+              </div>
+              <% } %>
+
+              <div aria-current="page"><%- post.title %></div>
+            </div>
+
+            <h1 class="post__title">
+              <span class="title"><%- post.title %></span>
+            </h1>
+
+            <div class="post__info">
+              <bdi class="post__author" data-text="Oleh">
+                <a href="<%- post.author.url %>"><%- post.author.name %></a>
+              </bdi>
+
+              <% if (post.date.updatedISO) { %>
+              <time class="post__time updated" datetime="<%- post.date.updatedISO %>" title="Updated: <%- post.date.updated("MMMM D, YYYY") %>"><%- post.date.updated("MMMM D, YYYY") %></time>
+              <% } else { %>
+              <time class="post__time published" datetime="<%- post.date.publishedISO %>" title="Published: <%- post.date.published("MMMM D, YYYY") %>"><%- post.date.published("MMMM D, YYYY") %></time>
+              <% } %>
+            </div>
+
+            <div class="post__inner">
+              <div class="post__entry" id="postID-<%- post.id %>">
+                <div class="post__body" id="post__body">
+                  <%- post.content %>
+                </div>
+              </div>
+            </div>
+
+            <div class="post__share">
+              <div class="inner" data-text="Bagikan:">
+                <div class="text">
+                  <a aria-label="Facebook" class="facebook" data-text="Facebook" href="https://www.facebook.com/sharer.php?u=<%- post.url %>" rel="noopener nofollow" role="button" target="_blank" title="Share to Facebook">
+                    Facebook
+                  </a>
+                </div>
+
+                <div class="text">
+                  <a aria-label="Twitter" class="twitter" data-text="Twitter" href="https://twitter.com/share?url=<%- post.url %>" rel="noopener nofollow" role="button" target="_blank" title="Share to Twitter">
+                    Twitter
+                  </a>
+                </div>
+
+                <div class="text">
+                  <a aria-label="Pinterest" class="pinterest" data-pin-config="beside" data-text="Pinterest" href="https://pinterest.com/pin/create/button/?url=<%- post.url %><%- post.featuredImage() ? `&amp;media=${post.featuredImage()}` : "" %>" rel="noopener nofollow" role="button" target="_blank" title="Share to Pinterest">
+                    Pinterest
+                  </a>
+                </div>
+
+                <div class="text">
+                  <a aria-label="Whatsapp" class="whatsapp" data-text="Whatsapp" href="https://api.whatsapp.com/send?text=<%- post.url %>" rel="noopener" role="button" target="_blank" title="Share to Whatsapp">
+                    Whatsapp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <aside class="aside"></aside>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

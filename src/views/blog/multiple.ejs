@@ -33,7 +33,7 @@
                   <span><%- post.author.name %></span>
                 </bdi>
 
-                <time class="post__time published" datetime="<%- post.date.iso %>" title="Published: <%- post.date.published("MMMM D, YYYY") %>"><%- post.date.published("MMMM D, YYYY") %></time>
+                <time class="post__time published" datetime="<%- post.date.publishedISO %>" title="Published: <%- post.date.published("MMMM D, YYYY") %>"><%- post.date.published("MMMM D, YYYY") %></time>
 
                 <div class="post__category" data-text="In">
                   <% if (post.tags.length > 0) { %>
@@ -117,8 +117,6 @@
           <% } %>
         </div>
       </main>
-
-      <% console.log(pagination) %>
 
       <aside class="aside">
 
