@@ -14,7 +14,7 @@ if (view.isPageCreate || view.isPageUpdate) {
 <html lang="en">
 
 <head>
-  <title><%- blog.pageTitle %></title>
+  <title><%- !view.isError ? blog.pageTitle : "404: Not Found" %></title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
