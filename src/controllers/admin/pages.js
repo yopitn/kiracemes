@@ -37,7 +37,7 @@ exports.index = async (req, res) => {
           id: page.id,
           title: page.title,
           author: page.author.name,
-          url: `${setting.homeurl}/${page.slug}`,
+          url: `${setting.homeurl}/p/${page.slug}`,
           status: page.status,
           featuredImage: () => {
             const content = page.content;

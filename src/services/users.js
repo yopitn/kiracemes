@@ -48,6 +48,35 @@ exports.findById = async (id) => {
   }
 };
 
+exports.findBySlug = async (slug) => {
+  try {
+    const user = model.users.findOne({
+      attributes: [
+        "id",
+        "username",
+        "name",
+        "email",
+        "password",
+        "slug",
+        "image",
+        "bio",
+        "location",
+        "meta_title",
+        "meta_description",
+        "created_at",
+        "updated_at",
+      ],
+      where: {
+        slug: slug,
+      },
+    });
+
+    return user;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.update = async (body, id) => {
   try {
     await model.users.update(

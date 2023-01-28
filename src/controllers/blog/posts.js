@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
         isPage: false,
         isSearch: false,
         isCategory: false,
+        isAuthor: false,
       },
       post: {
         id: post.id,

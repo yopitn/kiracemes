@@ -5,15 +5,15 @@ const util = require("../../utils");
 exports.main = async (req, res) => {
   try {
     const { params } = req;
-
     const setting = await util.getSetting();
     const findBy = {
       limit: setting.posts_per_page,
       slug: params.slug,
     };
-    const posts = await service.posts.blog.findAllByTag({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAllByAuthor({ order: "published_at", query: findBy });
+    const user = await service.users.findBySlug(params.slug);
 
-    res.render("blog/multiple", {
+    res.render("blog/author", {
       blog: {
         title: setting.title,
         description: setting.description,
@@ -24,14 +24,15 @@ exports.main = async (req, res) => {
       },
       view: {
         isHomepage: false,
-        isMultipleItems: true,
+        isMultipleItems: false,
         isSingleItem: false,
         isPost: false,
         isPage: false,
         isSearch: false,
-        isCategory: true,
-        isAuthor: false,
+        isCategory: false,
+        isAuthor: true,
       },
+      author: user,
       posts: posts.data.map((post) => {
         return {
           id: post.id,
@@ -104,7 +105,7 @@ exports.main = async (req, res) => {
         pages: Math.ceil(posts.count / setting.posts_per_page),
         total: posts.count,
         next: null,
-        prev: posts.count > setting.posts_per_page ? `${setting.homeurl}/category/${params.slug}/page/2` : null,
+        prev: posts.count > setting.posts_per_page ? `${setting.homeurl}/author/${params.slug}/page/2` : null,
       },
     });
   } catch (error) {
@@ -117,7 +118,7 @@ exports.pagination = async (req, res) => {
     const { params } = req;
 
     if (parseInt(params.page) === 1) {
-      res.redirect(`/category/${params.slug}`);
+      res.redirect(`/author/${params.slug}`);
       return false;
     }
 
@@ -127,14 +128,15 @@ exports.pagination = async (req, res) => {
       page: params.page,
       slug: params.slug,
     };
-    const posts = await service.posts.blog.findAllByTag({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAllByAuthor({ order: "published_at", query: findBy });
+    const user = await service.users.findBySlug(params.slug);
 
     if (posts.data.length == 0) {
-      res.redirect(`/category/${params.slug}`);
+      res.redirect(`/author/${params.slug}`);
       return false;
     }
 
-    res.render("blog/multiple", {
+    res.render("blog/author", {
       blog: {
         title: setting.title,
         description: setting.description,
@@ -145,14 +147,15 @@ exports.pagination = async (req, res) => {
       },
       view: {
         isHomepage: false,
-        isMultipleItems: true,
+        isMultipleItems: false,
         isSingleItem: false,
         isPost: false,
         isPage: false,
         isSearch: false,
-        isCategory: true,
-        isAuthor: false,
+        isCategory: false,
+        isAuthor: true,
       },
+      author: user,
       posts: posts.data.map((post) => {
         return {
           id: post.id,
@@ -228,16 +231,16 @@ exports.pagination = async (req, res) => {
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > 1
             ? params.page > 1
               ? parseInt(params.page - 1) === 1
-                ? `${setting.homeurl}/category/${params.slug}`
-                : `${setting.homeurl}/category/${params.slug}/page/${parseInt(params.page) - 1}`
+                ? `${setting.homeurl}/author/${params.slug}`
+                : `${setting.homeurl}/author/${params.slug}/page/${parseInt(params.page) - 1}`
               : null
             : null,
         prev:
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > 1 &&
           Math.ceil(posts.count / parseInt(setting.posts_per_page)) > parseInt(params.page || 1)
             ? params.page > 0
-              ? `${setting.homeurl}/category/${params.slug}/page/${parseInt(params.page) + 1}`
-              : `${setting.homeurl}/category/${params.slug}/page/2`
+              ? `${setting.homeurl}/author/${params.slug}/page/${parseInt(params.page) + 1}`
+              : `${setting.homeurl}/author/${params.slug}/page/2`
             : null,
       },
     });

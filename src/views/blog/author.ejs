@@ -4,6 +4,26 @@
   <div class="container">
     <div class="content__inner">
       <main class="main">
+        <div class="author__box">
+          <div class="author__inner">
+            <div class="author__image">
+              <img src="<%- author.image %>" alt="<%- author.name %>">
+            </div>
+
+            <div class="author__description">
+              <p><%- author.bio %></p>
+            </div>
+
+            <div class="author__location">
+              <span><%- author.location %></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="author__title">
+          <span class="text">Semua postingan oleh <%- author.name %></span>
+        </div>
+
         <div class="blog__posts">
           <% if (posts.length > 0) { %>
           <% posts.forEach(post => { %>
@@ -92,7 +112,7 @@
           <% }) %>
           <% } else { %>
           <div class="post__empty">
-            <span class="text">Tidak ada postingan...</span>
+            <span class="text">Belum ada postingan...</span>
           </div>
           <% } %>
         </div>
@@ -104,12 +124,6 @@
           </a>
           <% } %>
 
-          <% if (!view.isHomepage) { %>
-          <a href="<%- blog.homepageUrl %>" class="link home">
-            <span class="text">Beranda</span>
-          </a>
-          <% } %>
-
           <% if (pagination.prev) { %>
           <a href="<%- pagination.prev %>" class="link prev">
             <span class="text">Postingan lama</span>
@@ -117,10 +131,6 @@
           <% } %>
         </div>
       </main>
-
-      <aside class="aside">
-
-      </aside>
     </div>
   </div>
 </div>

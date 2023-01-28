@@ -4,4 +4,5 @@ module.exports = {
   category: require("./category"),
   posts: require("./posts"),
   staticPage: require("./static-page"),
+  author: require("./author"),
 };

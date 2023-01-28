@@ -443,6 +443,14 @@ body {
   }
 }
 
+.author {
+  .main {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
 .main {
   flex: 0 0 calc(100% - 310px);
   max-width: calc(100% - 310px);
@@ -605,6 +613,10 @@ body {
       .post__author {
         font-weight: 500;
 
+        a {
+          color: var(--text-color);
+        }
+
         &::before {
           content: attr(data-text);
           font-size: 13px;
@@ -618,30 +630,30 @@ body {
         margin-top: 15px;
       }
     }
+  }
+}
 
-    &__pagination {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 40px;
+.blog__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
 
-      .link {
-        display: inline-block;
-        padding: 10px;
-        border-radius: 4px;
-        font-size: 14px;
-        color: var(--white-color);
-        background-color: var(--primary-color);
-      }
+  .link {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+  }
 
-      .next {
-        margin-right: auto;
-      }
+  .next {
+    margin-right: auto;
+  }
 
-      .prev {
-        margin-left: auto;
-      }
-    }
+  .prev {
+    margin-left: auto;
   }
 }
 
@@ -805,6 +817,125 @@ body {
               background-color: #24cc63;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.author {
+  .author {
+    &__box {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--line-color);
+    }
+
+    &__inner {
+      text-align: center;
+    }
+
+    &__image {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 500px;
+        overflow: hidden;
+      }
+    }
+
+    &__description {
+      max-width: 400px;
+      line-height: 1.6em;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    &__location {
+      display: inline-flex;
+      align-items: center;
+
+      > * {
+        margin: 0 5px;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+  }
+
+  .blog__posts {
+    position: relative;
+    left: -10px;
+    right: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 20px);
+
+    article {
+      flex: 0 0 calc(33.33% - 20px);
+      width: calc(33.33% - 20px);
+      margin: 0 10px 20px;
+    }
+
+    .post {
+      &__content {
+        padding: 12px 6px;
+      }
+
+      &__title {
+        font-size: 20px;
+      }
+
+      &__info {
+        margin: 16px 0;
+        font-size: 13px;
+
+        > * {
+          display: inline-flex;
+          align-items: center;
+        }
+
+        > *:not(:last-child)::after {
+          content: "";
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: var(--icon-color);
+          margin: 0 6px;
+          border-radius: 500px;
+        }
+      }
+
+      &__author {
+        font-weight: 500;
+
+        > a {
+          color: var(--text-color);
+        }
+
+        &::before {
+          content: attr(data-text);
+          font-size: 13px;
+          font-weight: 400;
+          margin-right: 3px;
+          opacity: 0.9;
         }
       }
     }

@@ -16,9 +16,10 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman pagination.
 - [x] Halaman postingan.
 - [x] Halaman page (static).
-- [ ] Halaman author.
+- [x] Halaman author.
 - [x] Halaman search.
 - [x] Halaman kategori.
+- [ ] Halaman error 404.
 
 **Admin**
 
@@ -29,6 +30,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman signin.
 - [x] Halaman setup.
 - [x] Logic admin signout.
+- [ ] Halaman error 404.
 
 **API**
 

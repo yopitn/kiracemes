@@ -10,5 +10,7 @@ router.get("/category/:slug", middleware.admin.isSetup, controller.blog.category
 router.get("/category/:slug/page/:page", middleware.admin.isSetup, controller.blog.category.pagination);
 router.get("/blog/:slug", middleware.admin.isSetup, controller.blog.posts);
 router.get("/p/:slug", middleware.admin.isSetup, controller.blog.staticPage);
+router.get("/author/:slug", middleware.admin.isSetup, controller.blog.author.main);
+router.get("/author/:slug/page/:page", middleware.admin.isSetup, controller.blog.author.pagination);
 
 module.exports = router;
