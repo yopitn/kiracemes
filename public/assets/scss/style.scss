@@ -435,6 +435,14 @@ body {
   }
 }
 
+.page {
+  .main {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
 .main {
   flex: 0 0 calc(100% - 310px);
   max-width: calc(100% - 310px);

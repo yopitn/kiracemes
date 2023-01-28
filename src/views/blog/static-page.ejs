@@ -4,7 +4,21 @@
   <div class="container">
     <div class="content__inner">
       <main class="main">
+        <div class="blog__posts">
+          <article class="hentry">
+            <h1 class="post__title">
+              <span class="title"><%- page.title %></span>
+            </h1>
 
+            <div class="post__inner">
+              <div class="post__entry" id="pageID-<%- page.id %>">
+                <div class="post__body" id="post__body">
+                  <%- page.content %>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
       </main>
     </div>
   </div>

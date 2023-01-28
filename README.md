@@ -15,7 +15,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman home.
 - [x] Halaman pagination.
 - [x] Halaman postingan.
-- [ ] Halaman page (static).
+- [x] Halaman page (static).
 - [ ] Halaman author.
 - [x] Halaman search.
 - [x] Halaman kategori.
