@@ -34,4 +34,6 @@ router.put("/setting/favicon", [middleware.admin.isSetup, middleware.admin.isLog
 router.get("/setting/robots-txt", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.getRobotsTxt);
 router.put("/setting/robots-txt", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.setting.updateRobotsTxt);
 
+router.get("/*", [middleware.admin.isSetup, middleware.admin.isLogin], controller.admin.error404);
+
 module.exports = router;

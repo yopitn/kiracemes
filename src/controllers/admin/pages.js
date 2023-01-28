@@ -1,3 +1,4 @@
+const error404 = require("./error-404");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -136,6 +137,10 @@ exports.update = async (req, res) => {
     const setting = await util.getSetting();
     const user = await service.users.findById(user_id);
     const page = await service.pages.api.findById(params.id);
+
+    if (!page) {
+      return error404(req, res);
+    }
 
     res.render("admin/editor", {
       blog: {

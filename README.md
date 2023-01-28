@@ -30,7 +30,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman signin.
 - [x] Halaman setup.
 - [x] Logic admin signout.
-- [ ] Halaman error 404.
+- [x] Halaman error 404.
 
 **API**
 

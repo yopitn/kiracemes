@@ -10,9 +10,7 @@ module.exports = (app) => {
     if (!res.headersSend) {
       const urlPath = req.originalUrl.split("/")[1];
 
-      if (urlPath === "admin") {
-        res.send("Error for admin");
-      } else {
+      if (urlPath !== "admin") {
         return controller.blog.error404(req, res);
       }
     }

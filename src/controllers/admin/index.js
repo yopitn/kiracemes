@@ -7,4 +7,5 @@ module.exports = {
   pages: require("./pages"),
   profile: require("./profile"),
   setting: require("./setting"),
+  error404: require("./error-404"),
 };
