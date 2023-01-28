@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
       page: params.page,
       search: query.q,
     };
-    const posts = await service.posts.findAllBlog({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAll({ order: "published_at", query: findBy });
 
     if (posts.data.length == 0) {
       res.redirect("/");

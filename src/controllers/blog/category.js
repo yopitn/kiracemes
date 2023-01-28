@@ -11,7 +11,7 @@ exports.main = async (req, res) => {
       limit: setting.posts_per_page,
       slug: params.slug,
     };
-    const posts = await service.posts.findAllByTag({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAllByTag({ order: "published_at", query: findBy });
 
     res.render("blog/multiple", {
       blog: {
@@ -113,7 +113,7 @@ exports.main = async (req, res) => {
 
 exports.pagination = async (req, res) => {
   try {
-    const { params, query } = req;
+    const { params } = req;
 
     if (parseInt(params.page) === 1) {
       res.redirect(`/category/${params.slug}`);
@@ -126,7 +126,7 @@ exports.pagination = async (req, res) => {
       page: params.page,
       slug: params.slug,
     };
-    const posts = await service.posts.findAllByTag({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAllByTag({ order: "published_at", query: findBy });
 
     if (posts.data.length == 0) {
       res.redirect(`/category/${params.slug}`);

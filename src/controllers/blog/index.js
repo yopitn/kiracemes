@@ -3,4 +3,5 @@ module.exports = {
   pagination: require("./pagination"),
   category: require("./category"),
   posts: require("./posts"),
+  staticPage: require("./static-page"),
 };

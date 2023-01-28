@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
       limit: setting.posts_per_page,
       search: query.q,
     };
-    const posts = await service.posts.findAllBlog({ order: "published_at", query: findBy });
+    const posts = await service.posts.blog.findAll({ order: "published_at", query: findBy });
 
     res.render("blog/multiple", {
       blog: {

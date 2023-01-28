@@ -6,7 +6,7 @@ exports.index = async (req, res) => {
     const { query, user_id } = req;
     const setting = await util.getSetting();
     const user = await service.users.findById(user_id);
-    const posts = await service.posts.findAllAdmin({ order: "created_at", query: query });
+    const posts = await service.posts.admin({ order: "created_at", query: query });
     const tags = await service.tags.findAll();
 
     let limit = parseInt(query.limit || 10);
@@ -146,7 +146,7 @@ exports.update = async (req, res) => {
     const { params, user_id } = req;
     const setting = await util.getSetting();
     const user = await service.users.findById(user_id);
-    const post = await service.posts.findById(params.id);
+    const post = await service.posts.api.findById(params.id);
 
     res.render("admin/editor", {
       blog: {

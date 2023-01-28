@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
       published_at: body.published_at,
     };
 
-    await service.pages.create(page);
+    await service.pages.api.create(page);
 
     res.status(200).json({
       page: {
@@ -65,7 +65,7 @@ exports.findAll = async (req, res) => {
 
     const limit = parseInt(query.limit || 10);
 
-    const pages = await service.pages.findAll({
+    const pages = await service.pages.api.findAll({
       order: "created_at",
       query: query,
     });
@@ -132,7 +132,7 @@ exports.findById = async (req, res) => {
   try {
     const { params } = req;
 
-    const page = await service.pages.findById(params.id);
+    const page = await service.pages.api.findById(params.id);
 
     if (page) {
       res.status(200).json({
@@ -162,7 +162,7 @@ exports.findBySlug = async (req, res) => {
   try {
     const { params } = req;
 
-    const page = await service.pages.findBySlug(params.slug);
+    const page = await service.pages.api.findBySlug(params.slug);
 
     if (page) {
       res.status(200).json({
@@ -192,10 +192,10 @@ exports.update = async (req, res) => {
   try {
     const { body, params } = req;
 
-    const page = await service.pages.findById(params.id);
+    const page = await service.pages.api.findById(params.id);
 
     if (page) {
-      await service.pages.update({ body: body, id: params.id });
+      await service.pages.api.update({ body: body, id: params.id });
 
       res.status(200).json({
         page: [
@@ -228,10 +228,10 @@ exports.destroy = async (req, res) => {
   try {
     const { params } = req;
 
-    const page = await service.pages.findById(params.id);
+    const page = await service.pages.api.findById(params.id);
 
     if (page) {
-      await service.pages.destroy(params.id);
+      await service.pages.api.destroy(params.id);
 
       res.status(204).json({
         page: [

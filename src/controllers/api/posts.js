@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
       published_at: body.published_at,
     };
 
-    await service.posts.create(post);
+    await service.posts.api.create(post);
 
     if (body.tags && body.tags.length > 0) {
       body.tags.forEach(async (name) => {
@@ -106,7 +106,7 @@ exports.findAll = async (req, res) => {
     let limit = parseInt(query.limit || 10);
     limit = limit < 0 ? 10 : limit;
 
-    const posts = await service.posts.findAll({
+    const posts = await service.posts.api.findAll({
       order: "created_at",
       query: query,
     });
@@ -191,7 +191,7 @@ exports.findById = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findById(params.id);
+    const post = await service.posts.api.findById(params.id);
 
     if (post) {
       res.status(200).json({
@@ -221,7 +221,7 @@ exports.findBySlug = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findBySlug(params.slug);
+    const post = await service.posts.api.findBySlug(params.slug);
 
     if (post) {
       res.status(200).json({
@@ -253,10 +253,10 @@ exports.update = async (req, res) => {
 
     if (!body.published_at && body.status === "published") body.published_at = new Date();
 
-    const post = await service.posts.findById(params.id);
+    const post = await service.posts.api.findById(params.id);
 
     if (post) {
-      await service.posts.update({ body: body, id: params.id });
+      await service.posts.api.update({ body: body, id: params.id });
 
       await service.postsTags.destroy(params.id);
 
@@ -319,10 +319,10 @@ exports.destroy = async (req, res) => {
   try {
     const { params } = req;
 
-    const post = await service.posts.findById(params.id);
+    const post = await service.posts.api.findById(params.id);
 
     if (post) {
-      await service.posts.destroy(params.id);
+      await service.posts.api.destroy(params.id);
 
       res.status(204).json({
         post: [

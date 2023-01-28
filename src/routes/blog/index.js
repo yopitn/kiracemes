@@ -9,5 +9,6 @@ router.get("/page/:page", middleware.admin.isSetup, controller.blog.pagination);
 router.get("/category/:slug", middleware.admin.isSetup, controller.blog.category.main);
 router.get("/category/:slug/page/:page", middleware.admin.isSetup, controller.blog.category.pagination);
 router.get("/blog/:slug", middleware.admin.isSetup, controller.blog.posts);
+router.get("/p/:slug", middleware.admin.isSetup, controller.blog.staticPage);
 
 module.exports = router;
