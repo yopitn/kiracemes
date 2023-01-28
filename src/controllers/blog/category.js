@@ -1,3 +1,4 @@
+const error404 = require("./error-404");
 const moment = require("moment");
 const service = require("../../services");
 const util = require("../../utils");
@@ -116,6 +117,10 @@ exports.main = async (req, res) => {
 exports.pagination = async (req, res) => {
   try {
     const { params } = req;
+
+    if (isNaN(params.page)) {
+      return error404(req, res);
+    }
 
     if (parseInt(params.page) === 1) {
       res.redirect(`/category/${params.slug}`);

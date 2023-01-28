@@ -38,3 +38,6 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Endpoint `/api/admin/posts`
 - [x] Endpoint `/api/admin/pages`
 - [x] Endpoint `/api/admin/images`
+
+- [ ] Endpoint `/api/content/posts`
+- [ ] Endpoint `/api/content/pages`

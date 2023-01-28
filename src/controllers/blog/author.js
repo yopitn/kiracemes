@@ -123,6 +123,10 @@ exports.pagination = async (req, res) => {
   try {
     const { params } = req;
 
+    if (isNaN(params.page)) {
+      return error404(req, res);
+    }
+
     if (parseInt(params.page) === 1) {
       res.redirect(`/author/${params.slug}`);
       return false;
