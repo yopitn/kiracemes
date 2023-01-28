@@ -42,6 +42,7 @@ module.exports = async (req, res) => {
         isSearch: query.q ? true : false,
         isCategory: false,
         isAuthor: false,
+        isError: true,
       },
       posts: posts.data.map((post) => {
         return {

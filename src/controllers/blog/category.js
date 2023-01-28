@@ -31,6 +31,7 @@ exports.main = async (req, res) => {
         isSearch: false,
         isCategory: true,
         isAuthor: false,
+        isError: true,
       },
       posts: posts.data.map((post) => {
         return {
@@ -152,6 +153,7 @@ exports.pagination = async (req, res) => {
         isSearch: false,
         isCategory: true,
         isAuthor: false,
+        isError: true,
       },
       posts: posts.data.map((post) => {
         return {

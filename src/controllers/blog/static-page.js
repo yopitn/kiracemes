@@ -1,3 +1,4 @@
+const error404 = require("./error-404");
 const moment = require("moment");
 const service = require("../../services");
 const util = require("../../utils");
@@ -7,6 +8,10 @@ module.exports = async (req, res) => {
     const { params } = req;
     const setting = await util.getSetting();
     const page = await service.pages.blog.findBySlug(params.slug);
+
+    if (!page) {
+      return error404(req, res);
+    }
 
     res.render("blog/static-page", {
       blog: {
@@ -26,6 +31,7 @@ module.exports = async (req, res) => {
         isSearch: false,
         isCategory: false,
         isAuthor: false,
+        isError: true,
       },
       page: {
         id: page.id,

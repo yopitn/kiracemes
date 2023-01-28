@@ -19,7 +19,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman author.
 - [x] Halaman search.
 - [x] Halaman kategori.
-- [ ] Halaman error 404.
+- [x] Halaman error 404.
 
 **Admin**
 

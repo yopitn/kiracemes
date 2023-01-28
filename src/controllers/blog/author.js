@@ -1,3 +1,4 @@
+const error404 = require("./error-404");
 const moment = require("moment");
 const service = require("../../services");
 const util = require("../../utils");
@@ -12,6 +13,10 @@ exports.main = async (req, res) => {
     };
     const posts = await service.posts.blog.findAllByAuthor({ order: "published_at", query: findBy });
     const user = await service.users.findBySlug(params.slug);
+
+    if (!user) {
+      return await error404(req, res);
+    }
 
     res.render("blog/author", {
       blog: {
@@ -31,6 +36,7 @@ exports.main = async (req, res) => {
         isSearch: false,
         isCategory: false,
         isAuthor: true,
+        isError: true,
       },
       author: user,
       posts: posts.data.map((post) => {
@@ -154,6 +160,7 @@ exports.pagination = async (req, res) => {
         isSearch: false,
         isCategory: false,
         isAuthor: true,
+        isError: true,
       },
       author: user,
       posts: posts.data.map((post) => {

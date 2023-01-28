@@ -5,4 +5,5 @@ module.exports = {
   posts: require("./posts"),
   staticPage: require("./static-page"),
   author: require("./author"),
+  error404: require("./error-404"),
 };

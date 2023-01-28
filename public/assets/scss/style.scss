@@ -942,6 +942,52 @@ body {
   }
 }
 
+.error {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  &__box {
+    width: 100%;
+    max-width: 640px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    h1 {
+      font-size: 20vh;
+      line-height: 1em;
+    }
+
+    h3 {
+      font-size: 3vh;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 2em;
+    }
+  }
+
+  &__action {
+    > * {
+      display: inline-block;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 auto;
+      background: var(--primary-color);
+      color: var(--white-color);
+      border-radius: 4px;
+    }
+  }
+}
+
 .footer {
   &__wrap {
     position: relative;
