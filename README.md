@@ -39,5 +39,5 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Endpoint `/api/admin/pages`
 - [x] Endpoint `/api/admin/images`
 
-- [ ] Endpoint `/api/content/posts`
-- [ ] Endpoint `/api/content/pages`
+- [x] Endpoint `/api/content/posts`
+- [x] Endpoint `/api/content/pages`

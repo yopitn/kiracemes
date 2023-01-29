@@ -1,5 +1,5 @@
 const { customAlphabet } = require("nanoid");
-const service = require("../../services");
+const service = require("../../../services");
 
 const nanoid = customAlphabet("1234567890", 24);
 

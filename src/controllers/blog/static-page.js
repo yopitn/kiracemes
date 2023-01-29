@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
         title: setting.title,
         description: setting.description,
         homepageUrl: setting.homeurl,
-        pageTitle: setting.title,
+        pageTitle: page.title,
         meta_title: setting.meta_title,
         meta_description: setting.meta_description,
       },

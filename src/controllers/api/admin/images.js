@@ -1,4 +1,4 @@
-const util = require("../../utils");
+const util = require("../../../utils");
 
 exports.upload = async (req, res) => {
   try {

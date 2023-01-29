@@ -30,6 +30,7 @@ const users = sequelize.define(
       defaultValue: "author",
       validate: { isIn: [["admin", "author"]] },
     },
+    status: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     meta_title: { type: DataTypes.STRING(2000), allowNull: true },
     meta_description: { type: DataTypes.STRING(2000), allowNull: true },
     created_at: {
