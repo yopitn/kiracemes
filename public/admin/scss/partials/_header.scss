@@ -5,7 +5,7 @@
     width: 100%;
     background-color: $headerBackground;
     box-shadow: 0 2px 6px $borderColor;
-    z-index: 10;
+    z-index: 11;
 
     .container {
       position: relative;
@@ -45,6 +45,14 @@
       cursor: pointer;
       user-select: none;
 
+      &[for="search"] {
+        display: none;
+
+        @include breakpoint-max(lg) {
+          display: inline-flex;
+        }
+      }
+
       &:hover {
         opacity: 1;
       }
@@ -65,11 +73,27 @@
     align-items: center;
     width: $sidebarWidth;
     padding: 0 0 0 20px;
+
+    @include breakpoint-max(md) {
+      padding: 0 0 0 10px;
+    }
+
+    .header__icon[data-button="hamburger"] {
+      display: none;
+
+      @include breakpoint-max(lg) {
+        display: block;
+      }
+    }
   }
 
   &__title {
     display: inline-flex;
     align-items: center;
+
+    @include breakpoint-max(sm) {
+      display: none;
+    }
 
     .image {
       width: 36px;
@@ -96,6 +120,10 @@
     justify-content: space-between;
     padding: 0 20px;
 
+    @include breakpoint-max(md) {
+      padding: 0 10px;
+    }
+
     .header__icon {
       margin-left: auto;
     }
@@ -105,13 +133,49 @@
     position: relative;
     width: 100%;
 
+    @include breakpoint-max(lg) {
+      position: fixed;
+      top: $headerHeight;
+      left: 0;
+      right: 0;
+      padding: 0 20px;
+      margin: 0 auto;
+      width: 100%;
+      max-width: calc(100% + 40px);
+      z-index: 3;
+    }
+
     form {
       position: relative;
       width: 100%;
       max-width: 400px;
+
+      @include breakpoint-max(lg) {
+        max-width: 100%;
+      }
+
+      .overlay {
+        display: none;
+
+        @include breakpoint-max(lg) {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block;
+          width: 100%;
+          height: 100vh;
+          background-color: transparent;
+          opacity: 0;
+          visibility: hidden;
+          z-index: 1;
+        }
+      }
     }
 
     input {
+      position: relative;
       display: block;
       width: 100%;
       padding: 14px 62px 14px 14px;
@@ -120,6 +184,27 @@
       outline: none;
       border: none;
       border-radius: 8px;
+      z-index: 2;
+
+      @include breakpoint-max(lg) {
+        background-color: $whiteColor;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        margin-top: -100%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: 0.1s ease;
+
+        &:focus {
+          margin: 0;
+        }
+
+        &:focus ~ .overlay {
+          opacity: 1;
+          visibility: visible;
+          background-color: rgba(0, 0, 0, 0.08);
+          backdrop-filter: blur(5px) saturate(120%);
+        }
+      }
 
       &::placeholder {
         opacity: 0.9;
@@ -146,6 +231,7 @@
       background-color: transparent;
       outline: none;
       border: none;
+      z-index: 3;
 
       svg {
         width: 18px;

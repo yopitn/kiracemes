@@ -13,6 +13,10 @@
 
     .container {
       padding: 0 20px;
+
+      @include breakpoint-max(md) {
+        padding: 0 10px;
+      }
     }
   }
 
@@ -391,6 +395,10 @@
     font-weight: 500;
     text-transform: uppercase;
 
+    @include breakpoint-max(md) {
+      display: none;
+    }
+
     > *:first-child {
       width: 55%;
     }
@@ -420,6 +428,10 @@
 
     > *:first-child {
       width: 55%;
+
+      @include breakpoint-max(md) {
+        width: 86%;
+      }
     }
 
     > * {
@@ -429,6 +441,17 @@
 
       &:hover {
         opacity: 1;
+      }
+    }
+
+    @include breakpoint-max(md) {
+      > *:nth-child(2),
+      > *:nth-child(3) {
+        display: none;
+      }
+
+      > *:last-child {
+        width: 14%;
       }
     }
   }
@@ -518,6 +541,10 @@
   &__detail {
     display: flex;
     align-items: center;
+
+    @include breakpoint-max(md) {
+      padding-right: 20px;
+    }
   }
 
   &__image {
@@ -531,6 +558,11 @@
     background-color: rgba(0, 0, 0, 0.05);
     overflow: hidden;
 
+    @include breakpoint-max(md) {
+      flex: 0 0 100px;
+      max-width: 100px;
+    }
+
     &-letter {
       flex: 0 0 60px;
       max-width: 60px;
@@ -542,23 +574,53 @@
       font-size: 28px;
       font-weight: 800;
       border-radius: 2px;
+
+      @include breakpoint-max(md) {
+        flex: 0 0 100px;
+        max-width: 100px;
+        height: 100px;
+      }
     }
   }
 
   &__content {
     padding: 4px 0;
     padding-left: 10px;
+
+    @include breakpoint-min(md) {
+      .post__status {
+        display: none;
+      }
+    }
+
+    @include breakpoint-max(md) {
+      .post__status {
+        padding-top: 4px;
+        opacity: 0.9;
+
+        span {
+          padding: 0;
+        }
+      }
+    }
   }
 
   &__title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    font-size: 15px;
-    font-weight: 800;
-    text-overflow: ellipsis;
     padding-bottom: 4px;
-    overflow: hidden;
+
+    .title {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      font-size: 15px;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      @include breakpoint-max(md) {
+        -webkit-line-clamp: 2;
+      }
+    }
 
     &.opacity-7 {
       opacity: 0.7;
@@ -569,6 +631,9 @@
     display: inline-flex;
     align-items: center;
     font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     opacity: 0.9;
 
     > * {
@@ -589,6 +654,10 @@
 
   &__category {
     font-weight: 500;
+
+    @include breakpoint-max(sm) {
+      display: none;
+    }
 
     &::before {
       content: "In";
@@ -723,6 +792,7 @@
     align-items: baseline;
     justify-content: center;
     margin-top: 60px;
+    padding: 0 20px;
     z-index: 999;
   }
 

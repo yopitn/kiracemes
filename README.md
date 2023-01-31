@@ -13,8 +13,6 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 ## Goal
 
-- [ ] Responsive.
-
 **Blog**
 
 - [x] Halaman home.
@@ -25,6 +23,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman search.
 - [x] Halaman kategori.
 - [x] Halaman error 404.
+- [ ] Responsive.
 
 **Admin**
 
@@ -36,6 +35,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman setup.
 - [x] Logic admin signout.
 - [x] Halaman error 404.
+- [x] Responsive.
 
 **API**
 

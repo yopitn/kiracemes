@@ -308,5 +308,24 @@ function showInsertImageModal() {
   });
 }
 
+// Show more dropdown
+(function () {
+  const more_button = document.querySelector("[data-button='more']");
+
+  const dropdown = more_button.nextElementSibling;
+
+  console.log(dropdown);
+
+  more_button.addEventListener("click", () => {
+    dropdown.classList.toggle("s");
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (dropdown.classList.contains("s") && !more_button.contains(e.target)) {
+      dropdown.classList.remove("s");
+    }
+  });
+})();
+
 insert_link.addEventListener("click", showInsertLinkModal);
 insert_image.addEventListener("click", showInsertImageModal);

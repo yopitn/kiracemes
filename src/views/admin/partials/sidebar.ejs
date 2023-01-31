@@ -1,6 +1,10 @@
 <nav class="sidebar">
   <div class="sidebar__container">
     <div class="sidebar__content">
+      <div class="sidebar__close">
+        <label for="off-sidebar"></label>
+      </div>
+
       <div class="sidebar__inner">
         <% if (view.isPosts || view.isPages) { %>
         <div class="sidebar__button">
@@ -80,4 +84,6 @@
       </div>
     </div>
   </div>
+
+  <label class="sidebar__overlay" for="off-sidebar"></label>
 </nav>

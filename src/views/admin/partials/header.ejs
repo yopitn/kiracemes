@@ -33,9 +33,27 @@ if (view.isPageCreate || view.isPageUpdate) {
 </head>
 
 <body>
+  <input class="hidden off-sidebar" type="checkbox" id="off-sidebar">
+
   <header class="header__wrap">
     <div class="container">
       <div class="header__left">
+        <% if (view.isHomepage) { %>
+        <div class="header__icon" data-button="hamburger">
+          <ul>
+            <li>
+              <label class="icon" for="off-sidebar">
+                <svg class="line" viewBox="0 0 24 24">
+                  <line x1="3" x2="21" y1="12" y2="12"></line>
+                  <line x1="3" x2="21" y1="5" y2="5"></line>
+                  <line x1="3" x2="21" y1="19" y2="19"></line>
+                </svg>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <% } %>
+
         <% if (view.isEditor) { %>
         <div class="header__icon">
           <ul>
@@ -74,12 +92,26 @@ if (view.isPageCreate || view.isPageUpdate) {
                 </g>
               </svg>
             </button>
+            <div class="overlay"></div>
           </form>
         </div>
         <% } %>
 
         <div class="header__icon">
           <ul>
+            <% if (view.isPosts || view.isPages) { %>
+            <li>
+              <label for="search" class="icon">
+                <svg class="line" viewBox="0 0 24 24">
+                  <g transform="translate(2.000000, 2.000000)">
+                    <circle cx="9.76659044" cy="9.76659044" r="8.9885584"></circle>
+                    <line x1="16.0183067" x2="19.5423342" y1="16.4851259" y2="20.0000001"></line>
+                  </g>
+                </svg>
+              </label>
+            </li>
+            <% } %>
+
             <li>
               <div class="icon" aria-label="Notification">
                 <svg viewBox="0 0 24 24">

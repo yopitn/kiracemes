@@ -1,7 +1,7 @@
-const publish_button = document.querySelector("[data-button='publish']");
-const update_button = document.querySelector("[data-button='update']");
-const save_button = document.querySelector("[data-button='save']");
-const draft_button = document.querySelector("[data-button='draft']");
+const publish_button = document.querySelectorAll("[data-button='publish']");
+const update_button = document.querySelectorAll("[data-button='update']");
+const save_button = document.querySelectorAll("[data-button='save']");
+const draft_button = document.querySelectorAll("[data-button='draft']");
 const editor_wrap = document.querySelector(".editor__wrap");
 const editor_message = document.querySelector(".editor__message");
 
@@ -226,18 +226,26 @@ function updatePost() {
     });
 }
 
-if (publish_button) {
-  publish_button.addEventListener("click", updatePostAsPublished);
+if (publish_button.length > 0) {
+  publish_button.forEach((button) => {
+    button.addEventListener("click", updatePostAsPublished);
+  });
 }
 
-if (update_button) {
-  update_button.addEventListener("click", updatePost);
+if (update_button.length > 0) {
+  update_button.forEach((button) => {
+    button.addEventListener("click", updatePost);
+  });
 }
 
-if (save_button) {
-  save_button.addEventListener("click", updatePost);
+if (save_button.length > 0) {
+  save_button.forEach((button) => {
+    button.addEventListener("click", updatePost);
+  });
 }
 
-if (draft_button) {
-  draft_button.addEventListener("click", updatePostAsDraft);
+if (draft_button.length > 0) {
+  draft_button.forEach((button) => {
+    button.addEventListener("click", updatePostAsDraft);
+  });
 }

@@ -5,17 +5,83 @@
   transition: 0.1s ease;
   z-index: 10;
 
+  @include breakpoint-max(lg) {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+  }
+
   &__container {
-    position: sticky;
-    top: $headerHeight;
+    @include breakpoint-min(lg) {
+      position: sticky;
+      top: $headerHeight;
+    }
+
+    @include breakpoint-max(lg) {
+      position: relative;
+      width: 75%;
+      max-width: 480px;
+      height: 100%;
+      box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: inherit;
+      z-index: 3;
+    }
   }
 
   &__content {
     position: relative;
-    display: flex;
-    height: calc(100vh - $headerHeight);
     background-color: $sidebarBackground;
-    box-shadow: 0 2px 6px $borderColor;
+
+    @include breakpoint-min(lg) {
+      display: flex;
+      height: calc(100vh - $headerHeight);
+      box-shadow: 0 2px 6px $borderColor;
+    }
+
+    @include breakpoint-max(lg) {
+      padding: 0;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__close {
+    display: none;
+
+    @include breakpoint-max(lg) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: $headerHeight;
+      padding: 0 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+      label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 500px;
+        background-color: rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+        user-select: none;
+
+        &::before {
+          content: "\2715";
+          line-height: 18px;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+    }
   }
 
   &__inner {
@@ -23,6 +89,7 @@
     padding: 20px;
     padding-bottom: 170px;
     width: 100%;
+    height: calc(100vh - $headerHeight);
 
     ul {
       list-style: none;
@@ -113,4 +180,30 @@
       }
     }
   }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.1s ease;
+    z-index: 2;
+  }
+}
+
+.off-sidebar:checked ~ .content__wrap .sidebar {
+  left: 0;
+}
+
+.off-sidebar:checked ~ .content__wrap .sidebar .sidebar__overlay {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(5px) saturate(120%);
+  background-color: rgba(0, 0, 0, 0.08);
 }
