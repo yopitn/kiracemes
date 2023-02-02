@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const model = require("../../models");
 const jwt = require("jsonwebtoken");
 
@@ -28,7 +29,8 @@ exports.isLogin = (req, res, next) => {
       res.redirect("/admin/signin");
     }
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -59,7 +61,8 @@ exports.isNotLogin = (req, res, next) => {
       });
     }
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -77,7 +80,8 @@ exports.isSetup = async (req, res, next) => {
       res.redirect("/admin/setup");
     }
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -95,6 +99,7 @@ exports.isNotSetup = async (req, res, next) => {
       return next();
     }
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

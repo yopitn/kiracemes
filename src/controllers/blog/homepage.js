@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const moment = require("moment");
 const service = require("../../services");
 const util = require("../../utils");
@@ -108,6 +109,7 @@ module.exports = async (req, res) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

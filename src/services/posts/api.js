@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const model = require("../../models");
 
 exports.create = async (body) => {
@@ -22,7 +23,8 @@ exports.create = async (body) => {
       published_at: body.published_at,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -88,7 +90,8 @@ exports.findAll = async ({ order, query }) => {
       count: count.length,
     };
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -136,7 +139,8 @@ exports.findById = async (id) => {
 
     return post;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -185,7 +189,8 @@ exports.findBySlug = async (slug) => {
 
     return post;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -217,7 +222,8 @@ exports.update = async ({ body, id }) => {
       }
     );
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -230,6 +236,7 @@ exports.destroy = async (id) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

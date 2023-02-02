@@ -1,3 +1,4 @@
+const logger = require("../libs/logger");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -7,7 +8,8 @@ exports.create = async (body) => {
       tag_id: body.tag_id,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -19,6 +21,7 @@ exports.destroy = async (post_id) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

@@ -1,4 +1,5 @@
 const { Op } = require("sequelize");
+const logger = require("../../libs/logger");
 const model = require("../../models");
 
 module.exports = async ({ order, query }) => {
@@ -62,6 +63,7 @@ module.exports = async ({ order, query }) => {
       count: count.length,
     };
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

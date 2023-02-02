@@ -1,4 +1,5 @@
 const { Op } = require("sequelize");
+const logger = require("../libs/logger");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -9,7 +10,8 @@ exports.create = async (body) => {
       slug: body.slug,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -35,7 +37,8 @@ exports.findAll = async () => {
 
     return tags;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -64,7 +67,8 @@ exports.findByName = async (tag_name) => {
 
     return tag;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -85,7 +89,8 @@ exports.search = async (query) => {
 
     return tags;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -114,6 +119,7 @@ exports.findBySlug = async (tag_slug) => {
 
     return tag;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

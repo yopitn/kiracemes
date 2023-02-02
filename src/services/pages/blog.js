@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const model = require("../../models");
 
 exports.findBySlug = async (slug) => {
@@ -39,6 +40,7 @@ exports.findBySlug = async (slug) => {
 
     return page;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

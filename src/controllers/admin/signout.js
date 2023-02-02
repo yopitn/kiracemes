@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const service = require("../../services");
 
 exports.destroy = async (req, res) => {
@@ -10,6 +11,7 @@ exports.destroy = async (req, res) => {
 
     res.redirect("/");
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

@@ -1,4 +1,5 @@
 const error404 = require("./error-404");
+const logger = require("../../libs/logger");
 const moment = require("moment");
 const service = require("../../services");
 const util = require("../../utils");
@@ -110,7 +111,8 @@ exports.main = async (req, res) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -249,6 +251,7 @@ exports.pagination = async (req, res) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const logger = require("../libs/logger");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -60,7 +61,8 @@ exports.create = async (body) => {
 
     return null;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -72,6 +74,7 @@ exports.destroy = async (token) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

@@ -1,7 +1,10 @@
+const logger = require("../../libs/logger");
+
 exports.index = (req, res) => {
   try {
     res.redirect("/admin/posts");
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

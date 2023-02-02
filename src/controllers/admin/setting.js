@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const logger = require("../../libs/logger");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -33,7 +34,8 @@ exports.index = async (req, res) => {
       setting: setting,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -47,7 +49,8 @@ exports.update = async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -61,7 +64,8 @@ exports.getFavicon = async (req, res) => {
 
     res.end(favicon);
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -80,7 +84,8 @@ exports.updateFavicon = async (req, res) => {
       return res.sendStatus(200);
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -95,7 +100,8 @@ exports.getRobotsTxt = async (req, res) => {
       text: string,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -110,6 +116,7 @@ exports.updateRobotsTxt = async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

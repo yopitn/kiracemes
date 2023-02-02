@@ -1,4 +1,5 @@
 const error404 = require("./error-404");
+const logger = require("../../libs/logger");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -106,7 +107,8 @@ exports.index = async (req, res) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -138,7 +140,8 @@ exports.create = async (req, res) => {
       user: user,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -196,6 +199,7 @@ exports.update = async (req, res) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

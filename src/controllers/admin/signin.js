@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -14,7 +15,8 @@ exports.index = async (req, res) => {
       message: req.flash("message"),
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -38,6 +40,7 @@ exports.create = async (req, res) => {
       res.redirect("/admin/signin");
     }
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const logger = require("../../libs/logger");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -31,7 +32,8 @@ exports.index = async (req, res) => {
       user: user,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -51,7 +53,8 @@ exports.update = async (req, res) => {
 
     res.sendStatus(200);
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -77,7 +80,8 @@ exports.updateImage = async (req, res) => {
       res.sendStatus(200);
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -115,6 +119,7 @@ exports.updatePassword = async (req, res) => {
 
     return res.sendStatus(200);
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

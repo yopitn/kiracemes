@@ -1,3 +1,4 @@
+const logger = require("../../libs/logger");
 const service = require("../../services");
 const util = require("../../utils");
 
@@ -30,6 +31,7 @@ module.exports = async (req, res) => {
       user: user,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

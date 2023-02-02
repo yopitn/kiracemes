@@ -1,3 +1,4 @@
+const logger = require("../libs/logger");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -7,7 +8,8 @@ exports.create = async (body) => {
       value: body.value,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -21,7 +23,8 @@ exports.findByName = async (name) => {
 
     return setting.value;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -38,6 +41,7 @@ exports.update = async (body) => {
       }
     );
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

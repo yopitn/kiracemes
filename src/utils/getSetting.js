@@ -1,4 +1,5 @@
 const { settings } = require("../services");
+const logger = require("../libs/logger");
 
 const getSetting = async () => {
   try {
@@ -16,7 +17,8 @@ const getSetting = async () => {
 
     return setting;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 

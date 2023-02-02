@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const database = require("./database");
 const flash = require("connect-flash");
+const logger = require("./libs/logger");
 const path = require("path");
 const routes = require("./routes");
 const session = require("express-session");
@@ -34,13 +35,14 @@ const server = async () => {
 
   try {
     app.listen(PORT, () => {
-      console.log(`Server running at port ${PORT}`);
+      logger.info(`Server running at port ${PORT}`);
     });
 
     await database.authenticate();
     await database.sync();
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 

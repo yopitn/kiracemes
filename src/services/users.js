@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const logger = require("../libs/logger");
 const model = require("../models");
 
 exports.create = async (body) => {
@@ -15,7 +16,8 @@ exports.create = async (body) => {
       role: body.role,
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -44,7 +46,8 @@ exports.findById = async (id) => {
 
     return user;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -73,7 +76,8 @@ exports.findBySlug = async (slug) => {
 
     return user;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -100,7 +104,8 @@ exports.update = async (body, id) => {
       }
     );
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -117,7 +122,8 @@ exports.image = async (image, id) => {
       }
     );
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -146,6 +152,7 @@ exports.destroy = async (id) => {
       },
     });
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };

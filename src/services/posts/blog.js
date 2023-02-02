@@ -1,4 +1,5 @@
 const { Op } = require("sequelize");
+const logger = require("../../libs/logger");
 const model = require("../../models");
 
 exports.findAll = async ({ order, query }) => {
@@ -76,7 +77,8 @@ exports.findAll = async ({ order, query }) => {
       count: count.length,
     };
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -158,7 +160,8 @@ exports.findAllByTag = async ({ order, query }) => {
       count: count.length,
     };
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -239,7 +242,8 @@ exports.findAllByAuthor = async ({ order, query }) => {
       count: count.length,
     };
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
 
@@ -289,6 +293,7 @@ exports.findBySlug = async (slug) => {
 
     return post;
   } catch (error) {
-    throw new Error(error);
+    logger.error(error.message);
+    process.exit(1);
   }
 };
