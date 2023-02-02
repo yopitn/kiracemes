@@ -47,3 +47,70 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 
 - [x] Endpoint `/api/content/posts`
 - [x] Endpoint `/api/content/pages`
+
+## Get started
+
+Bagi kamu yang ingin mencoba project ini, silahkan ikuti langkah-langkah berikut ini.
+
+Silahkan `clone` repository ini dengan cara:
+
+```
+git clone https://github.com/yopitn/kiracemes.git
+```
+
+Buka folder kiracemes di terminal dengan cara:
+
+```
+cd kiracemes
+```
+
+Install dependency
+
+```
+npm install
+```
+
+Disini saya menggunakan `sqlite` sebagai database saat **development**. Untuk menggunakan MySQL, kamu bisa masuk ke folder `src/database/index.js` lalu comment bagian `sqlite`. Untuk config-nya, kamu bisa mengubah di folder `src/config/database.js`.
+
+Buat file `.env` dengan format
+
+```
+KEY_TOKEN_SECRET=YOUR_KET_TOKEN_SECRET_CODE
+SESSION_SECRET=YOUR_SESSION_SECRET_CODE
+
+NODE_ENV=development
+
+PORT=5215
+
+DB_NAME=kiracemes
+DB_USER=root
+DB_PASS=
+DB_HOST=localhost
+
+LOG_LEVEL=info
+```
+
+Setelah itu jalankan perintah
+
+```
+npm start
+```
+
+Halaman admin
+
+```
+localhost:5215/admin
+```
+
+Halaman blog/utama
+
+```
+localhost:5215
+```
+
+API
+
+```
+localhost:5215/api/admin/:endpoint
+localhost:5215/api/content/:endpoint
+```
