@@ -10,6 +10,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - Pada API, kedua endpoint, Admin dan Content, tidak memiliki perbedaan, keduanya me-return data yang sama. Seharusnya, saya membedakan data yang bisa kita dapat dari database, namun untuk sekarang, saya hanya memfokuskan agar jadi dulu.
 - Pada API, yang saya inginkan, untuk mengambil data dari endpoint /api/content seharusnya menggunakan api_key yang bisa di generate di halaman Admin oleh user yang sudah terdaftar di Blog-nya. Namun, saya tetap memfokuskan agar jadi dulu. Mungkin di-update nanti.
 - Masih banyak fitur yang belum saya buat, tentunya, karena wawasan saya masih sedikit.
+- Perbaikan lain dan fitur-fitur lain mungkin akan saya tambahkan di lain hari.
 
 ## Goal
 
