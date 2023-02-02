@@ -91,6 +91,8 @@
 
 <body class="<%- view.isMultipleItems ? "multi" : "" %><%- view.isAuthor ? "author" : "" %><%- view.isSingleItem ? "single" : "" %><%- view.isPost ? " post" : "" %><%- view.isPage ? " page" : "" %>">
 
+  <input class="hidden off-navbot" type="checkbox" id="off-navbot">
+
   <header class="header__wrap">
     <div class="container">
       <div class="header__top">
@@ -133,6 +135,16 @@
 
       <div class="header__bottom">
         <nav class="navbar__bottom">
+          <div class="navbar__hamburger">
+            <label for="off-navbot">
+              <svg class="line" viewBox="0 0 24 24">
+                <line x1="3" x2="21" y1="12" y2="12"></line>
+                <line x1="3" x2="21" y1="5" y2="5"></line>
+                <line x1="3" x2="21" y1="19" y2="19"></line>
+              </svg>
+            </label>
+          </div>
+
           <ul>
             <li>
               <a href="<%- blog.homepageUrl %>/category/tutorial" class="link">
@@ -153,6 +165,15 @@
             </li>
           </ul>
 
+          <div class="header__icon">
+            <label for="search">
+              <svg class="line" viewBox="0 0 24 24">
+                <circle cx="11.7666" cy="11.7666" r="8.98856"></circle>
+                <path d="M18.0183 18.4851L21.5423 22"></path>
+              </svg>
+            </label>
+          </div>
+
           <div class="header__search">
             <form action="<%- blog.homepageUrl %>" method="get">
               <input aria-label="Search for this blog" type="search" name="q" id="search" autocomplete="off" placeholder="Try tutorial, games, etc">
@@ -163,6 +184,7 @@
                   <path d="M18.0183 18.4851L21.5423 22"></path>
                 </svg>
               </button>
+              <span class="cover"></span>
             </form>
           </div>
         </nav>

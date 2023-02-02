@@ -23,7 +23,7 @@ Mungkin kodenya berantakan karena saya masih dalam tahap belajar.
 - [x] Halaman search.
 - [x] Halaman kategori.
 - [x] Halaman error 404.
-- [ ] Responsive.
+- [x] Responsive.
 
 **Admin**
 
