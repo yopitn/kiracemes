@@ -11,11 +11,11 @@ const imageFolderByYear = path.join(__dirname, `../../public/content/images/${ye
 const imageFolderByMonth = path.join(__dirname, `../../public/content/images/${year}/${month}`);
 
 if (!fs.existsSync(imageFolderByYear)) {
-  fs.mkdirSync(imageFolderByYear);
+  fs.mkdirSync(imageFolderByYear, { recursive: true });
 }
 
 if (!fs.existsSync(imageFolderByMonth)) {
-  fs.mkdirSync(imageFolderByMonth);
+  fs.mkdirSync(imageFolderByMonth, { recursive: true });
 }
 
 const upload = multer({
