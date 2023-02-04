@@ -1,8 +1,13 @@
+const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const util = require("util");
 
 const destination = path.join(__dirname, "../../public/content/images/users");
+
+if (!fs.existsSync(destination)) {
+  fs.mkdirSync(destination);
+}
 
 const upload = multer({
   storage: multer.diskStorage({

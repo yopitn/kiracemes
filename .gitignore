@@ -1,5 +1,5 @@
 node_modules
-public/content/images
+public/content/images/*
 
 .env
 *.map
